@@ -33,11 +33,11 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_member = chat.get_member(user_id)
     if user_member.status == 'administrator' or user_member.status == 'creator':
-        message.reply_text("How am I meant to promote someone that's already an admin?")
+        message.reply_text("Jak mam awansować kogoś kto już jest administratorem?")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I can't promote myself! Get an admin to do it for me.")
+        message.reply_text("Nie mogę awansować siebie! Uzyskaj prawa administratora żeby zrobić to dla mnie.")
         return ""
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -55,9 +55,9 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
 
     message.reply_text("promoted🧡")
     return "<b>{}:</b>" \
-           "\n#PROMOTED" \
-           "\n<b>Admin:</b> {}" \
-           "\n<b>User:</b> {}".format(html.escape(chat.title),
+           "\n#AWANSOWANY" \
+           "\n<b>Administrator:</b> {}" \
+           "\n<b>Użytkownik:</b> {}".format(html.escape(chat.title),
                                       mention_html(user.id, user.first_name),
                                       mention_html(user_member.user.id, user_member.user.first_name))
 
