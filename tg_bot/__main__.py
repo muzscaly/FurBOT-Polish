@@ -29,7 +29,6 @@ Kod źródłowy mnie znajdziesz tutaj -> [Github](https://github.com/DavivaD/Mar
 """
 
 HELP_STRINGS = """
-Hewwo! nazywam się *{}*.
 Dostępne *główne* komendy:
  - /start - Wystartuj mnie!
  - /help - Pomoc.
@@ -39,7 +38,7 @@ Dostępne *główne* komendy:
    - na Grupie:
 {}
 Oraz następujące:
-""".format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nWszystkie następujące komendy / lub ! mogę zostać użyte.\n")
+""".format("" if not ALLOW_EXCL else "\nWszystkie następujące komendy / lub ! mogę zostać użyte.\n")
 
 DONATE_STRING = """Hejka, miło słyszeć że chcesz podarować trochę grosiwa!
 To zajeło mnóstwo czasu [mojemu twórcowi](t.me/SonOfLars) do miejsca do którego obecnie jestem, każda darownizna pomaga \
