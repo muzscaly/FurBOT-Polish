@@ -25,7 +25,7 @@ Wszystkie zmiany we mnie będą wypisywane na - @davisshelter.
 Jak masz ze mną problem (np. konfiguracja) pisz [tutaj](tg://user?id=587942176)
 Jeżeli masz jakiekolwiek pytania jak mnie używać wpisz: /help
 Kod źródłowy mnie znajdziesz tutaj -> [Github](https://github.com/DavivaD/Marie-2.0-English)
-**Miej na uwadze że jakiekolwiek zmiany które TY zrobisz u mnie, muszą być na Githubie. Zgodnie z licencją.**
+**Miej na uwadze że jakiekolwiek zmiany które TY zrobisz we mnie mnie, muszą być na udostępnione Githubie. Zgodnie z licencją.**
 """
 
 HELP_STRINGS = """
