@@ -107,7 +107,7 @@ def send_help(chat_id, text, keyboard=None):
 def test(bot: Bot, update: Update):
     # pprint(eval(str(update)))
     # update.effective_message.reply_text("Hola tester! _I_ *have* `markdown`", parse_mode=ParseMode.MARKDOWN)
-    update.effective_message.reply_text("Ta osoba zmieniła wiadomość")
+    update.effective_message.reply_text("Ten futrzak zmienił wiadomość")
     print(update.effective_message)
 
 
@@ -344,14 +344,14 @@ def get_settings(bot: Bot, update: Update):
     # ONLY send settings in PM
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = "Naciśnij tutaj żeby otrzymać wszystkie ustawienia tego czatu, jeżeli jest twój."
+            text = "Naciśnij tutaj żeby otrzymać wszystkie ustawienia tego czatu, jeżeli chat jest twój."
             msg.reply_text(text,
                            reply_markup=InlineKeyboardMarkup(
                                [[InlineKeyboardButton(text="Ustawienia",
                                                       url="t.me/{}?start=stngs_{}".format(
                                                           bot.username, chat.id))]]))
         else:
-            text = "Click here to check your settings."
+            text = "Naciśnij tutaj żeby sprawdzić swoje ustawienia."
 
     else:
         send_settings(chat.id, user.id, True)
