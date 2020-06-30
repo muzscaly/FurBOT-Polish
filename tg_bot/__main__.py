@@ -23,7 +23,7 @@ Hoi {}!
 Nazywam się {}!
 Jestem botem administracyjnym opiekowanym przez [Davisa](tg://user?id={}) UwU.
 Wszystkie zmiany we mnie będą wypisywane na - @davisshelter.
-Jak masz ze mną problem (np. konfiguracja) pisz do [](tg://user?id=587942176)
+Jak masz ze mną problem (np. konfiguracja) pisz do [Davisa](tg://user?id=587942176)
 
 Jeżeli masz jakiekolwiek pytania jak mnie używać wpisz: /help
 
