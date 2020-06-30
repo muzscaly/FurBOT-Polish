@@ -18,6 +18,7 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
+
 Hoi {}!
 
 Nazywam się {}!
@@ -32,6 +33,7 @@ Kod źródłowy mnie znajdziesz tutaj -> [Github](https://github.com/DavivaD/Mar
 """
 
 HELP_STRINGS = """
+
 Hewwo! nazywam się *{}*.
 
 Dostępne *główne* komendy:
@@ -232,7 +234,7 @@ def get_help(bot: Bot, update: Update):
     # ONLY send help in PM
     if chat.type != chat.PRIVATE:
 
-        update.effective_message.reply_text("Napisz mi na PM żeby uzyskać listę dostępnych komend.",
+        update.effective_message.reply_text("Napisz mi na PV żeby uzyskać listę dostępnych komend.",
                                             reply_markup=InlineKeyboardMarkup(
                                                 [[InlineKeyboardButton(text="Pomoc",
                                                                        url="t.me/{}?start=help".format(
