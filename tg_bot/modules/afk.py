@@ -68,8 +68,8 @@ def reply_afk(bot: Bot, update: Update):
 
 
 __help__ = """
- - /afk <reason>: Oznacz siebie jako AFK.
- - brb <reason>: Te same działanie co komenda wyżej - ale nie jest komendą.
+ - /afk <powód>: Oznacz siebie jako AFK.
+ - brb <powód>: Te same działanie co komenda wyżej - ale nie jest komendą.
 
 Będąc zaznaczony jako AFK, na wszelkie wzmianki zostaną udzielone odpowiedzi z wiadomością, że nie jesteś dostępny!
 """
