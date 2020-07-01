@@ -178,7 +178,7 @@ def help_button(bot: Bot, update: Update):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = "Tutaj jest dostępna pomoc dla modułu *{}*:\n".format(HELPABLE[module].__mod_name__) \
+            text = "Dostępna pomoc dla modułu *{}*:\n".format(HELPABLE[module].__mod_name__) \
                    + HELPABLE[module].__help__
             query.message.reply_text(text=text,
                                      parse_mode=ParseMode.MARKDOWN,
@@ -235,7 +235,7 @@ def get_help(bot: Bot, update: Update):
 
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
         module = args[1].lower()
-        text = "Tutaj jest dostępna pomoc dla modułu *{}*:\n".format(HELPABLE[module].__mod_name__) \
+        text = "Dostępna pomoc dla modułu *{}*:\n".format(HELPABLE[module].__mod_name__) \
                + HELPABLE[module].__help__
         send_help(chat.id, text, InlineKeyboardMarkup([[InlineKeyboardButton(text="Wróć", callback_data="help_back")]]))
 
