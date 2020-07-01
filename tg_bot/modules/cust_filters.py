@@ -20,7 +20,7 @@ from tg_bot.modules.sql import cust_filters_sql as sql
 from tg_bot.modules.connection import connected
 
 HANDLER_GROUP = 10
-BASIC_FILTER_STRING = "*Filters in this chat:*\n"
+BASIC_FILTER_STRING = "*Filtry na tym czacie:*\n"
 
 
 @run_async
@@ -32,15 +32,15 @@ def list_handlers(bot: Bot, update: Update):
     if not conn == False:
         chat_id = conn
         chat_name = dispatcher.bot.getChat(conn).title
-        filter_list = "*Filters in {}:*\n"
+        filter_list = "*Filtry na {}:*\n"
     else:
         chat_id = update.effective_chat.id
         if chat.type == "private":
             chat_name = "local filters"
-            filter_list = "*local filters:*\n"
+            filter_list = "*lokalne filtry:*\n"
         else:
             chat_name = chat.title
-            filter_list = "*Filters in {}*:\n"
+            filter_list = "*Filtry na {}*:\n"
 
 
     all_handlers = sql.get_chat_triggers(chat_id)
@@ -103,7 +103,7 @@ def filters(bot: Bot, update: Update):
         content, buttons = button_markdown_parser(extracted[1], entities=msg.parse_entities(), offset=offset)
         content = content.strip()
         if not content:
-            msg.reply_text("There is no note message - You can't JUST have buttons, you need a message to go with it!")
+            msg.reply_text("To nie jest notka - NIE możesz mieć tylko przycisków, musisz dodać do nich wiadomość!")
             return
 
     elif msg.reply_to_message and msg.reply_to_message.sticker:
@@ -133,7 +133,7 @@ def filters(bot: Bot, update: Update):
         is_video = True
 
     else:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Nie określiłeś, na co odpowiedzieć!")
         return
 
     # Add the filter
@@ -173,16 +173,16 @@ def stop_filter(bot: Bot, update: Update):
     chat_filters = sql.get_chat_triggers(chat_id)
 
     if not chat_filters:
-        update.effective_message.reply_text("No filters are active here!")
+        update.effective_message.reply_text("Nie ma tutaj aktywnych filtrów!")
         return
 
     for keyword in chat_filters:
         if keyword == args[1]:
             sql.remove_filter(chat_id, args[1])
-            update.effective_message.reply_text("Yep, I'll stop replying to that in *{}*.".format(chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
+            update.effective_message.reply_text("Yup, Przestanę odpowiadać na to w *{}*.".format(chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
             raise DispatcherHandlerStop
 
-    update.effective_message.reply_text("That's not a current filter - run /filters for all active filters.")
+    update.effective_message.reply_text("To nie jest aktualnie filter - wpisz /filters żeby zobaczyć wszystkie filtry.")
 
 
 @run_async
@@ -235,19 +235,19 @@ def reply_filter(bot: Bot, update: Update):
                                        disable_web_page_preview=should_preview_disabled,
                                        reply_markup=keyboard)
                 except BadRequest as excp:
-                    if excp.message == "Unsupported url protocol":
-                        message.reply_text("You seem to be trying to use an unsupported url protocol. Telegram "
-                                           "doesn't support buttons for some protocols, such as tg://. Please try "
-                                           "again, or ask in @MarieSupport for help.")
+                    if excp.message == "Nieobsługiwany protokół URL":
+                        message.reply_text("YWygląda na to, że próbujesz użyć nieobsługiwanego protokołu URL. Telegram "
+                                           "nie obsługuje przycisków dla niektórych protokołów, takich jak tg://. Spróbuj "
+                                           "ponownie, lub spytaj @MarieSupport o pomoc.")
                     elif excp.message == "Reply message not found":
                         bot.send_message(chat.id, filt.reply, parse_mode=ParseMode.MARKDOWN,
                                          disable_web_page_preview=True,
                                          reply_markup=keyboard)
                     else:
-                        message.reply_text("This note could not be sent, as it is incorrectly formatted. Ask in "
-                                           "@MarieSupport if you can't figure out why!")
-                        LOGGER.warning("Message %s could not be parsed", str(filt.reply))
-                        LOGGER.exception("Could not parse filter %s in chat %s", str(filt.keyword), str(chat.id))
+                        message.reply_text("Nie można wysłać tej notki, ponieważ jest niepoprawnie sformatowana. Spytaj "
+                                           "na @MarieSupport jeśli nie możesz zrozumieć dlaczego!")
+                        LOGGER.warning("Wiadomość %s nie może być sparsowana", str(filt.reply))
+                        LOGGER.exception("Nie można sparsować filter %s w czacie %s", str(filt.keyword), str(chat.id))
 
             else:
                 # LEGACY - all new filters will have has_markdown set to True.
@@ -269,17 +269,17 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /filters: list all active filters in this chat.
+ - /filters: Wyświetla listę wszystkich filtrów na czacie.
 
 *Admin only:*
- - /filter <keyword> <reply message>: add a filter to this chat. The bot will now reply that message whenever 'keyword'\
-is mentioned. If you reply to a sticker with a keyword, the bot will reply with that sticker. NOTE: all filter \
-keywords are in lowercase. If you want your keyword to be a sentence, use quotes. eg: /filter "hey there" How you \
-doin?
- - /stop <filter keyword>: stop that filter.
+ - /filter <keyword> <reply message>: Dodaje filtr do tego czatu. Ja będę teraz odpowiadał na tę wiadomość za każdym razem kiedy 'keyword'\
+jest wspomniany. Jeśli odpowiesz na naklejkę słowem kluczowym, bot odpowie tą naklejką. NOTKA: wszystkie filtry \
+słowa kluczowe są z małej litery. Jeśli chcesz, aby keyword było zdaniem, użyj cudzysłowiów. np: /filter "no hej" Co \
+robisz?
+ - /stop <filter keyword>: Usuwa ten filtr.
 """
 
-__mod_name__ = "Filters"
+__mod_name__ = "Filtry"
 
 FILTER_HANDLER = CommandHandler("filter", filters)
 STOP_HANDLER = CommandHandler("stop", stop_filter)
