@@ -344,9 +344,6 @@ __help__ = """
  - /roll: Roll a dice.
  - /rlg: Join ears,nose,mouth and create an emo ;-;
  - /zal <tekst>: zalgofy! your text
- - /hug <nazwa futrzaka>: Huga futrzaka (poprzez @, lub odpowiedź)
- - /tyc <nazwa futrzaka>: tyca futrzaka (poprzez @, lub odpowiedź)
- - /patpat <nazwa futrzaka>: pat patuje futrzaka (poprzez @, lub odpowiedź)
  Dodatek Lyrics zajmie trochę czasu.
 """
 
