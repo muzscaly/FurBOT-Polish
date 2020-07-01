@@ -28,9 +28,9 @@ QUOTE_STRINGS = (
     "Wydymany zestresowany gaster zabawka antystresowa\n~ Mizchi",
     "Można spalić?\n~ Pusz",
     "Niech Godek szybko zemrze a Gastera zgwałcą węże\n~ Pusz",
-    "RZUCAĆ SERRRR\n~ Lexis UwU”,
+    "RZUCAĆ SERRRR\n~ Lexis UwU",
     "To się susiakiem pobaw\n~ Stripe",
-    "Ja jebe, co za jebane Tluste Krowie duoska Pierdolone szmaty zajmuja pol autobusu jeszcze kurwa siadaja obok bezczelnie ~ Lexis UwU”
+    "Ja jebe, co za jebane Tluste Krowie duoska Pierdolone szmaty zajmuja pol autobusu jeszcze kurwa siadaja obok bezczelnie ~ Lexis UwU",
     "Jesteś mojom przyjaciółgom,\nmoim plynem do mycia okien,\nmoim spryskiwaczem do powierzchni szklanych\n~ Koda",
     "Ja ćpię cement\n~ Fluffy Incluatio",
     "Idę się ciąć mydłem. Adios\n~ Specyk",
