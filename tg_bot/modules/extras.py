@@ -285,7 +285,7 @@ def hug(bot: Bot, update: Update, args: List[str]):
                 user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
                 user2 = curr_user
 
-            temp = random.choice("{user1} przytula {user2}!)
+            temp = random.choice("{user1} przytula {user2}!")
 
             repl = temp.format(user1=user1, user2=user2, item=item, hits=hit, throws=throw)
 
