@@ -251,7 +251,7 @@ def table(bot: Bot, update: Update):
             if r <= 45:
                 update.message.reply_text("(╯°□°）╯彡 ┻━┻")
             elif r <= 90:
-                update.message.reply_text("Wyślij pieniądze idioto żeby kupić nowy stół do przewrócenia.")
+                update.message.reply_text("Wyślij pieniądze żeby kupić nowy stół do przewrócenia.")
             else:
                 update.message.reply_text("Idż do roboty zamiast wywracać stoły idioto.")
 		
