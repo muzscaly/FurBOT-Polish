@@ -68,7 +68,7 @@ ITEMS = (
     "drewniana laska",
     "gwódź",
     "drukarka",
-    "łopatą",
+    "łopata",
     "monitor CRT",
     "podręcznik do fizyki",
     "toster",
@@ -410,7 +410,7 @@ def hug(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} przytula {user2}!\n{user2} został przytulony NaN razy!"
+    temp = "{user1} przytula {user2}!\n{user2} został(a) przytulony/a NaN razy!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -444,7 +444,7 @@ def boop(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} tycnął {user2}!\n{user2} został tycnięty NaN razy!"
+    temp = "{user1} tycnął {user2}!\n{user2} został(a) tycnięty/a NaN razy!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -478,7 +478,7 @@ def warm(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} ogrzał {user2}!\n{user2} został ogrzany NaN razy!"
+    temp = "{user1} ogrzał {user2}!\n{user2} został(a) ogrzany/a NaN razy!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -512,7 +512,7 @@ def pat(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} poklepał {user2}!\n{user2} został poklepany NaN razy!"
+    temp = "{user1} poklepał {user2}!\n{user2} został(a) poklepany/a NaN razy!"
 
     repl = temp.format(user1=user1, user2=user2)
 
