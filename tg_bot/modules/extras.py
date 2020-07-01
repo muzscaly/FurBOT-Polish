@@ -1,5 +1,7 @@
 import random, re
 from random import randint
+from typing import Optional, List
+
 from telegram import Message, Update, Bot, User, ParseMode
 from telegram.ext import Filters, MessageHandler, run_async
 from telegram.utils.helpers import escape_markdown
@@ -270,8 +272,8 @@ def hug(bot: Bot, update: Update, args: List[str]):
                 if hugged_user.username:
                     user2 = "@" + escape_markdown(hugged_user.username)
                 else:
-                    user2 = "[{}](tg://user?id={})".format(hugged_user.first_name,
-                                                           hugged_user.id)
+                    reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
+
             temp = "{user1} przytula {user2}."
             repl = temp.format(user1=user1, user2=user2)
             reply_text(repl, parse_mode=ParseMode.MARKDOWN)
@@ -291,8 +293,8 @@ def tyc(bot: Bot, update: Update, args: List[str]):
                 if booped_user.username:
                     user2 = "@" + escape_markdown(booped_user.username)
                 else:
-                    user2 = "[{}](tg://user?id={})".format(booped_user.first_name,
-                                                           booped_user.id)
+                    reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
+
             temp = "{user1} przytula {user2}."
             repl = temp.format(user1=user1, user2=user2)
             reply_text(repl, parse_mode=ParseMode.MARKDOWN)
@@ -312,8 +314,8 @@ def patpat(bot: Bot, update: Update, args: List[str]):
                 if patted_user.username:
                     user2 = "@" + escape_markdown(patted_user.username)
                 else:
-                    user2 = "[{}](tg://user?id={})".format(patted_user.first_name,
-                                                           patted_user.id)
+                    reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
+
             temp = "{user1} przytula {user2}."
             repl = temp.format(user1=user1, user2=user2)
             reply_text(repl, parse_mode=ParseMode.MARKDOWN)
