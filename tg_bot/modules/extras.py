@@ -259,6 +259,11 @@ def table(bot: Bot, update: Update):
 		
 @run_async
 def hug(bot: Bot, update: Update, args: List[str]):
+            msg = update.effective_message  # type: Optional[Message]
+
+            # reply to correct message
+            reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
+
             # get user who sent message
             if msg.from_user.username:
                 curr_user = "@" + escape_markdown(msg.from_user.username)
@@ -267,15 +272,23 @@ def hug(bot: Bot, update: Update, args: List[str]):
 
             user_id = extract_user(update.effective_message, args)
             if user_id:
-                hugged_user = bot.get_chat(user_id)
+                slapped_user = bot.get_chat(user_id)
                 user1 = curr_user
-                if hugged_user.username:
-                    user2 = "@" + escape_markdown(hugged_user.username)
-                else:
-                    reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
+                if slapped_user.username:
+                    user2 = "@" + escape_markdown(slapped_user.username)
+            else:
+                user2 = "[{}](tg://user?id={})".format(slapped_user.first_name,
+                                                       slapped_user.id)
 
-            temp = "{user1} przytula {user2}."
-            repl = temp.format(user1=user1, user2=user2)
+        # if no target found, bot targets the sender
+            else:
+                user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
+                user2 = curr_user
+
+            temp = random.choice("{user1} przytula {user2}!)
+
+            repl = temp.format(user1=user1, user2=user2, item=item, hits=hit, throws=throw)
+
             reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
 @run_async
