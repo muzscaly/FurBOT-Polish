@@ -247,7 +247,7 @@ def info(bot: Bot, update: Update, args: List[str]):
 def get_time(bot: Bot, update: Update, args: List[str]):
     location = " ".join(args)
     if location.lower() == bot.first_name.lower():
-        update.effective_message.reply_text("Dla mnie zawsze jest czas na Banhammer!")
+        update.effective_message.reply_text("Dla mnie zawsze jest czas na Yiff!")
         bot.send_sticker(update.effective_chat.id, BAN_STICKER)
         return
 
