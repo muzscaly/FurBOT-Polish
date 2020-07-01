@@ -260,9 +260,9 @@ __help__ = """
  - /table: Wywal/postaw stół :V.
  - /decide: Losowo odpowiada tak/nie/może
  - /toss: Rzuca monetą
- - ~~/abuse: Obraża futrzaka.~~ **WYŁĄCZONE**
+ - /abuse: Obraża futrzaka. **WYŁĄCZONE**
  - /tts <tekst>: Konwertuje tekst na mowę.
- - ~~/bluetext: Sprawdź sobie :V.~~ **WYŁĄCZONE**
+ - /bluetext: Sprawdź sobie :V. **WYŁĄCZONE**
  - /roll: Rzuca kością do grania.
  - /rlg: Połącz uszy, nos oraz usta i stwórz emo emotikonę ;-;
  - /zal <tekst>: Psuje twój tekst.
