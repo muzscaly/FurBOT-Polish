@@ -255,16 +255,19 @@ def table(bot: Bot, update: Update):
                 update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
 		
 __help__ = """
- - /shrug : get shrug XD.
- - /table : get flip/unflip :v.
- - /decide : Randomly answers yes/no/maybe
- - /toss : Tosses A coin
- - /abuse : Abuses the cunt
- - /tts <any text> : Converts text to speech
- - /bluetext : check urself :V
- - /roll : Roll a dice.
- - /rlg : Join ears,nose,mouth and create an emo ;-;
- - /zal <any text> : zalgofy! your text
+ - /shrug: get shrug XD.
+ - /table: get flip/unflip :v.
+ - /decide: Randomly answers yes/no/maybe
+ - /toss: Tosses A coin
+ - /abuse: Abuses the cunt
+ - /tts <any text>: Converts text to speech
+ - /bluetext: check urself :V
+ - /roll: Roll a dice.
+ - /rlg: Join ears,nose,mouth and create an emo ;-;
+ - /zal <any text>: zalgofy! your text
+ - /hug <nazwa futrzaka>: Huga futrzaka (poprzez @, lub odpowiedź)
+ - /tyc <nazwa futrzaka>: tyva futrzaka (poprzez @, lub odpowiedź)
+ - /patpat <nazwa futrzaka>: pat patuje futrzaka (poprzez @, lub odpowiedź)
  Lyrics Plugin will take some moar time to come up.
 """
 
