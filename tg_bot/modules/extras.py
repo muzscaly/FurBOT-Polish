@@ -2,13 +2,11 @@ import random, re
 from random import randint
 from typing import Optional, List
 
-from telegram import Message, Update, Bot, User, ParseMode
+from telegram import Message, Update, Bot, User
 from telegram.ext import Filters, MessageHandler, run_async
-from telegram.utils.helpers import escape_markdown
 
 from tg_bot import dispatcher
 from tg_bot.modules.disable import DisableAbleCommandHandler
-from tg_bot.modules.helper_funcs.extraction import extract_user
 
 ABUSE_STRINGS = (
     "Fuck off",
@@ -257,82 +255,6 @@ def table(bot: Bot, update: Update):
             else:
                 update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
 		
-@run_async
-def hug(bot: Bot, update: Update, args: List[str]):
-            msg = update.effective_message  # type: Optional[Message]
-
-            # reply to correct message
-            reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
-
-            # get user who sent message
-            if msg.from_user.username:
-                curr_user = "@" + escape_markdown(msg.from_user.username)
-            else:
-                curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
-
-            user_id = extract_user(update.effective_message, args)
-            if user_id:
-                hugged_user = bot.get_chat(user_id)
-                user1 = curr_user
-                if hugged_user.username:
-                    user2 = "@" + escape_markdown(hugged_user.username)
-                else:
-                    user2 = "[{}](tg://user?id={})".format(hugged_user.first_name,
-                                                           hugged_user.id)
-
-            # if no target found, bot targets the sender
-            else:
-                user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
-                user2 = curr_user
-
-            temp = "{user1} przytula {user2}!"
-
-            repl = temp.format(user1=user1, user2=user2)
-
-            reply_text(repl, parse_mode=ParseMode.MARKDOWN)
-
-@run_async
-def tyc(bot: Bot, update: Update, args: List[str]):
-            # get user who sent message
-            if msg.from_user.username:
-                curr_user = "@" + escape_markdown(msg.from_user.username)
-            else:
-                curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
-
-            user_id = extract_user(update.effective_message, args)
-            if user_id:
-                booped_user = bot.get_chat(user_id)
-                user1 = curr_user
-                if booped_user.username:
-                    user2 = "@" + escape_markdown(booped_user.username)
-                else:
-                    reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
-
-            temp = "{user1} przytula {user2}."
-            repl = temp.format(user1=user1, user2=user2)
-            reply_text(repl, parse_mode=ParseMode.MARKDOWN)
-		
-@run_async
-def patpat(bot: Bot, update: Update, args: List[str]):
-            # get user who sent message
-            if msg.from_user.username:
-                curr_user = "@" + escape_markdown(msg.from_user.username)
-            else:
-                curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
-
-            user_id = extract_user(update.effective_message, args)
-            if user_id:
-                patted_user = bot.get_chat(user_id)
-                user1 = curr_user
-                if patted_user.username:
-                    user2 = "@" + escape_markdown(patted_user.username)
-                else:
-                    reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
-
-            temp = "{user1} przytula {user2}."
-            repl = temp.format(user1=user1, user2=user2)
-            reply_text(repl, parse_mode=ParseMode.MARKDOWN)
-		
 __help__ = """
  - /shrug: get shrug XD.
  - /table: get flip/unflip :v.
@@ -356,9 +278,6 @@ BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
 RLG_HANDLER = DisableAbleCommandHandler("rlg", rlg)
 DECIDE_HANDLER = DisableAbleCommandHandler("decide", decide)
 TABLE_HANDLER = DisableAbleCommandHandler("table", table)
-HUG_HANDLER = DisableAbleCommandHandler("hug", hug)
-TYC_HANDLER = DisableAbleCommandHandler("tyc", tyc)
-PATPAT_HANDLER = DisableAbleCommandHandler("patpat", patpat)
 
 dispatcher.add_handler(ROLL_HANDLER)
 dispatcher.add_handler(TOSS_HANDLER)
@@ -367,6 +286,3 @@ dispatcher.add_handler(BLUETEXT_HANDLER)
 dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
-dispatcher.add_handler(HUG_HANDLER)
-dispatcher.add_handler(TYC_HANDLER)
-dispatcher.add_handler(PATPAT_HANDLER)
