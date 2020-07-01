@@ -9,21 +9,21 @@ from tg_bot import dispatcher
 from tg_bot.modules.disable import DisableAbleCommandHandler
 
 ABUSE_STRINGS = (
-    "Fuck off",
-    "Stfu go fuck yourself",
-    "Ur mum gey",
-    "Ur dad lesbo",
-    "Bsdk",
-    "Nigga",
-    "Ur granny tranny",
-    "you noob",
-	"Relax your Rear,ders nothing to fear,The Rape train is finally here",
-	"Stfu bc",
-	"Stfu and Gtfo U nub",
-	"GTFO bsdk"
-    "CUnt",
-    " Gay is here",
-    "Ur dad gey bc "
+    "Odpierdol się",
+    "Zamknij mordę i spierdalaj",
+    "Twoja stara to gej",
+    "Twój stary to lezba",
+    "Skończony dupek",
+    "Nygus",
+    "Twoja babcia to trans",
+    "Jesteś noob",
+    "Odpręż dupę, nie ma się czego obawiać, pociąg gwałtu nadjeżdza",
+    "Zamknij mordę suko",
+    "Zamknij mordę i wypierdalaj noobie",
+    "Wypierdalaj skończony dupku"
+    "Cipa",
+    "Gej idzie po ciebie",
+    "Twój stary to gej skończony dupku"
 )
 
 EYES = [
@@ -199,8 +199,8 @@ EARS = [
 ]
 
 TOSS = (
-    "Heads",
-    "Tails",
+    "Orzeł",
+    "Reszka",
 )
 
 @run_async
@@ -226,7 +226,7 @@ def shrug(bot: Bot, update: Update):
 def bluetext(bot: Bot, update: Update):
     # reply to correct message
     reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
-    reply_text("BLUE TEXT\n MUST CLICK\n I AM A STUPID ANIMAL THAT IS ATTRACTED TO COLORS")		
+    reply_text("NIEBIESKI TEKST\n MUSISZ NACISNĄĆ\n JESTEM GŁUPIM FUTRZAKIEM ZAJARANYM KOLORORAMI")		
 
 @run_async
 def rlg(bot: Bot, update: Update):
@@ -240,32 +240,32 @@ def rlg(bot: Bot, update: Update):
 def decide(bot: Bot, update: Update):
         r = randint(1, 100)
         if r <= 65:
-            update.message.reply_text("Yes.")
+            update.message.reply_text("Tak.")
         elif r <= 90:
-            update.message.reply_text("NoU.")
+            update.message.reply_text("Nie.")
         else:
-            update.message.reply_text("Maybe.")
+            update.message.reply_text("Może.")
             
 def table(bot: Bot, update: Update):
             r = randint(1, 100)
             if r <= 45:
                 update.message.reply_text("(╯°□°）╯彡 ┻━┻")
             elif r <= 90:
-                update.message.reply_text("Send money bsdk to buy new table to flip")
+                update.message.reply_text("Wyślij pieniądze idioto żeby kupić nowy stół do przewrócenia.")
             else:
-                update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
+                update.message.reply_text("Idż do roboty zamiast wywracać stoły idioto.")
 		
 __help__ = """
- - /shrug: get shrug XD.
- - /table: get flip/unflip :v.
- - /decide: Randomly answers yes/no/maybe
- - /toss: Tosses A coin
- - /abuse: Abuses the cunt
- - /tts <any text>: Converts text to speech
- - /bluetext: check urself :V
- - /roll: Roll a dice.
- - /rlg: Join ears,nose,mouth and create an emo ;-;
- - /zal <tekst>: zalgofy! your text
+ - /shrug: Shrug.
+ - /table: Wywal/postaw stół :v.
+ - /decide: Losowo odpowiada tak/nie/może
+ - /toss: Rzuca monetą
+ - ~~/abuse: Obraża futrzaka~~
+ - /tts <tekst>: Konwertuje tekst na mowę
+ - /bluetext: Sprawdź na sobie :V
+ - /roll: Rzuca kością do grania.
+ - /rlg: Połącz uszy, nos oraz usta i stwórz emo emotikonę ;-;
+ - /zal <tekst>: Psuje twój tekst.
  Dodatek Lyrics zajmie trochę czasu.
 """
 
@@ -274,6 +274,7 @@ __mod_name__ = "Dodatki"
 ROLL_HANDLER = DisableAbleCommandHandler("roll", roll)
 TOSS_HANDLER = DisableAbleCommandHandler("toss", toss)
 SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug)
+ABUSE_HANDLER = DisableAbleCommandHandler("abuse", abuse)
 BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
 RLG_HANDLER = DisableAbleCommandHandler("rlg", rlg)
 DECIDE_HANDLER = DisableAbleCommandHandler("decide", decide)
@@ -282,6 +283,7 @@ TABLE_HANDLER = DisableAbleCommandHandler("table", table)
 dispatcher.add_handler(ROLL_HANDLER)
 dispatcher.add_handler(TOSS_HANDLER)
 dispatcher.add_handler(SHRUG_HANDLER)
+dispatcher.add_handler(ABUSE_HANDLER)
 dispatcher.add_handler(BLUETEXT_HANDLER)
 dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
