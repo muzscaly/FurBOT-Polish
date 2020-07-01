@@ -214,7 +214,7 @@ def info(bot: Bot, update: Update, args: List[str]):
     if user.username:
         text += "\nPseudomin: @{}".format(html.escape(user.username))
 
-    text += "\nPermamentny link futrzaka: {}".format(mention_html(user.id, "link"))
+    text += "\nPermamentny link do futrzaka: {}".format(mention_html(user.id, "link"))
 
     if user.id == OWNER_ID:
         text += "\n\nTen futrzak jest moim opiekunem - Nigdy nie zrobiłbym nic przeciwko mu!"
