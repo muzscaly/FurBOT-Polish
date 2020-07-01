@@ -254,6 +254,69 @@ def table(bot: Bot, update: Update):
             else:
                 update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
 		
+@run_async
+def hug(bot: Bot, update: Update, args: List[str]):
+            # get user who sent message
+	    if msg.from_user.username:
+		curr_user = "@" + escape_markdown(msg.from_user.username)
+	    else:
+		curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+
+	    user_id = extract_user(update.effective_message, args)
+	    if user_id:
+		hugged_user = bot.get_chat(user_id)
+		user1 = curr_user
+		if hugged_user.username:
+		    user2 = "@" + escape_markdown(hugged_user.username)
+		else:
+		    user2 = "[{}](tg://user?id={})".format(hugged_user.first_name,
+							   hugged_user.id)
+	    temp = "{user1} przytula {user2}."
+	    repl = temp.format(user1=user1, user2=user2)
+	    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+
+@run_async
+def tyc(bot: Bot, update: Update, args: List[str]):
+            # get user who sent message
+	    if msg.from_user.username:
+		curr_user = "@" + escape_markdown(msg.from_user.username)
+	    else:
+		curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+
+	    user_id = extract_user(update.effective_message, args)
+	    if user_id:
+		booped_user = bot.get_chat(user_id)
+		user1 = curr_user
+		if booped_user.username:
+		    user2 = "@" + escape_markdown(hugged_user.username)
+		else:
+		    user2 = "[{}](tg://user?id={})".format(booped_user.first_name,
+							   booped_user.id)
+	    temp = "{user1} tyca {user2}."
+	    repl = temp.format(user1=user1, user2=user2)
+	    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+		
+@run_async
+def patpat(bot: Bot, update: Update, args: List[str]):
+            # get user who sent message
+	    if msg.from_user.username:
+		curr_user = "@" + escape_markdown(msg.from_user.username)
+	    else:
+		curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+
+	    user_id = extract_user(update.effective_message, args)
+	    if user_id:
+		patted_user = bot.get_chat(user_id)
+		user1 = curr_user
+		if patted_user.username:
+		    user2 = "@" + escape_markdown(patted_user.username)
+		else:
+		    user2 = "[{}](tg://user?id={})".format(patted_user.first_name,
+							   patted_user.id)
+	    temp = "{user1} robi *pat pat* na {user2}."
+	    repl = temp.format(user1=user1, user2=user2)
+	    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+		
 __help__ = """
  - /shrug: get shrug XD.
  - /table: get flip/unflip :v.
@@ -264,14 +327,14 @@ __help__ = """
  - /bluetext: check urself :V
  - /roll: Roll a dice.
  - /rlg: Join ears,nose,mouth and create an emo ;-;
- - /zal <any text>: zalgofy! your text
+ - /zal <tekst>: zalgofy! your text
  - /hug <nazwa futrzaka>: Huga futrzaka (poprzez @, lub odpowiedź)
- - /tyc <nazwa futrzaka>: tyva futrzaka (poprzez @, lub odpowiedź)
+ - /tyc <nazwa futrzaka>: tyca futrzaka (poprzez @, lub odpowiedź)
  - /patpat <nazwa futrzaka>: pat patuje futrzaka (poprzez @, lub odpowiedź)
- Lyrics Plugin will take some moar time to come up.
+ Dodatek Lyrics zajmie trochę czasu.
 """
 
-__mod_name__ = "Extras"
+__mod_name__ = "Dodatki"
 
 ROLL_HANDLER = DisableAbleCommandHandler("roll", roll)
 TOSS_HANDLER = DisableAbleCommandHandler("toss", toss)
@@ -280,6 +343,9 @@ BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
 RLG_HANDLER = DisableAbleCommandHandler("rlg", rlg)
 DECIDE_HANDLER = DisableAbleCommandHandler("decide", decide)
 TABLE_HANDLER = DisableAbleCommandHandler("table", table)
+HUG_HANDLER = DisableAbleCommandHandler("hug", hug)
+TYC_HANDLER = DisableAbleCommandHandler("tyc", tyc)
+PATPAT_HANDLER = DisableAbleCommandHandler("patpat", patpat)
 
 dispatcher.add_handler(ROLL_HANDLER)
 dispatcher.add_handler(TOSS_HANDLER)
@@ -288,3 +354,6 @@ dispatcher.add_handler(BLUETEXT_HANDLER)
 dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
+dispatcher.add_handler(HUG_HANDLER)
+dispatcher.add_handler(TYC_HANDLER)
+dispatcher.add_handler(PATPAT_HANDLER)
