@@ -98,7 +98,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     except BadRequest as excp:
         if excp.message == "Nie znaleziono odpowiedzi":
             # Do not reply
-            message.reply_text('Zbanowany!', quote=False)
+            message.reply_text('Zbanowano!', quote=False)
             return log
         else:
             LOGGER.warning(update)
@@ -171,13 +171,13 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         chat.kick_member(user_id, until_date=bantime)
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        message.reply_text("Zbanowany! Futrzak będzie zbanowany przez {}.".format(time_val))
+        message.reply_text("Zbanowano! Futrzak będzie zbanowany przez {}.".format(time_val))
         return log
 
     except BadRequest as excp:
         if excp.message == "Nie znaleziono odpowiedzi":
             # Do not reply
-            message.reply_text("Zbanowany! Futrzak będzie zbanowany przez {}.".format(time_val), quote=False)
+            message.reply_text("Zbanowano! Futrzak będzie zbanowany przez {}.".format(time_val), quote=False)
             return log
         else:
             LOGGER.warning(update)
@@ -223,7 +223,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        message.reply_text("Wyrzucony!")
+        message.reply_text("Wyrzucono!")
         log = "<b>{}:</b>" \
               "\n#WYRZUCONY" \
               "\n<b>Administrator:</b> {}" \
@@ -358,7 +358,7 @@ def rban(bot: Bot, update: Update, args: List[str]):
 
     try:
         chat.kick_member(user_id)
-        message.reply_text("Zbanowany!")
+        message.reply_text("Zbanowano!")
     except BadRequest as excp:
         if excp.message == "Nie znaleziono odpowiedzi":
             # Do not reply
