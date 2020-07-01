@@ -220,11 +220,11 @@ __help__ = """
  - /adminlist: lista administracji tego czatu
 
 *Admin only:*
- - /pin: cicho przypina wiadomość, na którą odpowiedziano - dodaj 'loud' lub 'notify' żeby powiadomić innych futrzaków.
- - /unpin: odpina obecnie przypiętą wiadomość
- - /invitelink: podaje link zapraszający
- - /promote: awansuje futrzaka, na którego odpowiedziano
- - /demote: degraduje futrzaka, na którego odpowiedziano
+ - /pin: Cicho przypina wiadomość, na którą odpowiedziano - dodaj 'loud' lub 'notify' żeby powiadomić innych futrzaków.
+ - /unpin: Odpina obecnie przypiętą wiadomość
+ - /invitelink: Podaje link zapraszający
+ - /promote: Awansuje futrzaka, na którego odpowiedziano
+ - /demote: Degraduje futrzaka, na którego odpowiedziano
 """
 
 __mod_name__ = "Administracja"
