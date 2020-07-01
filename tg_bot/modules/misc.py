@@ -30,7 +30,7 @@ QUOTE_STRINGS = (
     "Niech Godek szybko zemrze a Gastera zgwałcą węże\n~ Pusz",
     "RZUCAĆ SERRRR\n~ Lexis UwU",
     "To się susiakiem pobaw\n~ Stripe",
-    "Ja jebe, co za jebane Tluste Krowie duoska Pierdolone szmaty zajmuja pol autobusu jeszcze kurwa siadaja obok bezczelnie ~ Lexis UwU",
+    "Ja jebe, co za jebane Tłuste Krowie dupska\nPierdolone szmaty zajmują pół autobusu jeszcze kurwa siadają obok bezczelnie ~ Lexis UwU",
     "Jesteś mojom przyjaciółgom,\nmoim plynem do mycia okien,\nmoim spryskiwaczem do powierzchni szklanych\n~ Koda",
     "Ja ćpię cement\n~ Fluffy Incluatio",
     "Idę się ciąć mydłem. Adios\n~ Specyk",
@@ -39,7 +39,8 @@ QUOTE_STRINGS = (
     "Mursuit is just a fursuit with (reverse) gloryhole feature\n~ Davis",
     "Jeśli wszystko inne zawiedzie, rzucaj w to Futrzakami puki nie przestanie\n~Lexis UwU",
     "Płytki podłogowe\n~ Pastel",
-    "Chuj z butami, uwaga Olive będzie skakać!\n~ Cytrynek"
+    "Chuj z butami, uwaga Olive będzie skakać!\n~ Cytrynek",
+    "Nie zesraj sie\n~ Stripe"
 )
 
 
