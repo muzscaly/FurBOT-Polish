@@ -18,7 +18,7 @@ from tg_bot.modules.helper_funcs.filters import CustomFilters
 
 QUOTE_STRINGS = (
     "Fajny ten pies\n~ Specyk",
-    "Jaki kurwa wąwóz\n~ FUTRZAK NIEZNANY",
+    "Jaki kurwa wąwóz\n~ Avirka",
     "CZEKOLADOWE NALEŚNIKI\n~ Artorus",
     "Lazania to po prostu tort o smaku spaghetti\n~ Kozel",
     "UwU\n~ Praktycznie każdy futrzak",
