@@ -151,7 +151,7 @@ if is_module_loaded(FILENAME):
     __help__ = """
  - /cmds: Sprawdź obecny status wyłączonych komend
 
-*Admin only:*
+*Tylko administratorzy:*
  - /enable <nazwa komendy>: Włącz tą komendę
  - /disable <nazwa komendy>: Wyłącz tą komendę
  - /listcmds: Sprawdź wszystkie komendy do przełączenia
