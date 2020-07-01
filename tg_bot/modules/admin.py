@@ -219,7 +219,7 @@ def __chat_settings__(chat_id, user_id):
 __help__ = """
  - /adminlist: Lista administracji tego czatu
 
-*Tylko Administratorzy:*
+*Tylko administratorzy:*
  - /pin: Cicho przypina wiadomość, na którą odpowiedziano - dodaj 'loud' lub 'notify' żeby powiadomić innych futrzaków.
  - /unpin: Odpina obecnie przypiętą wiadomość
  - /invitelink: Podaje link zapraszający
