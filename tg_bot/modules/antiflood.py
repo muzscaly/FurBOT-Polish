@@ -122,7 +122,7 @@ def __chat_settings__(chat_id, user_id):
 __help__ = """
  - /flood: Żeby sprawdzić obecny stan kontroli spamu..
 
-*Tylko Administracja:*
+*Tylko administracja:*
  - /setflood <int/'no'/'off'>: Włącza lub wyłącza kontrolę spamu
 """
 
