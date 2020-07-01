@@ -258,65 +258,65 @@ def table(bot: Bot, update: Update):
 @run_async
 def hug(bot: Bot, update: Update, args: List[str]):
             # get user who sent message
-	    if msg.from_user.username:
-		curr_user = "@" + escape_markdown(msg.from_user.username)
-	    else:
-		curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+            if msg.from_user.username:
+                curr_user = "@" + escape_markdown(msg.from_user.username)
+            else:
+                curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
 
-	    user_id = extract_user(update.effective_message, args)
-	    if user_id:
-		hugged_user = bot.get_chat(user_id)
-		user1 = curr_user
-		if hugged_user.username:
-		    user2 = "@" + escape_markdown(hugged_user.username)
-		else:
-		    user2 = "[{}](tg://user?id={})".format(hugged_user.first_name,
-							   hugged_user.id)
-	    temp = "{user1} przytula {user2}."
-	    repl = temp.format(user1=user1, user2=user2)
-	    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+            user_id = extract_user(update.effective_message, args)
+            if user_id:
+                hugged_user = bot.get_chat(user_id)
+                user1 = curr_user
+                if hugged_user.username:
+                    user2 = "@" + escape_markdown(hugged_user.username)
+                else:
+                    user2 = "[{}](tg://user?id={})".format(hugged_user.first_name,
+                                                           hugged_user.id)
+            temp = "{user1} przytula {user2}."
+            repl = temp.format(user1=user1, user2=user2)
+            reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
 @run_async
 def tyc(bot: Bot, update: Update, args: List[str]):
             # get user who sent message
-	    if msg.from_user.username:
-		curr_user = "@" + escape_markdown(msg.from_user.username)
-	    else:
-		curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+            if msg.from_user.username:
+                curr_user = "@" + escape_markdown(msg.from_user.username)
+            else:
+                curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
 
-	    user_id = extract_user(update.effective_message, args)
-	    if user_id:
-		booped_user = bot.get_chat(user_id)
-		user1 = curr_user
-		if booped_user.username:
-		    user2 = "@" + escape_markdown(hugged_user.username)
-		else:
-		    user2 = "[{}](tg://user?id={})".format(booped_user.first_name,
-							   booped_user.id)
-	    temp = "{user1} tyca {user2}."
-	    repl = temp.format(user1=user1, user2=user2)
-	    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+            user_id = extract_user(update.effective_message, args)
+            if user_id:
+                booped_user = bot.get_chat(user_id)
+                user1 = curr_user
+                if booped_user.username:
+                    user2 = "@" + escape_markdown(booped_user.username)
+                else:
+                    user2 = "[{}](tg://user?id={})".format(booped_user.first_name,
+                                                           booped_user.id)
+            temp = "{user1} przytula {user2}."
+            repl = temp.format(user1=user1, user2=user2)
+            reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 		
 @run_async
 def patpat(bot: Bot, update: Update, args: List[str]):
             # get user who sent message
-	    if msg.from_user.username:
-		curr_user = "@" + escape_markdown(msg.from_user.username)
-	    else:
-		curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+            if msg.from_user.username:
+                curr_user = "@" + escape_markdown(msg.from_user.username)
+            else:
+                curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
 
-	    user_id = extract_user(update.effective_message, args)
-	    if user_id:
-		patted_user = bot.get_chat(user_id)
-		user1 = curr_user
-		if patted_user.username:
-		    user2 = "@" + escape_markdown(patted_user.username)
-		else:
-		    user2 = "[{}](tg://user?id={})".format(patted_user.first_name,
-							   patted_user.id)
-	    temp = "{user1} robi *pat pat* na {user2}."
-	    repl = temp.format(user1=user1, user2=user2)
-	    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+            user_id = extract_user(update.effective_message, args)
+            if user_id:
+                patted_user = bot.get_chat(user_id)
+                user1 = curr_user
+                if patted_user.username:
+                    user2 = "@" + escape_markdown(patted_user.username)
+                else:
+                    user2 = "[{}](tg://user?id={})".format(patted_user.first_name,
+                                                           patted_user.id)
+            temp = "{user1} przytula {user2}."
+            repl = temp.format(user1=user1, user2=user2)
+            reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 		
 __help__ = """
  - /shrug: get shrug XD.
