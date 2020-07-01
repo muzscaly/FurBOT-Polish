@@ -271,12 +271,12 @@ def __chat_settings__(chat_id, user_id):
 __help__ = """
  - /filters: Wyświetla listę wszystkich filtrów na czacie.
 
-*Admin only:*
- - /filter <keyword> <reply message>: Dodaje filtr do tego czatu. Ja będę teraz odpowiadał na tę wiadomość za każdym razem kiedy 'keyword'\
+*Tylko administracja:*
+ - /filter <słowo kluczowe> <odpowiedź>: Dodaje filtr do tego czatu. Ja będę teraz odpowiadał na tę wiadomość za każdym razem kiedy 'keyword'\
 jest wspomniany. Jeśli odpowiesz na naklejkę słowem kluczowym, bot odpowie tą naklejką. NOTKA: wszystkie filtry \
 słowa kluczowe są z małej litery. Jeśli chcesz, aby keyword było zdaniem, użyj cudzysłowiów. np: /filter "no hej" Co \
 robisz?
- - /stop <filter keyword>: Usuwa ten filtr.
+ - /stop <słowo kluczowe>: Usuwa ten filtr.
 """
 
 __mod_name__ = "Filtry"
