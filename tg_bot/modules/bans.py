@@ -425,7 +425,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
 
     try:
         chat.unban_member(user_id)
-    message.reply_text("Yup, ten futrzak może wrócić!")
+        message.reply_text("Yup, ten futrzak może wrócić!")
     except BadRequest as excp:
         if excp.message == "Nie znaleziono odpowiedzi":
             # Do not reply
