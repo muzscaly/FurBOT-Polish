@@ -1,11 +1,16 @@
 import random, re
 from random import randint
 from telegram import Message, Update, Bot, User
+from telegram import ParseMode, MAX_MESSAGE_LENGTH
 from telegram import MessageEntity
 from telegram.ext import Filters, MessageHandler, run_async
+from telegram.ext.dispatcher import run_async
+from telegram.utils.helpers import escape_markdown
 
+import tg_bot.modules.sql.userinfo_sql as sql
 from tg_bot import dispatcher
 from tg_bot.modules.disable import DisableAbleCommandHandler
+from tg_bot.modules.helper_funcs.extraction import extract_user
 
 ABUSE_STRINGS = (
     "Fuck off",
