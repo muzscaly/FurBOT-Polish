@@ -260,9 +260,9 @@ __help__ = """
  - /table: Wywal/postaw stół :V.
  - /decide: Losowo odpowiada tak/nie/może
  - /toss: Rzuca monetą
- - ~~/abuse: Obraża futrzaka~~
- - /tts <tekst>: Konwertuje tekst na mowę
- - /bluetext: Sprawdź sobie :V.
+ - ~~/abuse: Obraża futrzaka.~~ **WYŁĄCZONE**
+ - /tts <tekst>: Konwertuje tekst na mowę.
+ - ~~/bluetext: Sprawdź sobie :V.~~ **WYŁĄCZONE**
  - /roll: Rzuca kością do grania.
  - /rlg: Połącz uszy, nos oraz usta i stwórz emo emotikonę ;-;
  - /zal <tekst>: Psuje twój tekst.
@@ -274,8 +274,8 @@ __mod_name__ = "Dodatki"
 ROLL_HANDLER = DisableAbleCommandHandler("roll", roll)
 TOSS_HANDLER = DisableAbleCommandHandler("toss", toss)
 SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug)
-ABUSE_HANDLER = DisableAbleCommandHandler("abuse", abuse)
-BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
+#ABUSE_HANDLER = DisableAbleCommandHandler("abuse", abuse)
+#BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
 RLG_HANDLER = DisableAbleCommandHandler("rlg", rlg)
 DECIDE_HANDLER = DisableAbleCommandHandler("decide", decide)
 TABLE_HANDLER = DisableAbleCommandHandler("table", table)
@@ -283,8 +283,8 @@ TABLE_HANDLER = DisableAbleCommandHandler("table", table)
 dispatcher.add_handler(ROLL_HANDLER)
 dispatcher.add_handler(TOSS_HANDLER)
 dispatcher.add_handler(SHRUG_HANDLER)
-dispatcher.add_handler(ABUSE_HANDLER)
-dispatcher.add_handler(BLUETEXT_HANDLER)
+#dispatcher.add_handler(ABUSE_HANDLER)
+#dispatcher.add_handler(BLUETEXT_HANDLER)
 dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
