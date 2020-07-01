@@ -276,11 +276,11 @@ def hug(bot: Bot, update: Update, args: List[str]):
                 user1 = curr_user
                 if slapped_user.username:
                     user2 = "@" + escape_markdown(slapped_user.username)
-            else:
-                user2 = "[{}](tg://user?id={})".format(slapped_user.first_name,
+                else:
+                    user2 = "[{}](tg://user?id={})".format(slapped_user.first_name,
                                                        slapped_user.id)
 
-        # if no target found, bot targets the sender
+            # if no target found, bot targets the sender
             else:
                 user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
                 user2 = curr_user
