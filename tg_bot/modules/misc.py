@@ -56,8 +56,8 @@ SLAP_TEMPLATES = (
     "{user1} zaczyna lekko klepać {user2} za pomocą {item}.",
     "{user1} zdejmuje {user2} oraz ciągle {hits} go za pomocą {item}.",
     "{user1} podnasza {item} i {hits} tym w {user2}.",
-    "{user1} przywiązuje {user2} do krzesła i {throws} {item} w niego.",
-    "{user1} skłonił się pomóc {user2} w nauce pływania w lawie."
+    "{user1} przywiązuje {user2} do krzesła i {throws} {item} w niego/nią.",
+    "{user1} skłonił(a) się pomóc {user2} w nauce pływania w lawie."
 )
 
 ITEMS = (
