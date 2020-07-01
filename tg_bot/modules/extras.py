@@ -257,12 +257,12 @@ def table(bot: Bot, update: Update):
 		
 __help__ = """
  - /shrug: Shrug.
- - /table: Wywal/postaw stół :v.
+ - /table: Wywal/postaw stół :V.
  - /decide: Losowo odpowiada tak/nie/może
  - /toss: Rzuca monetą
  - ~~/abuse: Obraża futrzaka~~
  - /tts <tekst>: Konwertuje tekst na mowę
- - /bluetext: Sprawdź na sobie :V
+ - /bluetext: Sprawdź sobie :V.
  - /roll: Rzuca kością do grania.
  - /rlg: Połącz uszy, nos oraz usta i stwórz emo emotikonę ;-;
  - /zal <tekst>: Psuje twój tekst.
