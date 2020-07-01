@@ -155,7 +155,7 @@ Akcje które są dostępne przy połączonych grupach:
  - /allowconnect on/yes/off/no: Pozwól futrzakom na zdalne połączenie z czatem
 """
 
-__mod_name__ = "Connections"
+__mod_name__ = "Połączenia"
 
 CONNECT_CHAT_HANDLER = CommandHandler("connect", connect_chat, allow_edited=True, pass_args=True)
 DISCONNECT_CHAT_HANDLER = CommandHandler("disconnect", disconnect_chat, allow_edited=True)
