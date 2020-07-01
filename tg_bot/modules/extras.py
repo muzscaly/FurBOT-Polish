@@ -272,22 +272,22 @@ def hug(bot: Bot, update: Update, args: List[str]):
 
             user_id = extract_user(update.effective_message, args)
             if user_id:
-                slapped_user = bot.get_chat(user_id)
+                hugged_user = bot.get_chat(user_id)
                 user1 = curr_user
-                if slapped_user.username:
-                    user2 = "@" + escape_markdown(slapped_user.username)
+                if hugged_user.username:
+                    user2 = "@" + escape_markdown(hugged_user.username)
                 else:
-                    user2 = "[{}](tg://user?id={})".format(slapped_user.first_name,
-                                                       slapped_user.id)
+                    user2 = "[{}](tg://user?id={})".format(hugged_user.first_name,
+                                                           hugged_user.id)
 
             # if no target found, bot targets the sender
             else:
                 user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
                 user2 = curr_user
 
-            temp = random.choice("{user1} przytula {user2}!")
+            temp = "{user1} przytula {user2}!"
 
-            repl = temp.format(user1=user1, user2=user2, item=item, hits=hit, throws=throw)
+            repl = temp.format(user1=user1, user2=user2)
 
             reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
