@@ -221,7 +221,7 @@ def info(bot: Bot, update: Update, args: List[str]):
     text += "\nPermamentny link futrzaka: {}".format(mention_html(user.id, "link"))
 
     if user.id == OWNER_ID:
-        text += "\n\nTen futrzak jest moim opiekunem - Nigdy nie zrobiłbym nic przeciwko mu!
+        text += "\n\nTen futrzak jest moim opiekunem - Nigdy nie zrobiłbym nic przeciwko mu!"
     else:
         if user.id in SUDO_USERS:
             text += "\nTen futrzak jest jednym z moich sudo futrzaków! " \
