@@ -441,7 +441,7 @@ def hug(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} przytula {user2}!"
+    temp = "**{user1} przytula {user2}!**"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -475,7 +475,41 @@ def boop(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} tyca {user2}!"
+    temp = "**{user1} tyca {user2}!**"
+
+    repl = temp.format(user1=user1, user2=user2)
+
+    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+
+@run_async
+def warm(bot: Bot, update: Update, args: List[str]):
+    msg = update.effective_message  # type: Optional[Message]
+
+    # reply to correct message
+    reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
+
+    # get user who sent message
+    if msg.from_user.username:
+        curr_user = "@" + escape_markdown(msg.from_user.username)
+    else:
+        curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+
+    user_id = extract_user(update.effective_message, args)
+    if user_id:
+        warmed_user = bot.get_chat(user_id)
+        user1 = curr_user
+        if warmed_user.username:
+            user2 = "@" + escape_markdown(warmed_user.username)
+        else:
+            user2 = "[{}](tg://user?id={})".format(warmed_user.first_name,
+                                                   warmed_user.id)
+
+    # if no target found, bot targets the sender
+    else:
+        user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
+        user2 = curr_user
+
+    temp = "**{user1} ogrzewa {user2}!**"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -509,7 +543,7 @@ def patpat(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} przytula {user2}!"
+    temp = "**{user1} pat patuje {user2}!**"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -520,9 +554,10 @@ __help__ = """
  - /id: get the current group id. If used by replying to a message, gets that user's id.
  - /runs: reply a random string from an array of replies.
  - /slap: slap a user, or get slapped if not a reply.
- - /hug: Huga futrzaka, lub przytulasz samego siebie jeżeli nie zostało użyte w odpowiedzi
- - /boop: tyca futrzaka, lub przytulasz samego siebie jeżeli nie zostało użyte w odpowiedzi
- - /patpat: pat patuje futrzaka, lub przytulasz samego siebie jeżeli nie zostało użyte w odpowiedzi
+ - /hug: Huga futrzaka lub przytula wysyłającego jeżeli nie zostało użyte w odpowiedzi
+ - /boop: Tyca futrzaka lub tyca wysyłającego jeżeli nie zostało użyte w odpowiedzi
+ - /warm: Ociepla futrzaka lub ociepla wysyłającego jeżeli nie zostało użyte w odpowiedzi
+ - /patpat: Pat patuje futrzaka lub pat patuje wysyłającego jeżeli nie zostało użyte w odpowiedzi
  - /time <place>: gives the local time at the given place.
  - /info: get information about a user.
  - /gdpr: deletes your information from the bot's database. Private chats only.
@@ -542,6 +577,7 @@ RUNS_HANDLER = DisableAbleCommandHandler("runs", runs)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True)
 HUG_HANDLER = DisableAbleCommandHandler("hug", hug, pass_args=True)
 BOOP_HANDLER = DisableAbleCommandHandler("boop", boop, pass_args=True)
+WARM_HANDLER = DisableAbleCommandHandler("warm", warm, pass_args=True)
 PATPAT_HANDLER = DisableAbleCommandHandler("patpat", patpat, pass_args=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True)
 
@@ -562,6 +598,7 @@ dispatcher.add_handler(RUNS_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(HUG_HANDLER)
 dispatcher.add_handler(BOOP_HANDLER)
+dispatcher.add_handler(WARM_HANDLER)
 dispatcher.add_handler(PATPAT_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
 dispatcher.add_handler(ECHO_HANDLER)
