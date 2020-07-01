@@ -46,64 +46,61 @@ QUOTE_STRINGS = (
 
 
 SLAP_TEMPLATES = (
-    "{user1} {hits} {user2} with a {item}.",
-    "{user1} {hits} {user2} in the face with a {item}.",
-    "{user1} {hits} {user2} around a bit with a {item}.",
-    "{user1} {throws} a {item} at {user2}.",
-    "{user1} grabs a {item} and {throws} it at {user2}'s face.",
-    "{user1} launches a {item} in {user2}'s general direction.",
-    "{user1} starts slapping {user2} silly with a {item}.",
-    "{user1} pins {user2} down and repeatedly {hits} them with a {item}.",
-    "{user1} grabs up a {item} and {hits} {user2} with it.",
-    "{user1} ties {user2} to a chair and {throws} a {item} at them.",
-    "{user1} gave a friendly push to help {user2} learn to swim in lava."
+    "{user1} {hits} {user2} za pomocą {item}.",
+    "{user1} {hits} prosto w twarz {user2} za pomocą {item}.",
+    "{user1} lekko {hits} {user2} za pomocą {item}.",
+    "{user1} {throws} {item} w {user2}.",
+    "{user1} podnosi {item} i {throws} nią w twarz {user2}.",
+    "{user1} wystrzeliwuje {item} w stronę {user2}.",
+    "{user1} zaczyna lekko klepać {user2} za pomocą {item}.",
+    "{user1} zdejmuje {user2} oraz ciągle {hits} go za pomocą {item}.",
+    "{user1} podnasza {item} i {hits} tym w {user2}.",
+    "{user1} przywiązuje {user2} do krzesła i {throws} {item} w niego.",
+    "{user1} skłonił się pomóc {user2} w nauce pływania w lawie."
 )
 
 ITEMS = (
-    "cast iron skillet",
-    "large trout",
-    "baseball bat",
-    "cricket bat",
-    "wooden cane",
-    "nail",
-    "printer",
-    "shovel",
-    "CRT monitor",
-    "physics textbook",
-    "toaster",
-    "portrait of Richard Stallman",
-    "television",
-    "five ton truck",
-    "roll of duct tape",
-    "book",
+    "patelnia",
+    "wielki pstrąg",
+    "kij bezbolowy",
+    "kij do krykietu",
+    "drewniana laska",
+    "gwódź",
+    "drukarka",
+    "łopatą",
+    "monitor CRT",
+    "podręcznik do fizyki",
+    "toster",
+    "potret Gastera",
+    "TV",
+    "pięciotonowa ciężarówka",
+    "taśma klejąca",
+    "książka",
     "laptop",
-    "old television",
-    "sack of rocks",
-    "rainbow trout",
-    "rubber chicken",
-    "spiked bat",
-    "fire extinguisher",
-    "heavy rock",
-    "chunk of dirt",
-    "beehive",
-    "piece of rotten meat",
-    "bear",
-    "ton of bricks",
+    "stare TV",
+    "worek skał",
+    "pstrąg tęczowy",
+    "gumowa kura",
+    "kolczasty kij",
+    "gaśnica",
+    "cięzki kamień",
+    "kawałek ziemi",
+    "ul",
+    "kawałek zgniłego mięsa",
+    "niedźwiedź",
+    "ton cegieł",
 )
 
 THROW = (
-    "throws",
-    "flings",
-    "chucks",
-    "hurls",
+    "rzuca",
+    "cisnie",
 )
 
 HIT = (
-    "hits",
-    "whacks",
-    "slaps",
-    "smacks",
-    "bashes",
+    "uderza",
+    "wali",
+    "grzmota",
+    "trafia",
 )
 
 GMAPS_LOC = "https://maps.googleapis.com/maps/api/geocode/json"
@@ -155,8 +152,8 @@ def slap(bot: Bot, update: Update, args: List[str]):
 
 @run_async
 def get_bot_ip(bot: Bot, update: Update):
-    """ Sends the bot's IP address, so as to be able to ssh in if necessary.
-        OWNER ONLY.
+    """ Wysyła adres IP bota, aby móc wejść na ssh w razie potrzeby.
+        TYLKO WŁAŚCICIEL.
     """
     res = requests.get("http://ipinfo.io/ip")
     update.message.reply_text(res.text)
@@ -170,7 +167,7 @@ def get_id(bot: Bot, update: Update, args: List[str]):
             user1 = update.effective_message.reply_to_message.from_user
             user2 = update.effective_message.reply_to_message.forward_from
             update.effective_message.reply_text(
-                "The original sender, {}, has an ID of `{}`.\nThe forwarder, {}, has an ID of `{}`.".format(
+                "Pierwotny wysyłający, {}, ma ID `{}`.\nPrzesyłający, {}, ma ID `{}`.".format(
                     escape_markdown(user2.first_name),
                     user2.id,
                     escape_markdown(user1.first_name),
@@ -178,16 +175,16 @@ def get_id(bot: Bot, update: Update, args: List[str]):
                 parse_mode=ParseMode.MARKDOWN)
         else:
             user = bot.get_chat(user_id)
-            update.effective_message.reply_text("{}'s id is `{}`.".format(escape_markdown(user.first_name), user.id),
+            update.effective_message.reply_text("ID {} to `{}`.".format(escape_markdown(user.first_name), user.id),
                                                 parse_mode=ParseMode.MARKDOWN)
     else:
         chat = update.effective_chat  # type: Optional[Chat]
         if chat.type == "private":
-            update.effective_message.reply_text("Your id is `{}`.".format(chat.id),
+            update.effective_message.reply_text("Twoje ID to `{}`.".format(chat.id),
                                                 parse_mode=ParseMode.MARKDOWN)
 
         else:
-            update.effective_message.reply_text("This group's id is `{}`.".format(chat.id),
+            update.effective_message.reply_text("ID grupy to `{}`.".format(chat.id),
                                                 parse_mode=ParseMode.MARKDOWN)
 
 
@@ -205,38 +202,38 @@ def info(bot: Bot, update: Update, args: List[str]):
     elif not msg.reply_to_message and (not args or (
             len(args) >= 1 and not args[0].startswith("@") and not args[0].isdigit() and not msg.parse_entities(
         [MessageEntity.TEXT_MENTION]))):
-        msg.reply_text("I can't extract a user from this.")
+        msg.reply_text("Nie mogę wyciągnąć informacji od tego futrzaka.")
         return
 
     else:
         return
 
-    text = "<b>User info</b>:" \
+    text = "<b>Informacje o futrzaku</b>:" \
            "\nID: <code>{}</code>" \
-           "\nFirst Name: {}".format(user.id, html.escape(user.first_name))
+           "\nImię: {}".format(user.id, html.escape(user.first_name))
 
     if user.last_name:
-        text += "\nLast Name: {}".format(html.escape(user.last_name))
+        text += "\nNazwisko: {}".format(html.escape(user.last_name))
 
     if user.username:
-        text += "\nUsername: @{}".format(html.escape(user.username))
+        text += "\nPseudomin: @{}".format(html.escape(user.username))
 
-    text += "\nPermanent user link: {}".format(mention_html(user.id, "link"))
+    text += "\nPermamentny link futrzaka: {}".format(mention_html(user.id, "link"))
 
     if user.id == OWNER_ID:
-        text += "\n\nThis person is my owner - I would never do anything against them!"
+        text += "\n\nTen futrzak jest moim opiekunem - Nigdy nie zrobiłbym nic przeciwko mu!
     else:
         if user.id in SUDO_USERS:
-            text += "\nThis person is one of my sudo users! " \
-                    "Nearly as powerful as my owner - so watch it."
+            text += "\nTen futrzak jest jednym z moich sudo futrzaków! " \
+                    "Prawie tak potężny jak mój opiekun - więc uważaj."
         else:
             if user.id in SUPPORT_USERS:
-                text += "\nThis person is one of my support users! " \
-                        "Not quite a sudo user, but can still gban you off the map."
+                text += "\nTen futrzak jest jednym z moich futrzaków wsparcia! " \
+                        "Nie jest sudo futrzakiem, ale dalej może ciebie globalnie zbanować."
 
             if user.id in WHITELIST_USERS:
-                text += "\nThis person has been whitelisted! " \
-                        "That means I'm not allowed to ban/kick them."
+                text += "\nTen futrzak jest na białej liście! " \
+                        "To znaczy że nie mogę go zbanować\wyrzucić."
 
     for mod in USER_INFO:
         mod_info = mod.__user_info__(user.id).strip()
@@ -250,7 +247,7 @@ def info(bot: Bot, update: Update, args: List[str]):
 def get_time(bot: Bot, update: Update, args: List[str]):
     location = " ".join(args)
     if location.lower() == bot.first_name.lower():
-        update.effective_message.reply_text("Its always banhammer time for me!")
+        update.effective_message.reply_text("Dla mnie zawsze jest czas na Banhammer!")
         bot.send_sticker(update.effective_chat.id, BAN_STICKER)
         return
 
@@ -284,8 +281,8 @@ def get_time(bot: Bot, update: Update, args: List[str]):
             if res.status_code == 200:
                 offset = json.loads(res.text)['dstOffset']
                 timestamp = json.loads(res.text)['rawOffset']
-                time_there = datetime.fromtimestamp(timenow + timestamp + offset).strftime("%H:%M:%S on %A %d %B")
-                update.message.reply_text("It's {} in {}".format(time_there, location))
+                time_there = datetime.fromtimestamp(timenow + timestamp + offset).strftime("%H:%M:%S w %A %d %B")
+                update.message.reply_text("Jest {} w {}".format(time_there, location))
 
 
 @run_async
@@ -301,52 +298,52 @@ def echo(bot: Bot, update: Update):
 
 @run_async
 def gdpr(bot: Bot, update: Update):
-    update.effective_message.reply_text("Deleting identifiable data...")
+    update.effective_message.reply_text("Usuwanie możliwych do zidentyfikowania danych...")
     for mod in GDPR:
         mod.__gdpr__(update.effective_user.id)
 
-    update.effective_message.reply_text("Your personal data has been deleted.\n\nNote that this will not unban "
-                                        "you from any chats, as that is telegram data, not Marie data. "
-                                        "Flooding, warns, and gbans are also preserved, as of "
-                                        "[this](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
-                                        "which clearly states that the right to erasure does not apply "
-                                        "\"for the performance of a task carried out in the public interest\", as is "
-                                        "the case for the aforementioned pieces of data.",
+    update.effective_message.reply_text("Twoje dane osobowe zostały usunięte\n\nPamiętaj że to nie odbanuje "
+                                        "ciebie z czatów z powodu że to już dane Telegrama, nie moje. "
+                                        "Spam, ostrzeżenia oraz globalny ban są również zachowane z powodu "
+                                        "[tego](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
+                                        "które wyraźnie stwierdza, że prawo do usunięcia nie ma zastosowania "
+                                        "\"jako wykonanie zadania realizowanego w interesie publicznym\", jak to "
+                                        "ma miejsce w przypadku wyżej wymienionych danych.",
                                         parse_mode=ParseMode.MARKDOWN)
 
 
 MARKDOWN_HELP = """
-Markdown is a very powerful formatting tool supported by telegram. {} has some enhancements, to make sure that \
-saved messages are correctly parsed, and to allow you to create buttons.
+Markdown to bardzo potężne narzędzie do formatowania tekstu obsługiwane przez Telegram. {} ma kilka ulepszeń, aby upewnić się, \
+że zapisane wiadomości są poprawnie parsowane i umożliwić tworzenie przycisków.
 
-- <code>_italic_</code>: wrapping text with '_' will produce italic text
-- <code>*bold*</code>: wrapping text with '*' will produce bold text
-- <code>`code`</code>: wrapping text with '`' will produce monospaced text, also known as 'code'
-- <code>[sometext](someURL)</code>: this will create a link - the message will just show <code>sometext</code>, \
-and tapping on it will open the page at <code>someURL</code>.
-EG: <code>[test](example.com)</code>
+- <code>_kursywa_</code>: napisanie tekstu między '_' utworzy tekst z kursywą
+- <code>*pogrubienie*</code>: napisanie tekstu między '*' utworzy pogrubiony tekst
+- <code>`kod`</code>: napisanie tekstu między '`' utworzy tekst na stałej szerokości, znany jako 'kod'
+- <code>[tekst](URL)</code>: utworzy link - wiadomość będzie pokazana jako tylko <code>tekst</code>, \
+oraz jego naciśnięcie otworzy stronę <code>URL</code>.
+NP: <code>[test](example.com)</code>
 
-- <code>[buttontext](buttonurl:someURL)</code>: this is a special enhancement to allow users to have telegram \
-buttons in their markdown. <code>buttontext</code> will be what is displayed on the button, and <code>someurl</code> \
-will be the url which is opened.
-EG: <code>[This is a button](buttonurl:example.com)</code>
+- <code>[tekst](buttonurl:URL)</code>: to jest specjalne ulepszenie które pozwala futrzakom utworzyć \
+przyciski. <code>tekst</code> biędzie pokazany jako nazwa przycisku a <code>URL</code> \
+będzie linkiem kryjącym się pod przyciskiem.
+NP: <code>[To jest przycisk](buttonurl:example.com)</code>
 
-If you want multiple buttons on the same line, use :same, as such:
-<code>[one](buttonurl://example.com)
-[two](buttonurl://google.com:same)</code>
-This will create two buttons on a single line, instead of one button per line.
+Jeżeli chcesz wiele przycisków na tym samym wierszu, dodaj :same. Jak tutaj:
+<code>[pierwszy](buttonurl://example.com)
+[drugi](buttonurl://google.com:same)</code>
+To utworzy 2 przyciski na wiersz zamiast jednego.
 
-Keep in mind that your message <b>MUST</b> contain some text other than just a button!
+Miej na uwadze że wiadomość z przyciskiem <b>MUSI</b> posiadać jakiś tekst niż sam przycisk!
 """.format(dispatcher.bot.first_name)
 
 
 @run_async
 def markdown_help(bot: Bot, update: Update):
     update.effective_message.reply_text(MARKDOWN_HELP, parse_mode=ParseMode.HTML)
-    update.effective_message.reply_text("Try forwarding the following message to me, and you'll see!")
-    update.effective_message.reply_text("/save test This is a markdown test. _italics_, *bold*, `code`, "
-                                        "[URL](example.com) [button](buttonurl:github.com) "
-                                        "[button2](buttonurl://google.com:same)")
+    update.effective_message.reply_text("Spróbuj przesłać następującą wiadomość do mnie, i zobaczysz!")
+    update.effective_message.reply_text("/save test To jest test markdown. _kursywa_, *pogrubienie*, `kod`, "
+                                        "[URL](example.com) [przycisk](buttonurl:github.com) "
+                                        "[przycisk2](buttonurl://google.com:same)")
 
 
 @run_async
@@ -357,14 +354,11 @@ def stats(bot: Bot, update: Update):
 def stickerid(bot: Bot, update: Update):
     msg = update.effective_message
     if msg.reply_to_message and msg.reply_to_message.sticker:
-        update.effective_message.reply_text("Hello " +
-                                            "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
-                                            + ", The sticker id you are replying is :\n```" + 
+        update.effective_message.reply_text("ID naklejki:\n```" + 
                                             escape_markdown(msg.reply_to_message.sticker.file_id) + "```",
                                             parse_mode=ParseMode.MARKDOWN)
     else:
-        update.effective_message.reply_text("Hello " + "[{}](tg://user?id={})".format(msg.from_user.first_name,
-                                            msg.from_user.id) + ", Please reply to sticker message to get id sticker",
+        update.effective_message.reply_text("Użyj tej komendy jako odpowiedź do naklejki żeby uzyskać jej ID",
                                             parse_mode=ParseMode.MARKDOWN)
 @run_async
 def getsticker(bot: Bot, update: Update):
@@ -372,22 +366,19 @@ def getsticker(bot: Bot, update: Update):
     chat_id = update.effective_chat.id
     if msg.reply_to_message and msg.reply_to_message.sticker:
         bot.sendChatAction(chat_id, "typing")
-        update.effective_message.reply_text("Hello " + "[{}](tg://user?id={})".format(msg.from_user.first_name,
-                                            msg.from_user.id) + ", Please check the file you requested below."
-                                            "\nPlease use this feature wisely!",
+        update.effective_message.reply_text("Korzystaj z tej funkcji mądrze!",
                                             parse_mode=ParseMode.MARKDOWN)
         bot.sendChatAction(chat_id, "upload_document")
         file_id = msg.reply_to_message.sticker.file_id
         newFile = bot.get_file(file_id)
         newFile.download('sticker.png')
         bot.sendDocument(chat_id, document=open('sticker.png', 'rb'))
-        bot.sendChatAction(chat_id, "upload_photo")
-        bot.send_photo(chat_id, photo=open('sticker.png', 'rb'))
+#       bot.sendChatAction(chat_id, "upload_photo")
+#       bot.send_photo(chat_id, photo=open('sticker.png', 'rb'))
         
     else:
         bot.sendChatAction(chat_id, "typing")
-        update.effective_message.reply_text("Hello " + "[{}](tg://user?id={})".format(msg.from_user.first_name,
-                                            msg.from_user.id) + ", Please reply to sticker message to get sticker image",
+        update.effective_message.reply_text("Użyj tej komendy jako odpowiedź do naklejki żeby uzyskać obraz tej naklejki",
                                             parse_mode=ParseMode.MARKDOWN)
 
 @run_async
@@ -530,17 +521,17 @@ def pat(bot: Bot, update: Update, args: List[str]):
 __help__ = """
  - /id: Wypisuje obecny groupid. Jeżeli użyte w odpowiedzi do wiadomości, wypisuje userid.
  - /rquote: Odpisuje losową wiadomością z listy cytatów.
- - /slap: slap a user, or get slapped if not a reply.
- - /hug: Huga futrzaka lub przytula wysyłającego jeżeli nie zostało użyte w odpowiedzi
- - /boop: Tyca futrzaka lub tyca wysyłającego jeżeli nie zostało użyte w odpowiedzi
- - /warm: Ociepla futrzaka lub ociepla wysyłającego jeżeli nie zostało użyte w odpowiedzi
- - /pat: Poklepywuje futrzaka lub poklepywuje wysyłającego jeżeli nie zostało użyte w odpowiedzi
- - /time <place>: gives the local time at the given place.
- - /info: get information about a user.
- - /gdpr: deletes your information from the bot's database. Private chats only.
- - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
- - /stickerid: reply to a sticker and get sticker id of that.
- - /getsticker: reply to a sticker and get that sticker as .png and image. 
+ - /slap: Uderza futrzaka lub uderza wysyłającego jeżeli nie zostało użyte w odpowiedzi
+ - /hug: Huga futrzaka lub przytula wysyłającego jeżeli nie zostało użyte w odpowiedzi.
+ - /boop: Tyca futrzaka lub tyca wysyłającego jeżeli nie zostało użyte w odpowiedzi.
+ - /warm: Ociepla futrzaka lub ociepla wysyłającego jeżeli nie zostało użyte w odpowiedzi.
+ - /pat: Poklepywuje futrzaka lub poklepywuje wysyłającego jeżeli nie zostało użyte w odpowiedzi.
+ - /time <miejsce>: Podaje lokalny czas w podanym miejscu.
+ - /info: Uzyskaj informacje o futrzaku.
+ - /gdpr: usuwa twoje informacje z mojej bazy danych. Użycie tylko na PW.
+ - /markdownhelp: szybki tutorial działania markdown w Telegramie. Użycie tylko na PW.
+ - /stickerid: Użycie przy odpowiedzi na naklejkę zwraca jej ID.
+ - /getsticker: Użycie przy odpowiedzi na naklejkę zwraca obraz PNG naklejki.
 """
 
 __mod_name__ = "Inne"
