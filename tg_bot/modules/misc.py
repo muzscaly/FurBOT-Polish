@@ -36,7 +36,10 @@ QUOTE_STRINGS = (
     "Idę się ciąć mydłem. Adios\n~ Specyk",
     "CYGAN. LEJ TEN CEMENT\n~ Davis",
     "Epic\n~ Fluffy Incluatio",
-    "Mursuit is just a fursuit with (reverse) gloryhole feature\n~ Davis"
+    "Mursuit is just a fursuit with (reverse) gloryhole feature\n~ Davis",
+    "Jeśli wszystko inne zawiedzie, rzucaj w to Futrzakami puki nie przestanie\n~Lexis UwU",
+    "Płytki podłogowe\n~ Pastel",
+
 )
 
 
