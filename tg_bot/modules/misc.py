@@ -16,7 +16,7 @@ from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot.modules.helper_funcs.extraction import extract_user
 from tg_bot.modules.helper_funcs.filters import CustomFilters
 
-RUN_STRINGS = (
+QUOTE_STRINGS = (
     "Where do you think you're going?",
     "Huh? what? did they get away?",
     "ZZzzZZzz... Huh? what? oh, just them again, nevermind.",
@@ -134,8 +134,8 @@ GMAPS_TIME = "https://maps.googleapis.com/maps/api/timezone/json"
 
 
 @run_async
-def runs(bot: Bot, update: Update):
-    update.effective_message.reply_text(random.choice(RUN_STRINGS))
+def rquote(bot: Bot, update: Update):
+    update.effective_message.reply_text(random.choice(QUOTE_STRINGS))
 
 
 @run_async
@@ -441,9 +441,9 @@ def hug(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "**{user1} przytula {user2}!**"
+    temp = "**{user1} przytula {user2}!**\n{user2} został przytulony NaN razy!"
 
-    repl = temp.format(user1=user1, user2=user2)
+    repl = temp.format(user1=user1, user2=user2, user2=user2)
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
@@ -475,9 +475,9 @@ def boop(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "**{user1} tyca {user2}!**"
+    temp = "**{user1} tycnął {user2}!**\n{user2} został przytulony NaN razy!"
 
-    repl = temp.format(user1=user1, user2=user2)
+    repl = temp.format(user1=user1, user2=user2, user2=user2)
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
@@ -509,14 +509,14 @@ def warm(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "**{user1} ogrzewa {user2}!**"
+    temp = "**{user1} ogrzał {user2}!**\n{user2} został przytulony NaN razy!"
 
-    repl = temp.format(user1=user1, user2=user2)
+    repl = temp.format(user1=user1, user2=user2, user2=user2)
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 		
 @run_async
-def patpat(bot: Bot, update: Update, args: List[str]):
+def pat(bot: Bot, update: Update, args: List[str]):
     msg = update.effective_message  # type: Optional[Message]
 
     # reply to correct message
@@ -543,21 +543,21 @@ def patpat(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "**{user1} pat patuje {user2}!**"
+    temp = "**{user1} poklepał {user2}!**\n{user2} został przytulony NaN razy!"
 
-    repl = temp.format(user1=user1, user2=user2)
+    repl = temp.format(user1=user1, user2=user2, user2=user2)
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
 # /ip is for private use
 __help__ = """
- - /id: get the current group id. If used by replying to a message, gets that user's id.
- - /runs: reply a random string from an array of replies.
+ - /id: Wypisuje obecny groupid. Jeżeli użyte w odpowiedzi do wiadomości, wypisuje userid.
+ - /rquote: Odpisuje losową wiadomością z listy cytatów.
  - /slap: slap a user, or get slapped if not a reply.
  - /hug: Huga futrzaka lub przytula wysyłającego jeżeli nie zostało użyte w odpowiedzi
  - /boop: Tyca futrzaka lub tyca wysyłającego jeżeli nie zostało użyte w odpowiedzi
  - /warm: Ociepla futrzaka lub ociepla wysyłającego jeżeli nie zostało użyte w odpowiedzi
- - /patpat: Pat patuje futrzaka lub pat patuje wysyłającego jeżeli nie zostało użyte w odpowiedzi
+ - /pat: Poklepywuje futrzaka lub poklepywuje wysyłającego jeżeli nie zostało użyte w odpowiedzi
  - /time <place>: gives the local time at the given place.
  - /info: get information about a user.
  - /gdpr: deletes your information from the bot's database. Private chats only.
@@ -573,12 +573,12 @@ IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID))
 
 TIME_HANDLER = CommandHandler("time", get_time, pass_args=True)
 
-RUNS_HANDLER = DisableAbleCommandHandler("runs", runs)
+RQUOTE_HANDLER = DisableAbleCommandHandler("rquote", rquote)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True)
 HUG_HANDLER = DisableAbleCommandHandler("hug", hug, pass_args=True)
 BOOP_HANDLER = DisableAbleCommandHandler("boop", boop, pass_args=True)
 WARM_HANDLER = DisableAbleCommandHandler("warm", warm, pass_args=True)
-PATPAT_HANDLER = DisableAbleCommandHandler("patpat", patpat, pass_args=True)
+PAT_HANDLER = DisableAbleCommandHandler("pat", pat, pass_args=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True)
 
 ECHO_HANDLER = CommandHandler("echo", echo, filters=Filters.user(OWNER_ID))
@@ -594,12 +594,12 @@ GETSTICKER_HANDLER = DisableAbleCommandHandler("getsticker", getsticker)
 dispatcher.add_handler(ID_HANDLER)
 dispatcher.add_handler(IP_HANDLER)
 dispatcher.add_handler(TIME_HANDLER)
-dispatcher.add_handler(RUNS_HANDLER)
+dispatcher.add_handler(RQUOTE_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(HUG_HANDLER)
 dispatcher.add_handler(BOOP_HANDLER)
 dispatcher.add_handler(WARM_HANDLER)
-dispatcher.add_handler(PATPAT_HANDLER)
+dispatcher.add_handler(PAT_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(MD_HELP_HANDLER)
