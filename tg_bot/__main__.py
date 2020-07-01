@@ -30,8 +30,8 @@ Kod źródłowy mnie znajdziesz tutaj -> [Github](https://github.com/DavivaD/Mar
 
 HELP_STRINGS = """
 Dostępne *główne* komendy:
- - /start - Wystartuj mnie!
- - /help - Pomoc.
+ - /start: Wystartuj mnie!
+ - /help: Pomoc.
  - /donate: Jeżeli chcesz dać na piwo/kawę mojemu oryginalnemu twórcowi!
  - /settings:
    - na PV: Żeby się dowiedzieć jakie USTAWIENIA możesz ustawić.
