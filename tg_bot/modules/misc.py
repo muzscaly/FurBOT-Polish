@@ -413,11 +413,116 @@ def getsticker(bot: Bot, update: Update):
                                             msg.from_user.id) + ", Please reply to sticker message to get sticker image",
                                             parse_mode=ParseMode.MARKDOWN)
 
+@run_async
+def hug(bot: Bot, update: Update, args: List[str]):
+    msg = update.effective_message  # type: Optional[Message]
+
+    # reply to correct message
+    reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
+
+    # get user who sent message
+    if msg.from_user.username:
+        curr_user = "@" + escape_markdown(msg.from_user.username)
+    else:
+        curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+
+    user_id = extract_user(update.effective_message, args)
+    if user_id:
+        hugged_user = bot.get_chat(user_id)
+        user1 = curr_user
+        if hugged_user.username:
+            user2 = "@" + escape_markdown(hugged_user.username)
+        else:
+            user2 = "[{}](tg://user?id={})".format(hugged_user.first_name,
+                                                   hugged_user.id)
+
+    # if no target found, bot targets the sender
+    else:
+        user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
+        user2 = curr_user
+
+    temp = "{user1} przytula {user2}!"
+
+    repl = temp.format(user1=user1, user2=user2)
+
+    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+
+@run_async
+def boop(bot: Bot, update: Update, args: List[str]):
+    msg = update.effective_message  # type: Optional[Message]
+
+    # reply to correct message
+    reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
+
+    # get user who sent message
+    if msg.from_user.username:
+        curr_user = "@" + escape_markdown(msg.from_user.username)
+    else:
+        curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+
+    user_id = extract_user(update.effective_message, args)
+    if user_id:
+        booped_user = bot.get_chat(user_id)
+        user1 = curr_user
+        if booped_user.username:
+            user2 = "@" + escape_markdown(booped_user.username)
+        else:
+            user2 = "[{}](tg://user?id={})".format(booped_user.first_name,
+                                                   booped_user.id)
+
+    # if no target found, bot targets the sender
+    else:
+        user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
+        user2 = curr_user
+
+    temp = "{user1} tyca {user2}!"
+
+    repl = temp.format(user1=user1, user2=user2)
+
+    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+		
+@run_async
+def patpat(bot: Bot, update: Update, args: List[str]):
+    msg = update.effective_message  # type: Optional[Message]
+
+    # reply to correct message
+    reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
+
+    # get user who sent message
+    if msg.from_user.username:
+        curr_user = "@" + escape_markdown(msg.from_user.username)
+    else:
+        curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+
+    user_id = extract_user(update.effective_message, args)
+    if user_id:
+        patted_user = bot.get_chat(user_id)
+        user1 = curr_user
+        if patted_user.username:
+            user2 = "@" + escape_markdown(patted_user.username)
+        else:
+            user2 = "[{}](tg://user?id={})".format(patted_user.first_name,
+                                                   patted_user.id)
+
+    # if no target found, bot targets the sender
+    else:
+        user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
+        user2 = curr_user
+
+    temp = "{user1} przytula {user2}!"
+
+    repl = temp.format(user1=user1, user2=user2)
+
+    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+
 # /ip is for private use
 __help__ = """
  - /id: get the current group id. If used by replying to a message, gets that user's id.
  - /runs: reply a random string from an array of replies.
  - /slap: slap a user, or get slapped if not a reply.
+ - /hug: Huga futrzaka, lub przytulasz samego siebie jeżeli nie zostało użyte w odpowiedzi
+ - /boop: tyca futrzaka, lub przytulasz samego siebie jeżeli nie zostało użyte w odpowiedzi
+ - /patpat: pat patuje futrzaka, lub przytulasz samego siebie jeżeli nie zostało użyte w odpowiedzi
  - /time <place>: gives the local time at the given place.
  - /info: get information about a user.
  - /gdpr: deletes your information from the bot's database. Private chats only.
@@ -426,7 +531,7 @@ __help__ = """
  - /getsticker: reply to a sticker and get that sticker as .png and image. 
 """
 
-__mod_name__ = "Misc"
+__mod_name__ = "Inne"
 
 ID_HANDLER = DisableAbleCommandHandler("id", get_id, pass_args=True)
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID))
@@ -435,6 +540,9 @@ TIME_HANDLER = CommandHandler("time", get_time, pass_args=True)
 
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True)
+HUG_HANDLER = DisableAbleCommandHandler("hug", hug, pass_args=True)
+BOOP_HANDLER = DisableAbleCommandHandler("boop", boop, pass_args=True)
+PATPAT_HANDLER = DisableAbleCommandHandler("patpat", patpat, pass_args=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True)
 
 ECHO_HANDLER = CommandHandler("echo", echo, filters=Filters.user(OWNER_ID))
@@ -452,6 +560,9 @@ dispatcher.add_handler(IP_HANDLER)
 dispatcher.add_handler(TIME_HANDLER)
 dispatcher.add_handler(RUNS_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
+dispatcher.add_handler(HUG_HANDLER)
+dispatcher.add_handler(BOOP_HANDLER)
+dispatcher.add_handler(PATPAT_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(MD_HELP_HANDLER)
