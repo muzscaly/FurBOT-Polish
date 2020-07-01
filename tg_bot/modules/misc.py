@@ -46,16 +46,16 @@ QUOTE_STRINGS = (
 
 
 SLAP_TEMPLATES = (
-    "{user1} {hits} {user2} za pomocą {item}.",
-    "{user1} {hits} prosto w twarz {user2} za pomocą {item}.",
-    "{user1} lekko {hits} {user2} za pomocą {item}.",
-    "{user1} {throws} {item} w {user2}.",
-    "{user1} podnosi {item} i {throws} nią w twarz {user2}.",
-    "{user1} wystrzeliwuje {item} w stronę {user2}.",
-    "{user1} zaczyna lekko klepać {user2} za pomocą {item}.",
-    "{user1} zdejmuje {user2} oraz ciągle {hits} go za pomocą {item}.",
-    "{user1} podnasza {item} i {hits} tym w {user2}.",
-    "{user1} przywiązuje {user2} do krzesła i {throws} {item} w niego.",
+    "{user1} {hits} {user2} za pomocą <b>{item}</b>.",
+    "{user1} {hits} prosto w twarz {user2} za pomocą <b>{item}</b>.",
+    "{user1} lekko {hits} {user2} za pomocą <b>{item}</b>.",
+    "{user1} {throws} <b>{item}</b> w {user2}.",
+    "{user1} podnosi <b>{item}</b> i {throws} nią w twarz {user2}.",
+    "{user1} wystrzeliwuje <b>{item}</b> w stronę {user2}.",
+    "{user1} zaczyna lekko klepać {user2} za pomocą <b>{item}</b>.",
+    "{user1} zdejmuje {user2} oraz ciągle {hits} go za pomocą <b>{item}</b>.",
+    "{user1} podnasza <b>{item}</b> i {hits} tym w {user2}.",
+    "{user1} przywiązuje {user2} do krzesła i {throws} <b>{item}</b> w niego.",
     "{user1} skłonił się pomóc {user2} w nauce pływania w lawie."
 )
 
@@ -409,7 +409,7 @@ def hug(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} przytula {user2}!\n{user2} został przytulony NaN razy!"
+    temp = "{user1} <b>przytula</b> {user2}!\n{user2} został przytulony <b>NaN</b> razy!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -443,7 +443,7 @@ def boop(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} tycnął {user2}!\n{user2} został przytulony NaN razy!"
+    temp = "{user1} <b>tycnął</b> {user2}!\n{user2} został przytulony <b>NaN</b> razy!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -477,7 +477,7 @@ def warm(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} ogrzał {user2}!\n{user2} został przytulony NaN razy!"
+    temp = "{user1} <b>ogrzał</b> {user2}!\n{user2} został przytulony <b>NaN</b> razy!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -511,7 +511,7 @@ def pat(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} poklepał {user2}!\n{user2} został poklepany NaN razy!"
+    temp = "{user1} <b>poklepał</b> {user2}!\n{user2} został poklepany <b>NaN</b> razy!"
 
     repl = temp.format(user1=user1, user2=user2)
 
