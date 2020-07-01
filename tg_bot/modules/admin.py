@@ -28,7 +28,7 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("mension one.... 🤷🏻‍♂.")
+        message.reply_text("Pierwszy... 🤷🏻‍♂.")
         return ""
 
     user_member = chat.get_member(user_id)
@@ -102,9 +102,9 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                               can_promote_members=False)
         message.reply_text("Successfully demoted!")
         return "<b>{}:</b>" \
-               "\n#DEMOTED" \
-               "\n<b>Admin:</b> {}" \
-               "\n<b>User:</b> {}".format(html.escape(chat.title),
+               "\n#DEGRADACJA" \
+               "\n<b>Administrator:</b> {}" \
+               "\n<b>Futrzak:</b> {}".format(html.escape(chat.title),
                                           mention_html(user.id, user.first_name),
                                           mention_html(user_member.user.id, user_member.user.first_name))
 
@@ -140,8 +140,8 @@ def pin(bot: Bot, update: Update, args: List[str]) -> str:
             else:
                 raise
         return "<b>{}:</b>" \
-               "\n#PINNED" \
-               "\n<b>Admin:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name))
+               "\n#PRZYPIĘTO" \
+               "\n<b>Administrator:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name))
 
     return ""
 
@@ -164,8 +164,8 @@ def unpin(bot: Bot, update: Update) -> str:
             raise
 
     return "<b>{}:</b>" \
-           "\n#UNPINNED" \
-           "\n<b>Admin:</b> {}".format(html.escape(chat.title),
+           "\n#ODPIĘTO" \
+           "\n<b>Administrator:</b> {}".format(html.escape(chat.title),
                                        mention_html(user.id, user.first_name))
 
 
@@ -190,7 +190,7 @@ def invite(bot: Bot, update: Update):
 @run_async
 def adminlist(bot: Bot, update: Update):
     administrators = update.effective_chat.get_administrators()
-    text = "Admins in *{}*:".format(update.effective_chat.title or "this chat")
+    text = "Administratorzy na *{}*:".format(update.effective_chat.title or "tym czacie")
     for admin in administrators:
         user = admin.user
         status = admin.status
@@ -217,9 +217,9 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /adminlist: lista administracji tego czatu
+ - /adminlist: Lista administracji tego czatu
 
-*Admin only:*
+*Tylko Administratorzy:*
  - /pin: Cicho przypina wiadomość, na którą odpowiedziano - dodaj 'loud' lub 'notify' żeby powiadomić innych futrzaków.
  - /unpin: Odpina obecnie przypiętą wiadomość
  - /invitelink: Podaje link zapraszający
