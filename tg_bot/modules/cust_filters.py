@@ -272,9 +272,9 @@ __help__ = """
  - /filters: Wyświetla listę wszystkich filtrów na czacie.
 
 *Tylko administracja:*
- - /filter <słowo kluczowe> <odpowiedź>: Dodaje filtr do tego czatu. Ja będę teraz odpowiadał na tę wiadomość za każdym razem kiedy 'keyword'\
-jest wspomniany. Jeśli odpowiesz na naklejkę słowem kluczowym, bot odpowie tą naklejką. NOTKA: wszystkie filtry \
-słowa kluczowe są z małej litery. Jeśli chcesz, aby keyword było zdaniem, użyj cudzysłowiów. np: /filter "no hej" Co \
+ - /filter <słowo kluczowe> <odpowiedź>: Dodaje filtr do tego czatu. Ja będę teraz odpowiadał na tę wiadomość za każdym razem kiedy 'słowo kluczowe'\
+jest wspomniane. Jeśli odpowiesz na naklejkę słowem kluczowym, bot odpowie tą naklejką. NOTKA: wszystkie słowa kluczowe \
+w filtrach są z małej litery. Jeśli chcesz, aby słowo kluczowe było zdaniem, użyj cudzysłowiów. np: /filter "no hej" Co \
 robisz?
  - /stop <słowo kluczowe>: Usuwa ten filtr.
 """
