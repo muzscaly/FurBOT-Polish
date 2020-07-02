@@ -31,7 +31,7 @@ class Welcome(BASE):
         self.should_goodbye = should_goodbye
 
     def __repr__(self):
-        return "<Czy czat {} powinien witać futrzaków: {}>".format(self.chat_id, self.should_welcome)
+        return "<Chat {} should Welcome new users: {}>".format(self.chat_id, self.should_welcome)
 
 
 class WelcomeButtons(BASE):
