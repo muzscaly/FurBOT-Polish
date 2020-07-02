@@ -62,7 +62,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         return
 
     if user_id == bot.id:
-        message.reply_text("-_- bardzo śmieszne... Globalnie zbanuj mnie, dlaczego by nie? Niezła próba.")
+        message.reply_text("-_- Bardzo śmieszne... Globalnie zbanuj mnie, dlaczego by nie? Niezła próba.")
         return
 
     try:
