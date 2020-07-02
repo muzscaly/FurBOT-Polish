@@ -5,8 +5,8 @@ from sqlalchemy import Column, String, Boolean, UnicodeText, Integer, BigInteger
 from tg_bot.modules.helper_funcs.msg_types import Types
 from tg_bot.modules.sql import SESSION, BASE
 
-DEFAULT_WELCOME = "Hey {first}, how are you?"
-DEFAULT_GOODBYE = "Nice knowing ya!"
+DEFAULT_WELCOME = "Cześć {first}, co tam u ciebie?"
+DEFAULT_GOODBYE = "Miło cię było znać!"
 
 
 class Welcome(BASE):
@@ -31,7 +31,7 @@ class Welcome(BASE):
         self.should_goodbye = should_goodbye
 
     def __repr__(self):
-        return "<Chat {} should Welcome new users: {}>".format(self.chat_id, self.should_welcome)
+        return "<Czy czat {} powinien witać futrzaków: {}>".format(self.chat_id, self.should_welcome)
 
 
 class WelcomeButtons(BASE):
@@ -297,4 +297,4 @@ def migrate_chat(old_chat_id, new_chat_id):
             for btn in chat_buttons:
                 btn.chat_id = str(new_chat_id)
 
-        SESSION.commit()
+        SUICIDE.commit()
