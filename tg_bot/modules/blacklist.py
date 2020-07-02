@@ -37,7 +37,7 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
     split_text = split_message(filter_list)
     for text in split_text:
         if text == BASE_BLACKLIST_STRING:
-            msg.reply_text("Nie ma tutaj obecnie zablokowanych zdań!")
+            msg.reply_text("Nie ma tutaj obecnie zablokowanych słów!")
             return
         msg.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -55,12 +55,12 @@ def add_blacklist(bot: Bot, update: Update):
             sql.add_to_blacklist(chat.id, trigger.lower())
 
         if len(to_blacklist) == 1:
-            msg.reply_text("Added <code>{}</code> to the blacklist!".format(html.escape(to_blacklist[0])),
+            msg.reply_text("Dodano <code>{}</code> na czarną listę!".format(html.escape(to_blacklist[0])),
                            parse_mode=ParseMode.HTML)
 
         else:
             msg.reply_text(
-                "Dodano <code>{}</code> na czarnej liście.".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
+                "Dodano <code>{}</code> na czarną listę!".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
 
     else:
         msg.reply_text("Jakie słowa chcesz usunąć z czarnej listy?")
@@ -136,11 +136,11 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     blacklisted = sql.num_blacklist_chat_filters(chat_id)
-    return "There are {} blacklisted words.".format(blacklisted)
+    return "Jest obecnie {} zablokowanych słów.".format(blacklisted)
 
 
 def __stats__():
-    return "{} blacklist triggers, across {} chats.".format(sql.num_blacklist_filters(),
+    return "{} zablokowanych słów spośród {} czatów.".format(sql.num_blacklist_filters(),
                                                             sql.num_blacklist_filter_chats())
 
 
