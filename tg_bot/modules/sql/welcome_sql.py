@@ -297,4 +297,4 @@ def migrate_chat(old_chat_id, new_chat_id):
             for btn in chat_buttons:
                 btn.chat_id = str(new_chat_id)
 
-        SUICIDE.commit()
+        SESSION.commit()
