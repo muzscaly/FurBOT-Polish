@@ -52,7 +52,7 @@ def gmute(bot: Bot, update: Update, args: List[str]):
 
     if sql.is_user_gmuted(user_id):
         if not reason:
-             message.reply_text("Ten futrzak jest już globalnie wyciszony. Mogę zmienić powód ale nie podałeś mi żadnego...")
+            message.reply_text("Ten futrzak jest już globalnie wyciszony. Mogę zmienić powód ale nie podałeś mi żadnego...")
             return
 
         success = sql.update_gmute_reason(user_id, user_chat.username or user_chat.first_name, reason)
