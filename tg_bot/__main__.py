@@ -295,7 +295,7 @@ def settings_button(bot: Bot, update: Update):
             chat_id = prev_match.group(1)
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("Hewwo! Jest tutaj kilka ustawień dla {} - śmiało i wybierz czym "
+            query.message.reply_text("Hewwo! Jest tutaj kilka ustawień dla {} - śmiało i wybierz co "
                                      "jesteś zainteresowany.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(curr_page - 1, CHAT_SETTINGS, "stngs",
@@ -305,7 +305,7 @@ def settings_button(bot: Bot, update: Update):
             chat_id = next_match.group(1)
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
-            query.message.reply_text("Hewwo! Jest tutaj kilka ustawień dla {} - śmiało i wybierz czym "
+            query.message.reply_text("Hewwo! Jest tutaj kilka ustawień dla {} - śmiało i wybierz co "
                                      "jesteś zainteresowany.".format(chat.title),
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(next_page + 1, CHAT_SETTINGS, "stngs",
@@ -314,7 +314,7 @@ def settings_button(bot: Bot, update: Update):
         elif back_match:
             chat_id = back_match.group(1)
             chat = bot.get_chat(chat_id)
-            query.message.reply_text(text="Hewwo! Jest tutaj kilka ustawień dla {} - śmiało i wybierz czym "
+            query.message.reply_text(text="Hewwo! Jest tutaj kilka ustawień dla {} - śmiało i wybierz co "
                                           "jesteś zainteresowany.".format(escape_markdown(chat.title)),
                                      parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(paginate_modules(0, CHAT_SETTINGS, "stngs",
@@ -366,7 +366,7 @@ def donate(bot: Bot, update: Update):
         update.effective_message.reply_text(DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
         if OWNER_ID != 254318997 and DONATION_LINK:
-            update.effective_message.reply_text("Możesz też dać trochę grosiwa osobie która mnie utrzymywuje "
+            update.effective_message.reply_text("Możesz też dać trochę grosiwa mojemu opiekunowi "
                                                 "[tutaj]({})".format(DONATION_LINK),
                                                 parse_mode=ParseMode.MARKDOWN)
 
