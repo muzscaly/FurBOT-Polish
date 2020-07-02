@@ -442,7 +442,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
 __help__ = """
  - /kickme: Wykopuje futrzaka który wpisał tą komendę
 
-*Admin only:*
+*Tylko Administracja:*
  - /ban <nazwa futrzaka>: Banuje futrzaka. (poprzez @, lub odpowiedź)
  - /tban <nazwa futrzaka> (m/g/d): bans a user for x time. (poprzez @, lub odpowiedź). m = minuty, g = godziny, d = dni.
  - /unban <nazwa futrzaka>: odbanuje futrzaka. (poprzez @, lub odpowiedź)
