@@ -14,7 +14,7 @@ def keyboard(bot, update):
     user = update.effective_user  # type: Optional[User]
     conn_id = con_sql.get_connected_chat(user.id)
     if conn_id and not conn_id == False:
-        btn1 = "/disconnect - Disconnect from chat"
+        btn1 = "/disconnect - Rozłącz z czatem"
         btn2 = ""
         btn3 = ""
     else:
@@ -52,9 +52,9 @@ def keyboard(bot, update):
 
     update.effective_message.reply_text("keyboard updated",
                                             reply_markup=ReplyKeyboardMarkup([[
-                                                KeyboardButton("/help - Bot Help"), 
-                                                KeyboardButton("/donate - Donate"),
-                                                KeyboardButton("/notes - Notes")],
+                                                KeyboardButton("/help - Pomoc"), 
+                                                KeyboardButton("/donate - Darowizny"),
+                                                KeyboardButton("/notes - Notki")],
                                              [KeyboardButton(btn1)], 
                                              [KeyboardButton(btn2)],
                                              [KeyboardButton(btn3)]]))
