@@ -247,7 +247,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
 def kickme(bot: Bot, update: Update):
     user_id = update.effective_message.from_user.id
     if is_user_admin(update.effective_chat, user_id):
-        update.effective_message.reply_text("Chciałbym móc... Sle jesteś administratorem.")
+        update.effective_message.reply_text("Chciałbym móc... Ale jesteś administratorem.")
         return
 
     res = update.effective_chat.unban_member(user_id)  # unban on current user = kick
