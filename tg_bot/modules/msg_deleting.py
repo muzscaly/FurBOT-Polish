@@ -31,31 +31,31 @@ def purge(bot: Bot, update: Update, args: List[str]) -> str:
                     bot.deleteMessage(chat.id, m_id)
                 except BadRequest as err:
                     if err.message == "Message can't be deleted":
-                        bot.send_message(chat.id, "Cannot delete all messages. The messages may be too old, I might "
-                                                  "not have delete rights, or this might not be a supergroup.")
+                        bot.send_message(chat.id, "Nie można usunąć wszystkich wiadomości. Wiadomości mogą być zbyt stare, Mogę "
+                                                  "nie mieć uprawnień do usuwania, lub czat nie jest supergrupą.")
 
                     elif err.message != "Message to delete not found":
-                        LOGGER.exception("Error while purging chat messages.")
+                        LOGGER.exception("Błąd podczas czyszczenia wiadomości czatu.")
 
             try:
                 msg.delete()
             except BadRequest as err:
                 if err.message == "Message can't be deleted":
-                    bot.send_message(chat.id, "Cannot delete all messages. The messages may be too old, I might "
-                                              "not have delete rights, or this might not be a supergroup.")
+                    bot.send_message(chat.id, "Nie można usunąć wszystkich wiadomości. Wiadomości mogą być zbyt stare, Mogę "
+                                              "nie mieć uprawnień do usuwania, lub czat nie jest supergrupą.")
 
                 elif err.message != "Message to delete not found":
-                    LOGGER.exception("Error while purging chat messages.")
+                    LOGGER.exception("Błąd podczas czyszczenia wiadomości czatu.")
 
             return "<b>{}:</b>" \
-                   "\n#PURGE" \
-                   "\n<b>Admin:</b> {}" \
-                   "\nPurged <code>{}</code> messages.".format(html.escape(chat.title),
-                                                               mention_html(user.id, user.first_name),
-                                                               delete_to - message_id)
+                   "\n#CZYSZCZENIE" \
+                   "\n<b>Administrator:</b> {}" \
+                   "\nWyczyszczono <code>{}</code> wiadomości.".format(html.escape(chat.title),
+                                                                       mention_html(user.id, user.first_name),
+                                                                       delete_to - message_id)
 
     else:
-        msg.reply_text("Reply to a message to select where to start purging from.")
+        msg.reply_text("Wybierz początek czyszczenia wiadomości w dół poprzez odpowiedzenie na najstarszą wiadomość.")
 
     return ""
 
@@ -71,24 +71,24 @@ def del_message(bot: Bot, update: Update) -> str:
             update.effective_message.reply_to_message.delete()
             update.effective_message.delete()
             return "<b>{}:</b>" \
-                   "\n#DEL" \
-                   "\n<b>Admin:</b> {}" \
-                   "\nMessage deleted.".format(html.escape(chat.title),
-                                               mention_html(user.id, user.first_name))
+                   "\n#USUWANIE" \
+                   "\n<b>Administrator:</b> {}" \
+                   "\nWiadomość usunięta.".format(html.escape(chat.title),
+                                                  mention_html(user.id, user.first_name))
     else:
-        update.effective_message.reply_text("Whadya want to delete?")
+        update.effective_message.reply_text("Co ty chcesz usunąć?")
 
     return ""
 
 
 __help__ = """
-*Admin only:*
- - /del: deletes the message you replied to
- - /purge: deletes all messages between this and the replied to message.
- - /purge <integer X>: deletes the replied message, and X messages following it.
+*Tylko Administracja:*
+ - /del: Usuwa wiadomość na którą odpowiedziałeś
+ - /purge: Usuwa wszystkie wiadomości w dół od tej na którą odpowiedziałeś.
+ - /purge <liczba>: Usuwa wiadomość na którą odpowiedziałeś oraz X następnych.
 """
 
-__mod_name__ = "Purges"
+__mod_name__ = "Czyszczenie"
 
 DELETE_HANDLER = CommandHandler("del", del_message, filters=Filters.group)
 PURGE_HANDLER = CommandHandler("purge", purge, filters=Filters.group, pass_args=True)
