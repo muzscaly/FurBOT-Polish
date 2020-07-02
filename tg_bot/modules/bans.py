@@ -65,7 +65,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message == "Futrzak nie znaleziony":
+        if excp.message == "User not found":
             message.reply_text("Nie mogę znaleźć tego futrzaka")
             return ""
         else:
@@ -96,7 +96,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
         return log
 
     except BadRequest as excp:
-        if excp.message == "Nie znaleziono odpowiedzi":
+        if excp.message == "Reply message not found":
             # Do not reply
             message.reply_text('Zbanowano!', quote=False)
             return log
@@ -128,7 +128,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message == "Futrzak nie znaleziony":
+        if excp.message == "User not found":
             message.reply_text("Nie mogę znaleźć tego futrzaka")
             return ""
         else:
@@ -175,7 +175,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
         return log
 
     except BadRequest as excp:
-        if excp.message == "Nie znaleziono odpowiedzi":
+        if excp.message == "User not found":
             # Do not reply
             message.reply_text("Zbanowano! Futrzak będzie zbanowany przez {}.".format(time_val), quote=False)
             return log
@@ -206,7 +206,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message == "Futrzak nie znaleziony":
+        if excp.message == "User not found":
             message.reply_text("Nie mogę znaleźć tego futrzaka")
             return ""
         else:
@@ -275,7 +275,7 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message == "Futrzak nie znaleziony":
+        if excp.message == "User not found":
             message.reply_text("Nie mogę znaleźć tego futrzaka")
             return ""
         else:
@@ -325,7 +325,7 @@ def rban(bot: Bot, update: Update, args: List[str]):
     try:
         chat = bot.get_chat(chat_id.split()[0])
     except BadRequest as excp:
-        if excp.message == "Czat nie znaleziony":
+        if excp.message == "Chat not found":
             message.reply_text("Czat nie znaleziony! Sprawdź czy podałeś poprawny chat ID oraz czy w nim jestem")
             return
         else:
@@ -342,7 +342,7 @@ def rban(bot: Bot, update: Update, args: List[str]):
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message == "Futrzak nie znaleziony":
+        if excp.message == "User not found":
             message.reply_text("Nie mogę znaleźć tego futrzaka")
             return
         else:
@@ -360,7 +360,7 @@ def rban(bot: Bot, update: Update, args: List[str]):
         chat.kick_member(user_id)
         message.reply_text("Zbanowano!")
     except BadRequest as excp:
-        if excp.message == "Nie znaleziono odpowiedzi":
+        if excp.message == "Reply message not found":
             # Do not reply
             message.reply_text('Zbanowany!', quote=False)
         elif excp.message in RBAN_ERRORS:
@@ -392,7 +392,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
     try:
         chat = bot.get_chat(chat_id.split()[0])
     except BadRequest as excp:
-        if excp.message == "Czat nie znaleziony":
+        if excp.message == "Chat not found":
             message.reply_text("Czat nie znaleziony! Sprawdź czy podałeś poprawny chat ID oraz czy w nim jestem")
             return
         else:
@@ -409,7 +409,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
-        if excp.message == "Futrzak nie znaleziony":
+        if excp.message == "User not found":
             message.reply_text("Nie mogę znaleźć tego futrzaka")
             return
         else:
@@ -427,7 +427,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
         chat.unban_member(user_id)
         message.reply_text("Yup, ten futrzak może wrócić!")
     except BadRequest as excp:
-        if excp.message == "Nie znaleziono odpowiedzi":
+        if excp.message == "Reply message not found":
             # Do not reply
             message.reply_text('Odbanowany!', quote=False)
         elif excp.message in RUNBAN_ERRORS:
