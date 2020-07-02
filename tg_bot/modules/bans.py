@@ -444,7 +444,7 @@ __help__ = """
 
 *Tylko Administracja:*
  - /ban <nazwa futrzaka>: Banuje futrzaka. (poprzez @, lub odpowiedź)
- - /tban <nazwa futrzaka> (m/g/d): Banuje futrzaka przez podaną ilość czasu. (poprzez @, lub odpowiedź). m = minuty, g = godziny, d = dni.
+ - /tban <nazwa futrzaka> x(m/g/d): Banuje futrzaka przez podaną ilość czasu. (poprzez @, lub odpowiedź). m = minuty, g = godziny, d = dni.
  - /unban <nazwa futrzaka>: Odbanuje futrzaka. (poprzez @, lub odpowiedź)
  - /kick <nazwa futrzaka>: Wykopuje futrzaka, (poprzez @, lub odpowiedź)
 """
