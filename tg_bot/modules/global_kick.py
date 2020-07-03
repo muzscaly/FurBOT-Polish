@@ -13,19 +13,19 @@ from tg_bot.modules.helper_funcs.misc import send_to_list
 from tg_bot.modules.sql.users_sql import get_all_chats
 
 GKICK_ERRORS = {
-    "User is an administrator of the chat",
-    "Chat not found",
-    "Not enough rights to restrict/unrestrict chat member",
+    "Futrzak jest administratorem czatu",
+    "Nie znaleziono czatu",
+    "Brak wystarczających uprawnień do ograniczenia/odgraniczenia futrzaka tego czatu",
     "User_not_participant",
     "Peer_id_invalid",
-    "Group chat was deactivated",
-    "Need to be inviter of a user to kick it from a basic group",
+    "Czat grupy został zdeaktywowany",
+    "Trzeba być zapraszającym futrzaka, aby wyrzucić go z grupy",
     "Chat_admin_required",
-    "Only the creator of a basic group can kick group administrators",
+    "Tylko twórca grupy może wyrzucić administratorów grupy",
     "Channel_private",
-    "Not in the chat",
-    "Method is available for supergroup and channel chats only",
-    "Reply message not found"
+    "Nie na czacie",
+    "Metoda jest dostępna tylko dla supergrup oraz kanałów",
+    "Nie znaleziono odpowiedzi"
 }
 
 @run_async
@@ -38,25 +38,25 @@ def gkick(bot: Bot, update: Update, args: List[str]):
         if excp.message in GKICK_ERRORS:
             pass
         else:
-            message.reply_text("User cannot be Globally kicked because: {}".format(excp.message))
+            message.reply_text("Futrzak nie może być globalnie wyrzucony ponieważ: {}".format(excp.message))
             return
     except TelegramError:
             pass
 
     if not user_id:
-        message.reply_text("You do not seems to be referring to a user")
+        message.reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
         return
     if int(user_id) in SUDO_USERS or int(user_id) in SUPPORT_USERS:
-        message.reply_text("OHHH! Someone's trying to gkick a sudo/support user! *Grabs popcorn*")
+        message.reply_text("OHO! któś próbuje globalnie zbanować futrzaka od supportu lub sudo administratora! *bierze popcorn*")
         return
     if int(user_id) == OWNER_ID:
-        message.reply_text("Wow! Someone's so noob that he want to gkick my owner! *Grabs Potato Chips*")
+        message.reply_text("Łał! Ktoś był na tyle głupi że chciał wykopać mojego opiekuna! *bierze cziperki*")
         return
     if int(user_id) == bot.id:
-        message.reply_text("OHH... Let me kick myself.. No way... ")
+        message.reply_text("OHH... Niech siebie wyrzucę.. Nie ma mowy... ")
         return
     chats = get_all_chats()
-    message.reply_text("Globally kicking user @{}".format(user_chat.username))
+    message.reply_text("Globalnie wyrzucam futrzaka @{}".format(user_chat.username))
     for chat in chats:
         try:
              bot.unban_chat_member(chat.chat_id, user_id)  # Unban_member = kick (and not ban)
@@ -64,7 +64,7 @@ def gkick(bot: Bot, update: Update, args: List[str]):
             if excp.message in GKICK_ERRORS:
                 pass
             else:
-                message.reply_text("User cannot be Globally kicked because: {}".format(excp.message))
+                message.reply_text("Futrzak nie może być globalnie wyrzucony ponieważ: {}".format(excp.message))
                 return
         except TelegramError:
             pass

@@ -21,10 +21,10 @@ def quickscope(bot: Bot, update: Update, args: List[int]):
         chat_id = str(args[1])
         to_kick = str(args[0])
     else:
-        update.effective_message.reply_text("You don't seem to be referring to a chat/user")
+        update.effective_message.reply_text("Wygląda na to, że nie odnosisz się do czatu/futrzaka.")
     try:
         bot.kick_chat_member(chat_id, to_kick)
-        update.effective_message.reply_text("Attempted banning " + to_kick + " from" + chat_id)
+        update.effective_message.reply_text("Próba zbanowania " + to_kick + " w " + chat_id)
     except BadRequest as excp:
         update.effective_message.reply_text(excp.message + " " + to_kick)
 
@@ -35,10 +35,10 @@ def quickunban(bot: Bot, update: Update, args: List[int]):
         chat_id = str(args[1])
         to_kick = str(args[0])
     else:
-        update.effective_message.reply_text("You don't seem to be referring to a chat/user")
+        update.effective_message.reply_text("Wygląda na to, że nie odnosisz się do czatu/futrzaka.")
     try:
         bot.unban_chat_member(chat_id, to_kick)
-        update.effective_message.reply_text("Attempted unbanning " + to_kick + " from" + chat_id)
+        update.effective_message.reply_text("Próba odbanowania " + to_kick + " w " + chat_id)
     except BadRequest as excp:
         update.effective_message.reply_text(excp.message + " " + to_kick)
 
@@ -54,7 +54,7 @@ def banall(bot: Bot, update: Update, args: List[int]):
     for mems in all_mems:
         try:
             bot.kick_chat_member(chat_id, mems.user)
-            update.effective_message.reply_text("Tried banning " + str(mems.user))
+            update.effective_message.reply_text("Próba zbanowania " + str(mems.user))
             sleep(0.1)
         except BadRequest as excp:
             update.effective_message.reply_text(excp.message + " " + str(mems.user))
@@ -67,14 +67,14 @@ def snipe(bot: Bot, update: Update, args: List[str]):
         chat_id = str(args[0])
         del args[0]
     except TypeError as excp:
-        update.effective_message.reply_text("Please give me a chat to echo to!")
+        update.effective_message.reply_text("Podaj mi czat do którego mam wysłać wiadomość!")
     to_send = " ".join(args)
     if len(to_send) >= 2:
         try:
             bot.sendMessage(int(chat_id), str(to_send))
         except TelegramError:
-            LOGGER.warning("Couldn't send to group %s", str(chat_id))
-            update.effective_message.reply_text("Couldn't send the message. Perhaps I'm not part of that group?")
+            LOGGER.warning("Nie można wysłać wiadomości do %s", str(chat_id))
+            update.effective_message.reply_text("Nie mogę wysłać wiadomości. Może nie należę do tej grupy?")
 
 
 @run_async
@@ -83,14 +83,14 @@ def getlink(bot: Bot, update: Update, args: List[int]):
     if args:
         chat_id = int(args[0])
     else:
-        update.effective_message.reply_text("You don't seem to be referring to a chat")
+        update.effective_message.reply_text("Wygląda na to, że nie odnosisz się do czatu.")
     chat = bot.getChat(chat_id)
     bot_member = chat.get_member(bot.id)
     if bot_member.can_invite_users:
         invitelink = bot.get_chat(chat_id).invite_link
         update.effective_message.reply_text(invitelink)
     else:
-        update.effective_message.reply_text("I don't have access to the invite link!")
+        update.effective_message.reply_text("Nie mam dostępu do linku zapraszającego!")
 
 
 @bot_admin
@@ -99,35 +99,36 @@ def leavechat(bot: Bot, update: Update, args: List[int]):
         chat_id = int(args[0])
         bot.leaveChat(chat_id)
     else:
-        update.effective_message.reply_text("You don't seem to be referring to a chat")
+        update.effective_message.reply_text("Wygląda na to, że nie odnosisz się do czatu.")
 
 __help__ = """
-**Owner only:**
-- /getlink **chatid**: Get the invite link for a specific chat.
-- /banall: Ban all members from a chat
-- /leavechat **chatid** : leave a chat
-**Sudo/owner only:**
-- /quickscope **userid** **chatid**: Ban user from chat.
-- /quickunban **userid** **chatid**: Unban user from chat.
-- /snipe **chatid** **string**: Make me send a message to a specific chat.
-- /rban **userid** **chatid** remotely ban a user from a chat
-- /runban **userid** **chatid** remotely unban a user from a chat
-- /Stats: check bot's stats
-- /chatlist: get chatlist
-- /gbanlist: get gbanned users list
-- /gmutelist: get gmuted users list
-- Chat bans via /restrict chat_id and /unrestrict chat_id commands
-**Support user:**
-- /Gban : Global ban a user
-- /Ungban : Ungban a user
-- /Gmute : Gmute a user
-- /Ungmute : Ungmute a user
-Sudo/owner can use these commands too.
-**Users:**
-- /listsudo Gives a list of sudo users
-- /listsupport gives a list of support users
+**Tylko opiekun:**
+- /getlink <chatid>: Uzyskiwuje link zaproszenia na podany czat.
+- /banall: Banuje wszystkich furzaków czatu.
+- /leavechat <chatid> : Opuszcza podany czat.
+**Tylko sudo futrzaki oraz opiekun:**
+- /quickscope <userid> <chatid>: Banuje futrzaka na podanym czacie.
+- /quickunban <userid> <chatid>: Odbanywuje futrzaka na podanym czacie.
+- /snipe <chatid> <tekst>: Wysyła wiadomość w moim imieniu na podany czat.
+- /rban <userid> <chatid>: Zdalnie banuje futrzaka na podanym czacie.
+- /runban <userid> <chatid>: Zdalnie odbanywuje futrzaka na podanym czacie.
+- /stats: Wyświetla moje statystyki.
+- /chatlist: Wysyła plik z listą czatów na których jestem.
+- /gbanlist: Wysyła plik z listą globalnie zbanowanych futrzaków.
+- /gmutelist: Wysyła plik z listą globalnie wyciszonych futrzaków.
+- /restrict <chatid>: Blokuje dodanie mnie na podany czat.
+- /unrestrict <chatid>: Odblokiwuje dodanie mnie na podany czat.
+**Tylko futrzaki supportu:**
+- /Gban : Globalnie banuje futrzaka.
+- /Ungban : Globalnie odbanywuje futrzaka.
+- /Gmute : Globalnie wycisza futrzaka.
+- /Ungmute : Globalnie odcisza futrzaka.
+NOTKA: sudo futrzaki oraz opiekun też mogą używać tych komend.
+**Zwykłe futrzaki:**
+- /listsudo Wysyła listę sudo futrzaków.
+- /listsupport Wysyła listę futrzaków supportu.
 """
-__mod_name__ = "Special"
+__mod_name__ = "Komendy specjalne"
 
 SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter)
 BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True, filters=Filters.user(OWNER_ID))

@@ -49,10 +49,10 @@ def translate(bot: Bot, update: Update):
 
 
 __help__ = """
- - /t: while replying to a message, will reply with a grammar corrected version
+ - /t: W odpowiedzi do wiadomości, odpowiada tą wiadomość z wprowadzoną korektą pisowni (Tylko Angielski).
 """
 
-__mod_name__ = "Translator"
+__mod_name__ = "Poprawa pisowni"
 
 
 TRANSLATE_HANDLER = CommandHandler('t', translate)

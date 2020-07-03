@@ -29,9 +29,9 @@ def about_me(bot: Bot, update: Update, args: List[str]):
                                             parse_mode=ParseMode.MARKDOWN)
     elif message.reply_to_message:
         username = message.reply_to_message.from_user.first_name
-        update.effective_message.reply_text(username + "Information about him is currently unavailable !")
+        update.effective_message.reply_text(username + "Informacje o tym futrzaku są obecnie niedostępne!")
     else:
-        update.effective_message.reply_text("You have not added any information about yourself yet !")
+        update.effective_message.reply_text("Nie dodałeś jeszcze żadnych informacji o sobie!")
 
 
 @run_async
@@ -43,10 +43,10 @@ def set_about_me(bot: Bot, update: Update):
     if len(info) == 2:
         if len(info[1]) < MAX_MESSAGE_LENGTH // 4:
             sql.set_user_me_info(user_id, info[1])
-            message.reply_text("Your information has been recorded successfully")
+            message.reply_text("Twoje informacje zostały pomyślnie zapisane")
         else:
             message.reply_text(
-                " About You{} To be confined to letters ".format(MAX_MESSAGE_LENGTH // 4, len(info[1])))
+                "O tobie powinien ograniczać się do {} liter".format(MAX_MESSAGE_LENGTH // 4, len(info[1])))
 
 
 @run_async
@@ -66,9 +66,9 @@ def about_bio(bot: Bot, update: Update, args: List[str]):
                                             parse_mode=ParseMode.MARKDOWN)
     elif message.reply_to_message:
         username = user.first_name
-        update.effective_message.reply_text("{} No details about him have been added yet !".format(username))
+        update.effective_message.reply_text("{} Nie dodano jeszcze żadnych szczegółów na temat tego futrzaka!".format(username))
     else:
-        update.effective_message.reply_text(" Your information about you has been added !")
+        update.effective_message.reply_text("Twoje informacje o tobie zostały dodane!")
 
 
 @run_async
@@ -79,10 +79,10 @@ def set_about_bio(bot: Bot, update: Update):
         repl_message = message.reply_to_message
         user_id = repl_message.from_user.id
         if user_id == message.from_user.id:
-            message.reply_text("Are you looking to change your own ... ?? That 's it.")
+            message.reply_text("Czy chcesz zmienić swój własny...?? OK...")
             return
         elif user_id == bot.id and sender.id not in SUDO_USERS:
-            message.reply_text(" Only SUDO USERS can change my information.")
+            message.reply_text("Tylko SUDO FUTRZAKI mogą zmieniać moje informacje.")
             return
 
         text = message.text
@@ -90,36 +90,36 @@ def set_about_bio(bot: Bot, update: Update):
         if len(bio) == 2:
             if len(bio[1]) < MAX_MESSAGE_LENGTH // 4:
                 sql.set_user_bio(user_id, bio[1])
-                message.reply_text("{} Information about the him has been successfully collected !".format(repl_message.from_user.first_name))
+                message.reply_text("{} Informacje o tym futrzaku zostały pomyślnie zebrane!".format(repl_message.from_user.first_name))
             else:
                 message.reply_text(
-                    "About you {} Must stick to the letter! The number of characters you have just tried {} hm .".format(
+                    "O tobie powinien ograniczać się do {} liter! Liczba właśnie wpisanych znaków {}.".format(
                         MAX_MESSAGE_LENGTH // 4, len(bio[1])))
     else:
-        message.reply_text(" His information can only be added if someone's MESSAGE as a REPLY")
+        message.reply_text("Jego informacje można dodać tylko, jeśli czyjaś WIADOMOŚĆ jest jako ODPOWIEDŹ")
 
 
 def __user_info__(user_id):
     bio = html.escape(sql.get_user_bio(user_id) or "")
     me = html.escape(sql.get_user_me_info(user_id) or "")
     if bio and me:
-        return "<b>About user:</b>\n{me}\n<b>What others say:</b>\n{bio}".format(me=me, bio=bio)
+        return "<b>O futrzaku:</b>\n{me}\n<b>Co inne futrzaki mówią:</b>\n{bio}".format(me=me, bio=bio)
     elif bio:
-        return "<b>What others say:</b>\n{bio}\n".format(me=me, bio=bio)
+        return "<b>Co inne futrzaki mówią:</b>\n{bio}\n".format(me=me, bio=bio)
     elif me:
-        return "<b>About user:</b>\n{me}""".format(me=me, bio=bio)
+        return "<b>O futrzaku:</b>\n{me}""".format(me=me, bio=bio)
     else:
         return ""
 
 
 __help__ = """
- - /setbio <text>: while replying, will save another user's bio
- - /bio: will get your or another user's bio. This cannot be set by yourself.
- - /setme <text>: will set your info
- - /me: will get your or another user's info
+ - /setbio <tekst>: W odpowiedzi, zapisze biografię innego futrzaka.
+ - /bio: Wysyła biografię o tobie lub innego futrzaka. Nie możesz tego ustawić samodzielnie.
+ - /setme <tekst>: Ustawia twoje informacje.
+ - /me: Wysyła informacje o tobie lub innego futrzaka.
 """
 
-__mod_name__ = "Bios and Abouts"
+__mod_name__ = "Biografie i Informacje"
 
 SET_BIO_HANDLER = DisableAbleCommandHandler("setbio", set_about_bio)
 GET_BIO_HANDLER = DisableAbleCommandHandler("bio", about_bio, pass_args=True)

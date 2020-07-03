@@ -25,33 +25,33 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You'll need to either give me a username to mute, or reply to someone to be muted.")
+        message.reply_text("Musisz mi podać nazwę futrzaka lub odpowiedzieć na jego wiadomość żeby go wyciszyć.")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I'm not muting myself!")
+        message.reply_text("Nie wyciszę samego siebie!")
         return ""
 
     member = chat.get_member(int(user_id))
 
     if member:
         if is_user_admin(chat, user_id, member=member):
-            message.reply_text("Afraid I can't stop an admin from talking!")
+            message.reply_text("Wydaje mi się że nie mogę wyciszyć administracji!")
 
         elif member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chat.id, user_id, can_send_messages=False)
-            message.reply_text("👍🏻 muted! 🤐")
+            message.reply_text("👍🏻 wyciszony! 🤐")
             return "<b>{}:</b>" \
-                   "\n#MUTE" \
-                   "\n<b>Admin:</b> {}" \
-                   "\n<b>User:</b> {}".format(html.escape(chat.title),
-                                              mention_html(user.id, user.first_name),
-                                              mention_html(member.user.id, member.user.first_name))
+                   "\n#WYCISZENIE" \
+                   "\n<b>Administrator:</b> {}" \
+                   "\n<b>Futrzak:</b> {}".format(html.escape(chat.title),
+                                                 mention_html(user.id, user.first_name),
+                                                 mention_html(member.user.id, member.user.first_name))
 
         else:
-            message.reply_text("This user is already muted!")
+            message.reply_text("Ten futrzak jest już wyciszony!")
     else:
-        message.reply_text("This user isn't in the chat!")
+        message.reply_text("Tego futrzaka nie ma na czacie!")
 
     return ""
 
@@ -67,7 +67,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You'll need to either give me a username to unmute, or reply to someone to be unmuted.")
+        message.reply_text("Musisz mi podać nazwę futrzaka lub odpowiedzieć na jego wiadomość żeby go odciszyć.")
         return ""
 
     member = chat.get_member(int(user_id))
@@ -75,23 +75,23 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
     if member.status != 'kicked' and member.status != 'left':
         if member.can_send_messages and member.can_send_media_messages \
                 and member.can_send_other_messages and member.can_add_web_page_previews:
-            message.reply_text("This user already has the right to speak.")
+            message.reply_text("Ten futrzak ma już prawo do mówienia.")
         else:
             bot.restrict_chat_member(chat.id, int(user_id),
                                      can_send_messages=True,
                                      can_send_media_messages=True,
                                      can_send_other_messages=True,
                                      can_add_web_page_previews=True)
-            message.reply_text("Unmuted!")
+            message.reply_text("Odciszony!")
             return "<b>{}:</b>" \
-                   "\n#UNMUTE" \
-                   "\n<b>Admin:</b> {}" \
-                   "\n<b>User:</b> {}".format(html.escape(chat.title),
-                                              mention_html(user.id, user.first_name),
-                                              mention_html(member.user.id, member.user.first_name))
+                   "\n#ODCISZENIE" \
+                   "\n<b>Administrator:</b> {}" \
+                   "\n<b>Futrzak:</b> {}".format(html.escape(chat.title),
+                                                 mention_html(user.id, user.first_name),
+                                                 mention_html(member.user.id, member.user.first_name))
     else:
-        message.reply_text("This user isn't even in the chat, unmuting them won't make them talk more than they "
-                           "already do!")
+        message.reply_text("Tego futrzaka i tak nie ma na czacie. Odciszenie go nie spowoduje że zacznie mówić "
+                           "jak wcześniej!")
 
     return ""
 
@@ -109,28 +109,28 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
         return ""
 
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text("I can't seem to find this user")
+            message.reply_text("Nie mogę znaleźć tego futrzaka")
             return ""
         else:
             raise
 
     if is_user_admin(chat, user_id, member):
-        message.reply_text("I really wish I could mute admins...")
+        message.reply_text("Naprawdę chciałbym móc wyciszać administratorów...")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I'm not gonna MUTE myself, are you crazy?")
+        message.reply_text("Nie zamierzam WYCISZAĆ siebie, oszalałeś?")
         return ""
 
     if not reason:
-        message.reply_text("You haven't specified a time to mute this user for!")
+        message.reply_text("Nie podałeś długości wyciszenia dla tego futrzaka!")
         return ""
 
     split_reason = reason.split(None, 1)
@@ -147,41 +147,41 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
         return ""
 
     log = "<b>{}:</b>" \
-          "\n#TEMP MUTED" \
-          "\n<b>Admin:</b> {}" \
-          "\n<b>User:</b> {}" \
-          "\n<b>Time:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name),
-                                     mention_html(member.user.id, member.user.first_name), time_val)
+          "\n#TYMCZASOWO WYCISZONY" \
+          "\n<b>Administrator:</b> {}" \
+          "\n<b>Futrzak:</b> {}" \
+          "\n<b>Długość:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name),
+                                        mention_html(member.user.id, member.user.first_name), time_val)
     if reason:
-        log += "\n<b>Reason:</b> {}".format(reason)
+        log += "\n<b>Powód:</b> {}".format(reason)
 
     try:
         if member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chat.id, user_id, until_date=mutetime, can_send_messages=False)
-            message.reply_text("shut up! 😠 Muted for {}!".format(time_val))
+            message.reply_text("Zamknij się! 😠 Wyciszony na {}!".format(time_val))
             return log
         else:
-            message.reply_text("This user is already muted.")
+            message.reply_text("Ten futrzak jest już wyciszony.")
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text("shut up! 😠 Muted for {}!".format(time_val), quote=False)
+            message.reply_text("Zamknij się! 😠 Wyciszony na {}!".format(time_val), quote=False)
             return log
         else:
             LOGGER.warning(update)
-            LOGGER.exception("ERROR muting user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
+            LOGGER.exception("BŁĄD podczas wyciszania futrzaka %s (%s) przez %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text("Well damn, I can't mute that user.")
+            message.reply_text("Cholera, nie mogę wyciszyć tego futrzaka.")
 
     return ""
 
 
 __help__ = """
-*Admin only:*
- - /mute <userhandle>: silences a user. Can also be used as a reply, muting the replied to user.
- - /tmute <userhandle> x(m/h/d): mutes a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
- - /unmute <userhandle>: unmutes a user. Can also be used as a reply, muting the replied to user.
+*Tylko Administracja:*
+ - /mute <nazwa futrzaka>: Ucisza futrzaka. (poprzez @, lub odpowiedź)
+ - /tmute <nazwa futrzaka> x(m/g/d): Wycisza futrzaka przez podaną ilość czasu. (poprzez @, lub odpowiedź). m = minuty, g = godziny, d = dni.
+ - /unmute <nazwa futrzaka>: Odczisza futrzaka. (poprzez @, lub odpowiedź)
 """
 
 __mod_name__ = "Mute"

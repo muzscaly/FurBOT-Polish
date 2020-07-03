@@ -24,25 +24,25 @@ def report_setting(bot: Bot, update: Update, args: List[str]):
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_user_setting(chat.id, True)
-                msg.reply_text("Turned on reporting! You'll be notified whenever anyone reports something.")
+                msg.reply_text("Włączono zgłaszanie! Będziesz powiadomiony kiedy jakiś futrzak zgłosi coś.")
 
             elif args[0] in ("no", "off"):
                 sql.set_user_setting(chat.id, False)
-                msg.reply_text("Turned off reporting! You wont get any reports.")
+                msg.reply_text("Wyłączono zgłaszanie! Nie będziesz dostawał żadnych zgłoszeń.")
         else:
-            msg.reply_text("Your current report preference is: `{}`".format(sql.user_should_report(chat.id)),
+            msg.reply_text("Twoje obecnie ustawienie zgłaszania: `{}`".format(sql.user_should_report(chat.id)),
                            parse_mode=ParseMode.MARKDOWN)
 
     else:
         if len(args) >= 1:
             if args[0] in ("yes", "on"):
                 sql.set_chat_setting(chat.id, True)
-                msg.reply_text("Turned on reporting! Admins who have turned on reports will be notified when /report "
-                               "or @admin are called.")
+                msg.reply_text("Włączono zgłaszanie! Administratorzy którzy włączyli zgłoszenie będą powiadomieni kiedy jakiś futrzak użyje /report "
+                               "lub @admin.")
 
             elif args[0] in ("no", "off"):
                 sql.set_chat_setting(chat.id, False)
-                msg.reply_text("Turned off reporting! No admins will be notified on /report or @admin.")
+                msg.reply_text("Wyłączono zgłaszanie! Żaden administrator nie będzie powiadamiany przez /report lub @admin.")
         else:
             msg.reply_text("This chat's current setting is: `{}`".format(sql.chat_should_report(chat.id)),
                            parse_mode=ParseMode.MARKDOWN)
@@ -63,8 +63,8 @@ def report(bot: Bot, update: Update) -> str:
 
         if chat.username and chat.type == Chat.SUPERGROUP:
             msg = "<b>{}:</b>" \
-                  "\n<b>Reported user:</b> {} (<code>{}</code>)" \
-                  "\n<b>Reported by:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+                  "\n<b>Zgłoszony futrzak:</b> {} (<code>{}</code>)" \
+                  "\n<b>Zgłoszony przez:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                                       mention_html(
                                                                           reported_user.id,
                                                                           reported_user.first_name),
@@ -73,12 +73,12 @@ def report(bot: Bot, update: Update) -> str:
                                                                                    user.first_name),
                                                                       user.id)
             link = "\n<b>Link:</b> " \
-                   "<a href=\"http://telegram.me/{}/{}\">click here</a>".format(chat.username, message.message_id)
+                   "<a href=\"http://telegram.me/{}/{}\">naciśnij tutaj</a>".format(chat.username, message.message_id)
 
             should_forward = False
 
         else:
-            msg = "{} is calling for admins in \"{}\"!".format(mention_html(user.id, user.first_name),
+            msg = "{} wzywa administrację do \"{}\"!".format(mention_html(user.id, user.first_name),
                                                                html.escape(chat_name))
             link = ""
             should_forward = True
@@ -100,7 +100,7 @@ def report(bot: Bot, update: Update) -> str:
                 except Unauthorized:
                     pass
                 except BadRequest as excp:  # TODO: cleanup exceptions
-                    LOGGER.exception("Exception while reporting user")
+                    LOGGER.exception("Wyjątek podczas zgłaszania futrzaka")
         return msg
 
     return ""
@@ -111,26 +111,26 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 def __chat_settings__(chat_id, user_id):
-    return "This chat is setup to send user reports to admins, via /report and @admin: `{}`".format(
+    return "Ten czat jest ustawiony żeby przyjąć zgłoszenia futrzaków przez /report i @admin: `{}`".format(
         sql.chat_should_report(chat_id))
 
 
 def __user_settings__(user_id):
-    return "You receive reports from chats you're admin in: `{}`.\nToggle this with /reports in PM.".format(
+    return "Ustawione otrzymywanie zgłoszeń od futrzaków czatu gdzie jesteś administratorem: `{}`.\nUstaw to przez /reports na PW.".format(
         sql.user_should_report(user_id))
 
 
-__mod_name__ = "Reporting"
+__mod_name__ = "Zgłaszanie"
 
 __help__ = """
- - /report <reason>: reply to a message to report it to admins.
- - @admin: reply to a message to report it to admins.
-NOTE: neither of these will get triggered if used by admins
+ - /report <powód>: Użyte w odpowiedzi zgłasza futrzaka.
+ - @admin: Użyte w odpowiedzi zgłasza futrzaka do administracja.
+NOTKA: żadne z nich nie zostanie uruchomione, jeśli zostanie użyte przez administratorów
 
-*Admin only:*
- - /reports <on/off>: change report setting, or view current status.
-   - If done in pm, toggles your status.
-   - If in chat, toggles that chat's status.
+*Tylko administracja:*
+ - /reports <on/off>: Zmienia ustawienie możliwości zgłoszenia, lub sprawdza obecne ustawienie.
+   - Jeżeli użyte na PW, przełącza twoje ustawienie.
+   - Jeżeli użyte na czacie, przełącza ustawienie tego czatu.
 """
 
 REPORT_HANDLER = CommandHandler("report", report, filters=Filters.group)

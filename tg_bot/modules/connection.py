@@ -27,16 +27,16 @@ def allow_connections(bot: Bot, update: Update, args: List[str]) -> str:
             print(var)
             if (var == "no"):
                 sql.set_allow_connect_to_chat(chat.id, False)
-                update.effective_message.reply_text("Disabled connections to this chat for users")
+                update.effective_message.reply_text("Wyłączono połączenia do tego czatu dla futrzaków")
             elif(var == "yes"):
                 sql.set_allow_connect_to_chat(chat.id, True)
-                update.effective_message.reply_text("Enabled connections to this chat for users")
+                update.effective_message.reply_text("Włączono połączenia do tego czatu dla futrzaków")
             else:
-                update.effective_message.reply_text("Please enter on/yes/off/no in group!")
+                update.effective_message.reply_text("Proszę wpisać on/yes/off/no na grupie!")
         else:
-            update.effective_message.reply_text("Please enter on/yes/off/no in group!")
+            update.effective_message.reply_text("Proszę wpisać on/yes/off/no na grupie!")
     else:
-        update.effective_message.reply_text("Please enter on/yes/off/no in group!")
+        update.effective_message.reply_text("Proszę wpisać on/yes/off/no na grupie!")
 
 
 @run_async
@@ -48,7 +48,7 @@ def connect_chat(bot, update, args):
             try:
                 connect_chat = int(args[0])
             except ValueError:
-                update.effective_message.reply_text("Invalid Chat ID provided!")
+                update.effective_message.reply_text("Podano nieprawidłowy Chat ID!")
             if (bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in ('administrator', 'creator') or 
                                      (sql.allow_connect_to_chat(connect_chat) == True) and 
                                      bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in ('member')) or (
@@ -95,29 +95,29 @@ def connect_chat(bot, update, args):
                     keyboard(bot, update)
                     
                 else:
-                    update.effective_message.reply_text("Connection failed!")
+                    update.effective_message.reply_text("Połączenie nieudane!")
             else:
-                update.effective_message.reply_text("Connections to this chat not allowed!")
+                update.effective_message.reply_text("Połączenia do tego czatu są zabronione!")
         else:
-            update.effective_message.reply_text("Input chat ID to connect!")
+            update.effective_message.reply_text("Podaj chat ID żeby połączyć!")
             history = sql.get_history(user.id)
             print(history.user_id, history.chat_id1, history.chat_id2, history.chat_id3, history.updated)
 
     else:
-        update.effective_message.reply_text("Usage limited to PMs only!")
+        update.effective_message.reply_text("Użycie tylko przez PW!")
 
 
 def disconnect_chat(bot, update):
     if update.effective_chat.type == 'private':
         disconnection_status = sql.disconnect(update.effective_message.from_user.id)
         if disconnection_status:
-            sql.disconnected_chat = update.effective_message.reply_text("Disconnected from chat!")
+            sql.disconnected_chat = update.effective_message.reply_text("Rozłączono z czatem!")
             #Rebuild user's keyboard
             keyboard(bot, update)
         else:
-           update.effective_message.reply_text("Disconnection unsuccessfull!")
+           update.effective_message.reply_text("Rozołączenie nieudane!")
     else:
-        update.effective_message.reply_text("Usage restricted to PMs only")
+        update.effective_message.reply_text("Użycie ograniczone tylko do PW!")
 
 
 def connected(bot, update, chat, user_id, need_admin=True):
@@ -131,12 +131,12 @@ def connected(bot, update, chat, user_id, need_admin=True):
                 if bot.get_chat_member(conn_id, update.effective_message.from_user.id).status in ('administrator', 'creator') or user_id in SUDO_USERS:
                     return conn_id
                 else:
-                    update.effective_message.reply_text("You need to be a admin in a connected group!")
+                    update.effective_message.reply_text("Musisz być administratorem połączonej grupy!")
                     exit(1)
             else:
                 return conn_id
         else:
-            update.effective_message.reply_text("Group changed rights connection or you are not admin anymore.\nI'll disconnect you.")
+            update.effective_message.reply_text("Grupa zmieniła swoje połączenie lub nie jesteś już administratorem.\nRozłączam ciebie.")
             disconnect_chat(bot, update)
             exit(1)
     else:
@@ -145,17 +145,17 @@ def connected(bot, update, chat, user_id, need_admin=True):
 
 
 __help__ = """
-Actions are available with connected groups:
- • View and edit notes
- • View and edit filters
- • More in future!
+Akcje które są dostępne przy połączonych grupach:
+ • Podgląd oraz edycja notek
+ • Podgląd oraz edycja filtrów
+ • Więcej w przyszłości!
 
- - /connect <chatid>: Connect to remote chat
- - /disconnect: Disconnect from chat
- - /allowconnect on/yes/off/no: Allow connect users to group
+ - /connect <chatid>: Połącz zdalnie do czatu
+ - /disconnect: Rozłącz zdalne połączenie z czatem
+ - /allowconnect on/yes/off/no: Pozwól futrzakom na zdalne połączenie z czatem
 """
 
-__mod_name__ = "Connections"
+__mod_name__ = "Połączenia"
 
 CONNECT_CHAT_HANDLER = CommandHandler("connect", connect_chat, allow_edited=True, pass_args=True)
 DISCONNECT_CHAT_HANDLER = CommandHandler("disconnect", disconnect_chat, allow_edited=True)

@@ -15,7 +15,7 @@ from tg_bot.modules.helper_funcs.misc import split_message
 
 BLACKLIST_GROUP = 11
 
-BASE_BLACKLIST_STRING = "Current <b>blacklisted</b> words:\n"
+BASE_BLACKLIST_STRING = "Obecnie <b>zablokowane</b> słowa:\n"
 
 
 @run_async
@@ -37,7 +37,7 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
     split_text = split_message(filter_list)
     for text in split_text:
         if text == BASE_BLACKLIST_STRING:
-            msg.reply_text("There are no blacklisted messages here!")
+            msg.reply_text("Nie ma tutaj obecnie zablokowanych słów!")
             return
         msg.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -55,15 +55,15 @@ def add_blacklist(bot: Bot, update: Update):
             sql.add_to_blacklist(chat.id, trigger.lower())
 
         if len(to_blacklist) == 1:
-            msg.reply_text("Added <code>{}</code> to the blacklist!".format(html.escape(to_blacklist[0])),
+            msg.reply_text("Dodano <code>{}</code> na czarną listę!".format(html.escape(to_blacklist[0])),
                            parse_mode=ParseMode.HTML)
 
         else:
             msg.reply_text(
-                "Added <code>{}</code> triggers to the blacklist.".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
+                "Dodano <code>{}</code> na czarną listę!".format(len(to_blacklist)), parse_mode=ParseMode.HTML)
 
     else:
-        msg.reply_text("Tell me which words you would like to remove from the blacklist.")
+        msg.reply_text("Jakie słowa chcesz usunąć z czarnej listy?")
 
 
 @run_async
@@ -83,28 +83,28 @@ def unblacklist(bot: Bot, update: Update):
 
         if len(to_unblacklist) == 1:
             if successful:
-                msg.reply_text("Removed <code>{}</code> from the blacklist!".format(html.escape(to_unblacklist[0])),
+                msg.reply_text("Usunięto <code>{}</code> z czarnej listy!".format(html.escape(to_unblacklist[0])),
                                parse_mode=ParseMode.HTML)
             else:
-                msg.reply_text("This isn't a blacklisted trigger...!")
+                msg.reply_text("To nie jest zablokowane słowo...!")
 
         elif successful == len(to_unblacklist):
             msg.reply_text(
-                "Removed <code>{}</code> triggers from the blacklist.".format(
+                "Usunięto <code>{}</code> z czarnej listy!".format(
                     successful), parse_mode=ParseMode.HTML)
 
         elif not successful:
             msg.reply_text(
-                "None of these triggers exist, so they weren't removed.".format(
+                "Żaden z wyzwalaczy nie istnieje, więc nie zostaną usunięte.".format(
                     successful, len(to_unblacklist) - successful), parse_mode=ParseMode.HTML)
 
         else:
             msg.reply_text(
-                "Removed <code>{}</code> triggers from the blacklist. {} did not exist, "
-                "so were not removed.".format(successful, len(to_unblacklist) - successful),
+                "Usunięto <code>{}</code> z czarnej listy. {} nie istnieje, "
+                "więc nie zostanie usunięte.".format(successful, len(to_unblacklist) - successful),
                 parse_mode=ParseMode.HTML)
     else:
-        msg.reply_text("Tell me which words you would like to remove from the blacklist.")
+        msg.reply_text("Powiedz mi, które słowa chcesz usunąć z czarnej listy.")
 
 
 @run_async
@@ -123,10 +123,10 @@ def del_blacklist(bot: Bot, update: Update):
             try:
                 message.delete()
             except BadRequest as excp:
-                if excp.message == "Message to delete not found":
+                if excp.message == "Nie znaleziono wiadomości do usunięcia":
                     pass
                 else:
-                    LOGGER.exception("Error while deleting blacklist message.")
+                    LOGGER.exception("Błąd podczas usuwania wiadomości z czarnej listy.")
             break
 
 
@@ -136,30 +136,30 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     blacklisted = sql.num_blacklist_chat_filters(chat_id)
-    return "There are {} blacklisted words.".format(blacklisted)
+    return "Jest obecnie {} zablokowanych słów.".format(blacklisted)
 
 
 def __stats__():
-    return "{} blacklist triggers, across {} chats.".format(sql.num_blacklist_filters(),
+    return "{} zablokowanych słów spośród {} czatów.".format(sql.num_blacklist_filters(),
                                                             sql.num_blacklist_filter_chats())
 
 
-__mod_name__ = "Word Blacklists"
+__mod_name__ = "Czarna Lista"
 
 __help__ = """
-Blacklists are used to stop certain triggers from being said in a group. Any time the trigger is mentioned, \
-the message will immediately be deleted. A good combo is sometimes to pair this up with warn filters!
+Czarne listy służą do zatrzymania wypowiadania niektórych słów na grupie. Za każdym razem, gdy wspomniane jest słowo, \
+wiadomość zostanie natychmiast usunięta. Dobrym połączeniem jest czasem połączenie tego z filtrami ostrzegającymi!
 
-*NOTE:* blacklists do not affect group admins.
+*NOTKA:* Czarne listy nie działają na administratorów grupy.
 
- - /blacklist: View the current blacklisted words.
+ - /blacklist: Zobacz obecne słowa z czarnej listy.
 
-*Admin only:*
- - /addblacklist <triggers>: Add a trigger to the blacklist. Each line is considered one trigger, so using different \
-lines will allow you to add multiple triggers.
- - /unblacklist <triggers>: Remove triggers from the blacklist. Same newline logic applies here, so you can remove \
-multiple triggers at once.
- - /rmblacklist <triggers>: Same as above.
+*Tylko administratorzy:*
+ - /addblacklist <słowo>: Dodaj słowo do czarnej listy. Każdy wiersz jest traktowana jako jedne słowo, więc używając wiele \
+wierszy pozwolą Ci dodać wiele słów.
+ - /unblacklist <słowo>: Usuń słowo z czarnej listy. Obowiązuje tutaj ta sama logika nowego wiersza, więc możesz usunąć \
+wiele wyzwalaczy jednocześnie.
+ - /rmblacklist <słowo>: To samo co wyżej.
 """
 
 BLACKLIST_HANDLER = DisableAbleCommandHandler("blacklist", blacklist, filters=Filters.group, pass_args=True,
