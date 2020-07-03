@@ -41,9 +41,9 @@ def send_rules(update, chat_id, from_pm=False):
         bot.send_message(user.id, "Administratorzy grupy nie ustawili jeszcze żadnych zasad dla tego czatu. "
                                   "To prawdopodobnie nie oznacza, że panuje bezprawie...!")
     elif rules:
-        update.effective_message.reply_text("Skontaktuj się ze mną na PW, aby uzyskać zasady tej grupy.",
+        update.effective_message.reply_text("Contact me in PM to get this group's rules.",
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Zasady",
+                                                [[InlineKeyboardButton(text="Rules",
                                                                        url="t.me/{}?start={}".format(bot.username,
                                                                                                      chat_id))]]))
     else:
