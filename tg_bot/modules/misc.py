@@ -44,10 +44,10 @@ QUOTE_STRINGS = (
 
 SLAP_TEMPLATES = (
     "{user1} {hits} {user2} za pomocą {item}.",
-    "{user1} {hits} prosto w twarz {user2} za pomocą {item}.",
+    "{user1} {hits} prosto w pyszczek {user2} za pomocą {item}.",
     "{user1} lekko {hits} {user2} za pomocą {item}.",
     "{user1} {throws} {item} w {user2}.",
-    "{user1} podnosi {item} i {throws} tym w twarz {user2}.",
+    "{user1} podnosi {item} i {throws} tym w pyszczek {user2}.",
     "{user1} wystrzeliwuje {item} w stronę {user2}.",
     "{user1} zaczyna lekko klepać {user2} za pomocą {item}.",
     "{user1} zdejmuje na ziemię {user2} oraz ciągle {hits} go/ją za pomocą {item}.",
