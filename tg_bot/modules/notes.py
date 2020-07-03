@@ -172,7 +172,7 @@ def save(bot: Bot, update: Update):
     sql.add_note_to_db(chat_id, note_name, text, data_type, buttons=buttons, file=content)
 
     msg.reply_text(
-        "OK, Dodano notkę *{note_name}* do *{chat_name}*.\nUżyj jej poprzez /get {note_name} lub #{note_name}".format(note_name=note_name, chat_name=chat_name), parse_mode=ParseMode.MARKDOWN)
+        "OK, Dodano notkę '{note_name}' do *{chat_name}*.\nUżyj jej poprzez /get {note_name} lub #{note_name}".format(note_name=note_name, chat_name=chat_name), parse_mode=ParseMode.MARKDOWN)
 
     if msg.reply_to_message and msg.reply_to_message.from_user.is_bot:
         if text:
