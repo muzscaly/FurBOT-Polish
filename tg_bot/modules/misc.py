@@ -525,8 +525,8 @@ __help__ = """
  - /pat: Poklepywuje futrzaka lub poklepywuje wysyłającego jeżeli nie zostało użyte w odpowiedzi.
  - /time <miejsce>: Podaje lokalny czas w podanym miejscu.
  - /info: Uzyskaj informacje o futrzaku.
- - /gdpr: usuwa twoje informacje z mojej bazy danych. Użycie tylko na PW.
- - /markdownhelp: szybki tutorial działania markdown w Telegramie. Użycie tylko na PW.
+ - /gdpr: Usuwa twoje informacje z mojej bazy danych. Użycie tylko na PW.
+ - /markdownhelp: Szybki tutorial działania markdown w Telegramie. Użycie tylko na PW.
  - /stickerid: Użycie przy odpowiedzi na naklejkę zwraca jej ID.
  - /getsticker: Użycie przy odpowiedzi na naklejkę zwraca obraz PNG naklejki.
 """
