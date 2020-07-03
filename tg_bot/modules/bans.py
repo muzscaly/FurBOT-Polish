@@ -403,7 +403,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
         return
 
     if not is_bot_admin(chat, bot.id) or not chat.get_member(bot.id).can_restrict_members:
-        message.reply_text("Nie mogę tutaj odograniczać futrzaków! Sprawdź czy mam prawa administratora i czy mogę odbanować.")
+        message.reply_text("Nie mogę tutaj odgraniczać futrzaków! Sprawdź czy mam prawa administratora i czy mogę odbanować.")
         return
 
     try:
@@ -416,7 +416,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
             raise
             
     if is_user_in_chat(chat, user_id):
-        message.reply_text("Dlaczego próbujesz zdalnie odbanować kogoś kto jest już na chacie?")
+        message.reply_text("Dlaczego próbujesz zdalnie futrzaka który jest już na chacie?")
         return ""
 
     if user_id == bot.id:
