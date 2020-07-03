@@ -64,7 +64,7 @@ def set_rules(bot: Bot, update: Update):
         markdown_rules = markdown_parser(txt, entities=msg.parse_entities(), offset=offset)
 
         sql.set_rules(chat_id, markdown_rules)
-        update.effective_message.reply_text("Pomyślnie ustawiono zasady dla tej grupy.)
+        update.effective_message.reply_text("Pomyślnie ustawiono zasady dla tej grupy.")
 
 
 @run_async
