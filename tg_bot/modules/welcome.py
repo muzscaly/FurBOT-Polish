@@ -441,7 +441,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
                                                                          mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
-            update.effective_message.reply_text("Rozumię tylko 'on/yes' lub 'off/no'!")
+        update.effective_message.reply_text("Rozumię tylko 'on/yes' lub 'off/no'!")
         return ""
 
 
