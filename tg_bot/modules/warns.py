@@ -407,7 +407,7 @@ było zdaniem, użyj cudzysłowiów. np: /addwarn "yiff me" Nie ma żadnego yiff
 spowoduje zbanowanie futrzaka. W przeciwnym razie po prostu wykopa futrzaka.
 """
 
-__mod_name__ = "Warnings"
+__mod_name__ = "Ostrzeżenia"
 
 WARN_HANDLER = CommandHandler("warn", warn_user, pass_args=True, filters=Filters.group)
 RESET_WARN_HANDLER = CommandHandler(["resetwarn", "resetwarns"], reset_warns, pass_args=True, filters=Filters.group)
