@@ -36,40 +36,40 @@ def send(update, message, keyboard, backup_message):
         msg = update.effective_message.reply_text(message, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
     except IndexError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                  "\nNote: the current message was "
-                                                                  "invalid due to markdown issues. Could be "
-                                                                  "due to the user's name."),
+                                                                  "\nNotka: obecna wiadomość była "
+                                                                  "nieprawidłowa z powodu problemów z markdown. Może to "
+                                                                  "wynikać z nazwy użytkownika."),
                                                   parse_mode=ParseMode.MARKDOWN)
     except KeyError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                  "\nNote: the current message is "
-                                                                  "invalid due to an issue with some misplaced "
-                                                                  "curly brackets. Please update"),
+                                                                  "\nNotka: obecna wiadomość jest "
+                                                                  "nieprawidłowa z powodu problemu z niektórymi źle umieszczonymi "
+                                                                  "nawiasami klamrowymi. Proszę poprawić."),
                                                   parse_mode=ParseMode.MARKDOWN)
     except BadRequest as excp:
         if excp.message == "Button_url_invalid":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has an invalid url "
-                                                                      "in one of its buttons. Please update."),
+                                                                      "\nNotka: obecna wiadomość ma nieprawidłowy link  "
+                                                                      "w jednym z swoich przycisków. Proszę poprawić."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has buttons which "
-                                                                      "use url protocols that are unsupported by "
-                                                                      "telegram. Please update."),
+                                                                      "\Notka: obecna wiadomość posiad przyciski które "
+                                                                      "protokoły adresów URL są nieobsługiwane przez "
+                                                                      "Telegrama. Proszę poprawić."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Wrong url host":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has some bad urls. "
-                                                                      "Please update."),
+                                                                      "\nNotka: obecna wiadomość ma kilka złych adresów URL. "
+                                                                      "Proszę poprawić."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
-            LOGGER.exception("Could not parse! got invalid url host errors")
+            LOGGER.exception("Nie można sparsować! Otrzymano nieprawidłowe błędy hosta adresu URL")
         else:
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: An error occured when sending the "
-                                                                      "custom message. Please update."),
+                                                                      "\nNotka: Wystąpił błąd podczas wysyłania "
+                                                                      "niestandardowej wiadomości. Proszę poprawić."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.exception()
 
@@ -86,30 +86,30 @@ def del_joined(bot: Bot, update: Update, args: List[str]) -> str:
     if not args:
         del_pref = sql.get_del_pref(chat.id)
         if del_pref:
-            update.effective_message.reply_text("I should be deleting `user` joined the chat messages now.")
+            update.effective_message.reply_text("Powinienem teraz usuwać serwisowe wiadomości dołączeń.")
         else:
-            update.effective_message.reply_text("I'm currently not deleting old joined messages!")
+            update.effective_message.reply_text("Obecnie nie usuwam serwisowych wiadomości dołączeń!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
         sql.set_del_joined(str(chat.id), True)
-        update.effective_message.reply_text("I'll try to delete old joined messages!")
+        update.effective_message.reply_text("Od teraz usuwam wszystkie serwisowe wiadomości dołączeń!")
         return "<b>{}:</b>" \
-               "\n#CLEAN_SERVICE_MESSAGE" \
-               "\n<b>Admin:</b> {}" \
-               "\nHas toggled join deletion to <code>ON</code>.".format(html.escape(chat.title),
+               "\n#USUWANIE_WIADOMOŚCI_SERWISOWYCH" \
+               "\n<b>Administrator:</b> {}" \
+               "\nPrzełączył usuwanie serwisowych wiadomości dołączeń na <code>ON</code>.".format(html.escape(chat.title),
                                                                          mention_html(user.id, user.first_name))
     elif args[0].lower() in ("off", "no"):
         sql.set_del_joined(str(chat.id), False)
-        update.effective_message.reply_text("I won't delete old joined messages.")
+        update.effective_message.reply_text("Od teraz nie usuwam żadnych serwisowych wiadomości dołączeń.")
         return "<b>{}:</b>" \
-               "\n#CLEAN_SERVICE_MESSAGE" \
-               "\n<b>Admin:</b> {}" \
-               "\nHas toggled joined deletion to <code>OFF</code>.".format(html.escape(chat.title),
-                                                                          mention_html(user.id, user.first_name))
+               "\n#USUWANIE_WIADOMOŚCI_SERWISOWYCH" \
+               "\n<b>Administrator:</b> {}" \
+               "\nPrzełączył usuwanie serwisowych wiadomości dołączeń na <code>OFF</code>.".format(html.escape(chat.title),
+                                                                         mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
-        update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+        update.effective_message.reply_text("Rozumię tylko 'on/yes' lub 'off/no'!")
         return ""
 
 
@@ -133,7 +133,7 @@ def new_member(bot: Bot, update: Update):
         for new_mem in new_members:
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                update.effective_message.reply_text("Master is in the houseeee, let's get this party started!")
+                update.effective_message.reply_text("OwO! Dołączył mój opiekun!")
                 continue
 
             # Don't welcome yourself
@@ -201,7 +201,7 @@ def left_member(bot: Bot, update: Update):
 
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
-                update.effective_message.reply_text("RIP Master")
+                update.effective_message.reply_text("RIP ;c")
                 return
 
             # if media goodbye, use appropriate function for it
@@ -249,8 +249,8 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0].lower() == "noformat"
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's welcome setting set to: `{}`.\n*The welcome message "
-            "(not filling the {{}}) is:*".format(pref),
+            "Ten czat ma powitania ustawione na: `{}`.\n*Wiadomość powitalna "
+            "(pomijając {{}}) to:*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
         if welcome_type == sql.Types.BUTTON_TEXT:
@@ -279,11 +279,11 @@ def welcome(bot: Bot, update: Update, args: List[str]):
 
         elif args[0].lower() in ("off", "no"):
             sql.set_welc_preference(str(chat.id), False)
-            update.effective_message.reply_text("I'm sulking, not saying hello anymore.")
+            update.effective_message.reply_text("Dąsam, już się nie przywitam.")
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("Rozumię tylko 'on/yes' lub 'off/no'!")
 
 
 @run_async
@@ -295,8 +295,8 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0] == "noformat"
         pref, goodbye_m, goodbye_type = sql.get_gdbye_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's goodbye setting set to: `{}`.\n*The goodbye  message "
-            "(not filling the {{}}) is:*".format(pref),
+            "en czat ma pożegnania ustawione na: `{}`.\n*Wiadomość pożegnalna "
+            "(pomijając {{}}) to:*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
         if goodbye_type == sql.Types.BUTTON_TEXT:
@@ -321,15 +321,15 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_gdbye_preference(str(chat.id), True)
-            update.effective_message.reply_text("I'll be sorry when people leave!")
+            update.effective_message.reply_text("Będę przepraszać, kiedy furzaki odejdą z grupy!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_gdbye_preference(str(chat.id), False)
-            update.effective_message.reply_text("They leave, they're dead to me.")
+            update.effective_message.reply_text("Kiedy odchodzą, są dla mnie już martwi.")
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("Rozumię tylko 'on/yes' lub 'off/no'!")
 
 
 @run_async
@@ -343,16 +343,16 @@ def set_welcome(bot: Bot, update: Update) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Nie określiłeś, co odpowiedzieć!")
         return ""
 
     sql.set_custom_welcome(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom welcome message!")
+    msg.reply_text("Pomyślnie ustawiono wiadomość powitalną!")
 
     return "<b>{}:</b>" \
-           "\n#SET_WELCOME" \
-           "\n<b>Admin:</b> {}" \
-           "\nSet the welcome message.".format(html.escape(chat.title),
+           "\n#USTAWIONO_WIADOMOŚĆ_POWITALNĄ" \
+           "\n<b>Administrator:</b> {}" \
+           "\nUstawiono wiadomość powitalną.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
 
 
@@ -363,11 +363,11 @@ def reset_welcome(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_welcome(chat.id, sql.DEFAULT_WELCOME, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset welcome message to default!")
+    update.effective_message.reply_text("Pomyślnie przywrócono domyślną wiadomość powitalną!")
     return "<b>{}:</b>" \
-           "\n#RESET_WELCOME" \
+           "\n#ZRESETOWANO_WIADOMOŚĆ_POWITALNĄ" \
            "\n<b>Admin:</b> {}" \
-           "\nReset the welcome message to default.".format(html.escape(chat.title),
+           "\nZresetowano wiadomość powitalną.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name))
 
 
@@ -381,15 +381,15 @@ def set_goodbye(bot: Bot, update: Update) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Nie określiłeś, co odpowiedzieć!")
         return ""
 
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom goodbye message!")
+    msg.reply_text("Pomyślnie ustawiono wiadomość pożegnalną!")
     return "<b>{}:</b>" \
-           "\n#SET_GOODBYE" \
+           "\n#USTAWIONO_WIADOMOŚĆ_POŻEGNALNĄ" \
            "\n<b>Admin:</b> {}" \
-           "\nSet the goodbye message.".format(html.escape(chat.title),
+           "\nUstawiono wiadomość pożegnalną.".format(html.escape(chat.title),
                                                mention_html(user.id, user.first_name))
 
 
@@ -400,12 +400,12 @@ def reset_goodbye(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset goodbye message to default!")
+    update.effective_message.reply_text("Pomyślnie przywrócono domyślną wiadomość pożegnalną!")
     return "<b>{}:</b>" \
-           "\n#RESET_GOODBYE" \
+           "\n#ZRESETOWANO_WIADOMOŚĆ_POŻEGNALNĄ" \
            "\n<b>Admin:</b> {}" \
-           "\nReset the goodbye message.".format(html.escape(chat.title),
-                                                 mention_html(user.id, user.first_name))
+           "\nZresetowano wiadomość pożegnalną.".format(html.escape(chat.title),
+                                                            mention_html(user.id, user.first_name))
 
 
 @run_async
@@ -418,56 +418,56 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
     if not args:
         clean_pref = sql.get_clean_pref(chat.id)
         if clean_pref:
-            update.effective_message.reply_text("I should be deleting welcome messages up to two days old.")
+            update.effective_message.reply_text("Powinienem teraz usuwać wiadomości powitalne starsze niż 2 dni.")
         else:
-            update.effective_message.reply_text("I'm currently not deleting old welcome messages!")
+            update.effective_message.reply_text("Obecnie nie usuwam starych wiadomości powitalnych!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
         sql.set_clean_welcome(str(chat.id), True)
-        update.effective_message.reply_text("I'll try to delete old welcome messages!")
+        update.effective_message.reply_text("Od teraz usuwam stare wiadomości powitalne!")
         return "<b>{}:</b>" \
-               "\n#CLEAN_WELCOME" \
-               "\n<b>Admin:</b> {}" \
-               "\nHas toggled clean welcomes to <code>ON</code>.".format(html.escape(chat.title),
+               "\n#USUWANIE_WIADOMOŚCI_POWITALNYCH" \
+               "\n<b>Administrator:</b> {}" \
+               "\nPrzełączył usuwanie wiadomości powitalnych na <code>ON</code>.".format(html.escape(chat.title),
                                                                          mention_html(user.id, user.first_name))
     elif args[0].lower() in ("off", "no"):
         sql.set_clean_welcome(str(chat.id), False)
-        update.effective_message.reply_text("I won't delete old welcome messages.")
+        update.effective_message.reply_text("Od teraz nie usuwam żadnych wiadomości powitalnych.")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>Admin:</b> {}" \
-               "\nHas toggled clean welcomes to <code>OFF</code>.".format(html.escape(chat.title),
-                                                                          mention_html(user.id, user.first_name))
+               "\nPrzełączył usuwanie wiadomości powitalnych na <code>OFF</code>.".format(html.escape(chat.title),
+                                                                         mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
-        update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("Rozumię tylko 'on/yes' lub 'off/no'!")
         return ""
 
 
-WELC_HELP_TXT = "Your group's welcome/goodbye messages can be personalised in multiple ways. If you want the messages" \
-                " to be individually generated, like the default welcome message is, you can use *these* variables:\n" \
-                " - `{{first}}`: this represents the user's *first* name\n" \
-                " - `{{last}}`: this represents the user's *last* name. Defaults to *first name* if user has no " \
-                "last name.\n" \
-                " - `{{fullname}}`: this represents the user's *full* name. Defaults to *first name* if user has no " \
-                "last name.\n" \
-                " - `{{username}}`: this represents the user's *username*. Defaults to a *mention* of the user's " \
-                "first name if has no username.\n" \
-                " - `{{mention}}`: this simply *mentions* a user - tagging them with their first name.\n" \
-                " - `{{id}}`: this represents the user's *id*\n" \
-                " - `{{count}}`: this represents the user's *member number*.\n" \
-                " - `{{chatname}}`: this represents the *current chat name*.\n" \
-                "\nEach variable MUST be surrounded by `{{}}` to be replaced.\n" \
-                "Welcome messages also support markdown, so you can make any elements bold/italic/code/links. " \
-                "Buttons are also supported, so you can make your welcomes look awesome with some nice intro " \
-                "buttons.\n" \
-                "To create a button linking to your rules, use this: `[Rules](buttonurl://t.me/{}?start=group_id)`. " \
-                "Simply replace `group_id` with your group's id, which can be obtained via /id, and you're good to " \
-                "go. Note that group ids are usually preceded by a `-` sign; this is required, so please don't " \
-                "remove it.\n" \
-                "If you're feeling fun, you can even set images/gifs/videos/voice messages as the welcome message by " \
-                "replying to the desired media, and calling /setwelcome.".format(dispatcher.bot.username)
+WELC_HELP_TXT = "Wiadomości powitalne/pożegnalne grupy można spersonalizować na wiele sposobów. Jeśli chcesz żeby wiadomości" \
+                " były generowane indywidualnie, tak jak domyślna wiadomość powitalna, możesz użyć *tych* zmiennych::\n" \
+                " - `{{first}}`: Reprezentuje *imię* futrzaka\n" \
+                "  - `{{last}}`: Reprezentuje *nazwisko* futrzaka. Domyślnie *imię*, jeśli futrzak nie ma " \
+                "nazwiska.\n" \
+                " - `{{fullname}}`: Reprezentuje *pełną* nazwę futrzaka. Domyślnie *imię*, jeśli użytkownik nie ma " \
+                "nazwiska.\n" \
+                " - `{{username}}`: Reprezentuje *pseudomin* futrzaka. Domyślnie *wspomina* imię futrzaka " \
+                "jeżeli on nie ma pseudominu.\n" \
+                " - `{{mention}}`: To po prostu *wspomina* futrzaka - oznaczając go jego imieniem.\n" \
+                " - `{{id}}`: Reprezentuje *ID* futrzaka.\n" \
+                " - `{{count}}`: Reprezentuje *numer* futrzaka na czacie.\n" \
+                " - `{{chatname}}`: Reprezentuje *bieżącą nazwę czatu*.\n" \
+                "\nKażda zmienna MUSI być otoczona przez `{{}}` żeby była zastąpiona.\n" \
+                "Wiadomości powitalne obsługują również markdown, dzięki czemu można tekst pogrubić/kursywa/kod/zalinkować. " \
+                "Obsługiwane są również przyciski, dzięki czemu możesz sprawić, że powitania będą wyglądać niesamowicie dzięki fajnymi przyciskami " \
+                "wstępnymi.\n" \
+                "Aby utworzyć przycisk prowadzący do twoich reguł, użyj tego: `[Zasady](buttonurl://t.me/{}?start=group_id)`. " \
+                "Po prostu zamień `group_id` na identyfikator grupy, który można uzyskać za pomocą /id, i będzie " \
+                "dobrze. Zauważ, że identyfikatory grup są zwykle poprzedzone znakiem `-`. jest to wymagane, więc proszę " \
+                "nie usuwaj tego.\n" \
+                "Jeśli dobrze się bawisz, możesz nawet ustawić obrazy/gify/wideo/wiadomości głosowe jako wiadomość powitalną " \
+                "odpowiadając się na wybrane media, przez odpowiadanie do /setwelcome.".format(dispatcher.bot.username)
 
 
 @run_async
@@ -495,29 +495,29 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(chat_id, user_id):
     welcome_pref, _, _ = sql.get_welc_pref(chat_id)
     goodbye_pref, _, _ = sql.get_gdbye_pref(chat_id)
-    return "This chat has it's welcome preference set to `{}`.\n" \
-           "It's goodbye preference is `{}`.".format(welcome_pref, goodbye_pref)
+    return "Ten czat ma ustawione powitania na `{}`.\n" \
+           "A pożegnania na `{}`.".format(welcome_pref, goodbye_pref)
 
 
 __help__ = """
 {}
 
-*Admin only:*
- - /welcome <on/off>: enable/disable welcome messages.
- - /welcome: shows current welcome settings.
- - /welcome noformat: shows current welcome settings, without the formatting - useful to recycle your welcome messages!
- - /goodbye -> same usage and args as /welcome.
- - /setwelcome <sometext>: set a custom welcome message. If used replying to media, uses that media.
- - /setgoodbye <sometext>: set a custom goodbye message. If used replying to media, uses that media.
- - /resetwelcome: reset to the default welcome message.
- - /resetgoodbye: reset to the default goodbye message.
- - /cleanwelcome <on/off>: On new member, try to delete the previous welcome message to avoid spamming the chat.
- - /clearjoin <on/off>: when someone joins, try to delete the *user* joined the group message.
- - /welcomehelp: view more formatting information for custom welcome/goodbye messages.
+*Tylko administracja:*
+ - /welcome <on/off>: Włącza/wyłącza wiadomości powitalne.
+ - /welcome: Pokazuje bieżące ustawione powitanie.
+ - /welcome noformat: sPokazuje bieżące ustawione powitanie, bez formatowania - przydatne do odzyskania wiadomości powitalnych!
+ - /goodbye -> takie same użycie i argumenty co /welcome.
+ - /setwelcome <tekst>: Ustawia wiadomość powitalną. Jeśli użyjesz w odpowiedzi na media, użyje tego.
+ - /setgoodbye <tekst>: Ustawia wiadomość pożegnalną. Jeśli użyjesz w odpowiedzi na media, użyje tego.
+ - /resetwelcome: Przywraca domyślną wiadomość powitalną.
+ - /resetgoodbye: Przywraca domyślną wiadomość pożegnalną.
+ - /cleanwelcome <on/off>: W przypadku nowego futrzaka, usuwa poprzednią wiadomość powitalną, aby uniknąć spamowania czatu.
+ - /clearjoin <on/off>: Kiedy futrzaka dołączy, usuwa serwisową wiadomość o dołączeniu do grupy.
+ - /welcomehelp: Wyświetla pomoc w tworzeniu wiadomości powitalnych/pożegnalnych.
 
 """.format(WELC_HELP_TXT)
 
-__mod_name__ = "Welcomes/Goodbyes"
+__mod_name__ = "Powitania/Pożegnania"
 
 NEW_MEM_HANDLER = MessageHandler(Filters.status_update.new_chat_members, new_member)
 LEFT_MEM_HANDLER = MessageHandler(Filters.status_update.left_chat_member, left_member)
