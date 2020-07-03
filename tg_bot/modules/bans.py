@@ -39,7 +39,7 @@ RUNBAN_ERRORS = {
     "Czat grupy został zdeaktywowany",
     "Trzeba być zapraszającym futrzaka, aby odbanować go z grupy",
     "Chat_admin_required",
-    "Tylko twórca grupy może odbanować administratorów grupy",
+    "Tylko twórca grupy może odbanowywać administratorów grupy",
     "Channel_private",
     "Nie jest na czacie"
 }
