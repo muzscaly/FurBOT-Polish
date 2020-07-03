@@ -76,7 +76,7 @@ def clear_rules(bot: Bot, update: Update):
 
 
 def __stats__():
-    return "{} chats have rules set.".format(sql.num_chats())
+    return "{} czatów ma ustawione zasady.".format(sql.num_chats())
 
 
 def __import_data__(chat_id, data):
@@ -90,7 +90,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 def __chat_settings__(chat_id, user_id):
-    return "This chat has had it's rules set: `{}`".format(bool(sql.get_rules(chat_id)))
+    return "Ten czat ma ustawione zasady: `{}`".format(bool(sql.get_rules(chat_id)))
 
 
 __help__ = """
