@@ -405,7 +405,7 @@ def hug(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} przytula {user2}!\n{user2} został(a) przytulony/a NaN razy!"
+    temp = "{user1} przytula {user2}!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -439,7 +439,7 @@ def boop(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} tycnął {user2}!\n{user2} został(a) tycnięty/a NaN razy!"
+    temp = "{user1} tyca {user2}!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -473,7 +473,7 @@ def warm(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} ogrzał {user2}!\n{user2} został(a) ogrzany/a NaN razy!"
+    temp = "{user1} ogrzewa {user2}!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -507,7 +507,7 @@ def pat(bot: Bot, update: Update, args: List[str]):
         user1 = "[{}](tg://user?id={})".format(bot.first_name, bot.id)
         user2 = curr_user
 
-    temp = "{user1} poklepał {user2}!\n{user2} został(a) poklepany/a NaN razy!"
+    temp = "{user1} poklepuje {user2}!"
 
     repl = temp.format(user1=user1, user2=user2)
 
@@ -529,6 +529,7 @@ __help__ = """
  - /markdownhelp: Szybki tutorial działania markdown w Telegramie. Użycie tylko na PW.
  - /stickerid: Użycie przy odpowiedzi na naklejkę zwraca jej ID.
  - /getsticker: Użycie przy odpowiedzi na naklejkę zwraca obraz PNG naklejki.
+Liczniki do przytuleń, tycnięć, ociepleń, poklepień wkrótce!
 """
 
 __mod_name__ = "Inne"
