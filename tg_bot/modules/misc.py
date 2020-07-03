@@ -344,7 +344,7 @@ def markdown_help(bot: Bot, update: Update):
 
 @run_async
 def stats(bot: Bot, update: Update):
-    update.effective_message.reply_text("Current stats:\n" + "\n".join([mod.__stats__() for mod in STATS]))
+    update.effective_message.reply_text("Obecne statystyki:\n" + "\n".join([mod.__stats__() for mod in STATS]))
 
 @run_async
 def stickerid(bot: Bot, update: Update):
@@ -362,7 +362,7 @@ def getsticker(bot: Bot, update: Update):
     chat_id = update.effective_chat.id
     if msg.reply_to_message and msg.reply_to_message.sticker:
         bot.sendChatAction(chat_id, "typing")
-        update.effective_message.reply_text("Korzystaj z tej funkcji mądrze!",
+        update.effective_message.reply_text("Korzystaj z tej funkcji rozważnie!",
                                             parse_mode=ParseMode.MARKDOWN)
         bot.sendChatAction(chat_id, "upload_document")
         file_id = msg.reply_to_message.sticker.file_id
