@@ -14,7 +14,65 @@ from tg_bot.modules.helper_funcs.string_handling import markdown_parser
 
 @run_async
 def get_rules(bot: Bot, update: Update):
+    chat_id = update.effective_ch@run_async
+@user_admin
+def set_rules(bot: Bot, update: Update):
     chat_id = update.effective_chat.id
+    msg = update.effective_message  # type: Optional[Message]
+    raw_text = msg.text
+    args = raw_text.split(None, 1)  # use python's maxsplit to separate cmd and args
+    if len(args) == 2:
+        txt = args[1]
+        offset = len(txt) - len(raw_text)  # set correct offset relative to command
+        markdown_rules = markdown_parser(txt, entities=msg.parse_entities(), offset=offset)
+
+        sql.set_rules(chat_id, markdown_rules)
+        update.effective_message.reply_text("Successfully set rules for this group.")
+
+
+@run_async
+@user_admin
+def clear_rules(bot: Bot, update: Update):
+    chat_id = update.effective_chat.id
+    sql.set_rules(chat_id, "")
+    update.effective_message.reply_text("Successfully cleared rules!")
+
+
+def __stats__():
+    return "{} chats have rules set.".format(sql.num_chats())
+
+
+def __import_data__(chat_id, data):
+    # set chat rules
+    rules = data.get('info', {}).get('rules', "")
+    sql.set_rules(chat_id, rules)
+
+
+def __migrate__(old_chat_id, new_chat_id):
+    sql.migrate_chat(old_chat_id, new_chat_id)
+
+
+def __chat_settings__(chat_id, user_id):
+    return "This chat has had it's rules set: `{}`".format(bool(sql.get_rules(chat_id)))
+
+
+__help__ = """
+ - /rules: get the rules for this chat.
+
+*Admin only:*
+ - /setrules <your rules here>: set the rules for this chat.
+ - /clearrules: clear the rules for this chat.
+"""
+
+__mod_name__ = "Rules"
+
+GET_RULES_HANDLER = CommandHandler("rules", get_rules, filters=Filters.group)
+SET_RULES_HANDLER = CommandHandler("setrules", set_rules, filters=Filters.group)
+RESET_RULES_HANDLER = CommandHandler("clearrules", clear_rules, filters=Filters.group)
+
+dispatcher.add_handler(GET_RULES_HANDLER)
+dispatcher.add_handler(SET_RULES_HANDLER)
+dispatcher.add_handler(RESET_RULES_HANDLER)at.id
     send_rules(update, chat_id)
 
 
