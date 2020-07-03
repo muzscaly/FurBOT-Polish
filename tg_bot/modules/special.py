@@ -124,9 +124,9 @@ __help__ = """
 - /Gmute : Globalnie wycisza futrzaka.
 - /Ungmute : Globalnie odcisza futrzaka.
 NOTKA: sudo futrzaki oraz opiekun też mogą używać tych komend.
-**Zwykli futrzaki:**
-- /listsudo Gives a list of sudo users
-- /listsupport gives a list of support users
+**Zwykłe futrzaki:**
+- /listsudo Wysyła listę sudo futrzaków.
+- /listsupport Wysyła listę futrzaków supportu.
 """
 __mod_name__ = "Komendy specjalne"
 
