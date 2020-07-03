@@ -42,7 +42,7 @@ def get_user_id(username):
                 if excp.message == 'Chat not found':
                     pass
                 else:
-                    LOGGER.exception("Error extracting user ID")
+                    LOGGER.exception("Błąd podczas wyciągania userID")
 
     return None
 
@@ -59,10 +59,10 @@ def broadcast(bot: Bot, update: Update):
                 sleep(0.1)
             except TelegramError:
                 failed += 1
-                LOGGER.warning("Couldn't send broadcast to %s, group name %s", str(chat.chat_id), str(chat.chat_name))
+                LOGGER.warning("Nie można wysłać ogłoszenia do %s, nazwa grupy %s", str(chat.chat_id), str(chat.chat_name))
 
-        update.effective_message.reply_text("Broadcast complete. {} groups failed to receive the message, probably "
-                                            "due to being kicked.".format(failed))
+        update.effective_message.reply_text("Ogłoszenie ukończone. {} grupy nie otrzymały wiadomości, "
+                                            "prawdopodobnie z powodu wykopania.".format(failed))
 
 
 @run_async
@@ -96,18 +96,18 @@ def chats(bot: Bot, update: Update):
     with BytesIO(str.encode(chatfile)) as output:
         output.name = "chatlist.txt"
         update.effective_message.reply_document(document=output, filename="chatlist.txt",
-                                                caption="Here is the list of chats in my database.")
+                                                caption="Oto lista czatów w mojej bazie danych.")
 
 
 def __user_info__(user_id):
     if user_id == dispatcher.bot.id:
-        return """I've seen them in... Wow. Are they stalking me? They're in all the same places I am... oh. It's me."""
+        return """Widziałem ich w... Łał. Czy oni mnie stalkują? Są w tych samych miejscach, w których jestem... och. To ja."""
     num_chats = sql.get_user_num_chats(user_id)
-    return """I've seen them in <code>{}</code> chats in total.""".format(num_chats)
+    return """Widziałem ich w <code>{}</code> czatach ogółem.""".format(num_chats)
 
 
 def __stats__():
-    return "{} users, across {} chats".format(sql.num_users(), sql.num_chats())
+    return "{} futrzaków sposród {} czatów".format(sql.num_users(), sql.num_chats())
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -116,7 +116,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 __help__ = ""  # no help string
 
-__mod_name__ = "Users"
+__mod_name__ = "Użytkownicy"
 
 BROADCAST_HANDLER = CommandHandler("broadcast", broadcast, filters=Filters.user(OWNER_ID))
 USER_HANDLER = MessageHandler(Filters.all & Filters.group, log_user)
