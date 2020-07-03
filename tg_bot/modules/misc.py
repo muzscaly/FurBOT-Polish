@@ -520,6 +520,7 @@ __help__ = """
  - /slap: Uderza futrzaka lub uderza wysyłającego jeżeli nie zostało użyte w odpowiedzi
  - /hug: Huga futrzaka lub przytula wysyłającego jeżeli nie zostało użyte w odpowiedzi.
  - /boop: Tyca futrzaka lub tyca wysyłającego jeżeli nie zostało użyte w odpowiedzi.
+ - /tyc: To samo co /boop.
  - /warm: Ociepla futrzaka lub ociepla wysyłającego jeżeli nie zostało użyte w odpowiedzi.
  - /pat: Poklepywuje futrzaka lub poklepywuje wysyłającego jeżeli nie zostało użyte w odpowiedzi.
  - /time <miejsce>: Podaje lokalny czas w podanym miejscu.
@@ -541,6 +542,7 @@ RQUOTE_HANDLER = DisableAbleCommandHandler("rquote", rquote)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True)
 HUG_HANDLER = DisableAbleCommandHandler("hug", hug, pass_args=True)
 BOOP_HANDLER = DisableAbleCommandHandler("boop", boop, pass_args=True)
+TYC_HANDLER = DisableAbleCommandHandler("tyc", boop, pass_args=True)
 WARM_HANDLER = DisableAbleCommandHandler("warm", warm, pass_args=True)
 PAT_HANDLER = DisableAbleCommandHandler("pat", pat, pass_args=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True)
@@ -562,6 +564,7 @@ dispatcher.add_handler(RQUOTE_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(HUG_HANDLER)
 dispatcher.add_handler(BOOP_HANDLER)
+dispatcher.add_handler(TYC_HANDLER)
 dispatcher.add_handler(WARM_HANDLER)
 dispatcher.add_handler(PAT_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
