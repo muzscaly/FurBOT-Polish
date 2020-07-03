@@ -258,6 +258,7 @@ def table(bot: Bot, update: Update):
 __help__ = """
  - /shrug: Shrug.
  - /table: Wywal/postaw stół :V.
+ - /react: Reaguje losową emotikoną.
  - /decide: Losowo odpowiada tak/nie/może
  - /toss: Rzuca monetą
  - /abuse: Obraża futrzaka. *WYŁĄCZONE*
