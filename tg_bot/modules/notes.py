@@ -222,22 +222,22 @@ def list_notes(bot: Bot, update: Update):
     if not conn == False:
         chat_id = conn
         chat_name = dispatcher.bot.getChat(conn).title
-        msg = "*Notes in {}:*\n"
+        msg = "*NNotki w {}:*\n"
     else:
         chat_id = update.effective_chat.id
         if chat.type == "private":
             chat_name = ""
-            msg = "*Local Notes:*\n"
+            msg = "*Lokalne notki:*\n"
         else:
             chat_name = chat.title
-            msg = "*Notes in {}:*\n"
+            msg = "*Notki w {}:*\n"
 
     note_list = sql.get_all_chat_notes(chat_id)
 
     for note in note_list:
         note_name = escape_markdown(" - {}\n".format(note.name))
         if len(msg) + len(note_name) > MAX_MESSAGE_LENGTH:
-            update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(msg.format(chat_name), parse_mode=ParseMode.MARKDOWN)
             msg = ""
         msg += note_name
 
