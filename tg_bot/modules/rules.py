@@ -41,9 +41,9 @@ def send_rules(update, chat_id, from_pm=False):
         bot.send_message(user.id, "The group admins haven't set any rules for this chat yet. "
                                   "This probably doesn't mean it's lawless though...!")
     elif rules:
-        update.effective_message.reply_text("Skontaktuj się ze mną na PW, aby uzyskać zasady tej grupy.",
+        update.effective_message.reply_text("Contact me in PM to get this group's rules.",
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Zasady",
+                                                [[InlineKeyboardButton(text="Rules",
                                                                        url="t.me/{}?start={}".format(bot.username,
                                                                                                      chat_id))]]))
     else:
@@ -101,7 +101,7 @@ __help__ = """
  - /clearrules: clear the rules for this chat.
 """
 
-__mod_name__ = "Zasady"
+__mod_name__ = "Rules"
 
 GET_RULES_HANDLER = CommandHandler("rules", get_rules, filters=Filters.group)
 SET_RULES_HANDLER = CommandHandler("setrules", set_rules, filters=Filters.group)
