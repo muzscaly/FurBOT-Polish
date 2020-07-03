@@ -184,7 +184,7 @@ __help__ = """
  - /unmute <nazwa futrzaka>: Odczisza futrzaka. (poprzez @, lub odpowiedź)
 """
 
-__mod_name__ = "Mute"
+__mod_name__ = "Wyciszenia"
 
 MUTE_HANDLER = CommandHandler("mute", mute, pass_args=True, filters=Filters.group)
 UNMUTE_HANDLER = CommandHandler("unmute", unmute, pass_args=True, filters=Filters.group)
