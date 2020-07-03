@@ -94,14 +94,14 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /rules: get the rules for this chat.
+ - /rules: Wyświetla zasady tego czatu.
 
-*Admin only:*
- - /setrules <your rules here>: set the rules for this chat.
- - /clearrules: clear the rules for this chat.
+*Tylko administratorzy:*
+ - /setrules <tekst>: Ustawia zasady tego czatu.
+ - /clearrules: Czyści zasady tego czatu.
 """
 
-__mod_name__ = "Rules"
+__mod_name__ = "Zasady"
 
 GET_RULES_HANDLER = CommandHandler("rules", get_rules, filters=Filters.group)
 SET_RULES_HANDLER = CommandHandler("setrules", set_rules, filters=Filters.group)
