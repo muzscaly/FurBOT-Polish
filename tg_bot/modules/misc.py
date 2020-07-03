@@ -38,6 +38,7 @@ QUOTE_STRINGS = (
     "Nie zesraj sie\n~ Stripe",
     "Reee znów się zjebałem z łóżka psia kurwa zajebana mać\n~ Pusz",
     "Jeżeli się mówi \"smacznego\" jak sie zaczyna jeść, to kiedy sie znaczyna pić to mówi sie \"pijnego\"?\n~ Olive",
+    "Na górze róże\nna dole pachnie makiem\nrozpoczęło się narodowe rzucanie futrzakiem\n~ nepriz",
 )
 
 
