@@ -33,7 +33,7 @@ def send_rules(update, chat_id, from_pm=False):
             raise
 
     rules = sql.get_rules(chat_id)
-    text = "Zasady dla *{}* są następujące:\n\n{}".format(escape_markdown(chat.title), rules)
+    text = "The rules for *{}* are:\n\n{}".format(escape_markdown(chat.title), rules)
 
     if from_pm and rules:
         bot.send_message(user.id, text, parse_mode=ParseMode.MARKDOWN)
@@ -41,9 +41,9 @@ def send_rules(update, chat_id, from_pm=False):
         bot.send_message(user.id, "Administratorzy grupy nie ustawili jeszcze żadnych zasad dla tego czatu. "
                                   "To prawdopodobnie nie oznacza, że panuje bezprawie...!")
     elif rules:
-        update.effective_message.reply_text("Contact me in PM to get this group's rules.",
+        update.effective_message.reply_text("Skontaktuj się ze mną na PW, aby uzyskać zasady tej grupy.",
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Rules",
+                                                [[InlineKeyboardButton(text="Zasady",
                                                                        url="t.me/{}?start={}".format(bot.username,
                                                                                                      chat_id))]]))
     else:
