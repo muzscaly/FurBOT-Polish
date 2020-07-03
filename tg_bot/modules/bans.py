@@ -23,9 +23,9 @@ RBAN_ERRORS = {
     "User_not_participant",
     "Peer_id_invalid",
     "Czat grupy został zdeaktywowany",
-    "Trzeba być zapraszającym futrzaka, aby wyrzucić go z grupy",
+    "Trzeba być zapraszającym futrzaka, aby zbanować go z grupy",
     "Chat_admin_required",
-    "Tylko twórca grupy może wyrzucić administratorów grupy",
+    "Tylko twórca grupy może zbanować administratorów grupy",
     "Channel_private",
     "Nie na czacie"
 }
@@ -37,9 +37,9 @@ RUNBAN_ERRORS = {
     "User_not_participant",
     "Peer_id_invalid",
     "Czat grupy został zdeaktywowany",
-    "Trzeba być zapraszającym futrzaka, aby wyrzucić go z grupy",
+    "Trzeba być zapraszającym futrzaka, aby odbanować go z grupy",
     "Chat_admin_required",
-    "Tylko twórca grupy może wyrzucić administratorów grupy",
+    "Tylko twórca grupy może odbanować administratorów grupy",
     "Channel_private",
     "Nie jest na czacie"
 }
