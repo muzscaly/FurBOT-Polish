@@ -54,7 +54,7 @@ def send(update, message, keyboard, backup_message):
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\Notka: obecna wiadomość posiad przyciski które "
+                                                                      "\nNotka: obecna wiadomość posiad przyciski które "
                                                                       "protokoły adresów URL są nieobsługiwane przez "
                                                                       "Telegrama. Proszę poprawić."),
                                                       parse_mode=ParseMode.MARKDOWN)
