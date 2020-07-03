@@ -5,7 +5,10 @@ from sqlalchemy import Column, String, Boolean, UnicodeText, Integer, BigInteger
 from tg_bot.modules.helper_funcs.msg_types import Types
 from tg_bot.modules.sql import SESSION, BASE
 
-DEFAULT_WELCOME = "Cześć {first}, co tam u ciebie?"
+DEFAULT_WELCOME = "Cześć {first}, co tam u ciebie?", reply_markup=InlineKeyboardMarkup(
+                                                                [[InlineKeyboardButton(
+                                                                  text="Zasady",url="t.me/{}?start={}".format(bot.username,
+                                                                  chat_id))]])
 DEFAULT_GOODBYE = "Miło cię było znać!"
 
 
