@@ -24,7 +24,7 @@ Jestem botem administracyjnym opiekowanym przez [tego Futrzaka](tg://user?id={})
 Wszystkie zmiany we mnie będą wypisywane na - @davisshelter.
 Jak masz ze mną problem (np. konfiguracja) pisz [tutaj](tg://user?id=587942176)
 Jeżeli masz jakiekolwiek pytania jak mnie używać wpisz: /help
-Kod źródłowy mnie znajdziesz tutaj -> [Github](https://github.com/DavivaD/Marie-2.0-English)
+Kod źródłowy mnie znajdziesz tutaj -> [Github](https://github.com/DavivaD/FurBOT-Polish)
 **Miej na uwadze że jakiekolwiek zmiany które TY zrobisz we mnie mnie, muszą być na udostępnione Githubie. Zgodnie z licencją.**
 """
 
