@@ -1,7 +1,7 @@
 import html
 import json
 import random
-import randint
+from random import randint
 from datetime import datetime
 from typing import Optional, List
 
