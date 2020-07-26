@@ -551,6 +551,38 @@ def pat(bot: Bot, update: Update, args: List[str]):
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
+@run_async
+def howgay(bot: Bot, update: Update, args: List[str]):
+    msg = update.effective_message  # type: Optional[Message]
+
+    # reply to correct message
+    reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
+
+    # get user who sent message
+    if msg.from_user.username:
+        curr_user = "@" + escape_markdown(msg.from_user.username)
+    else:
+        curr_user = "[{}](tg://user?id={})".format(msg.from_user.first_name, msg.from_user.id)
+
+    user_id = extract_user(update.effective_message, args)
+    if user_id:
+        howgay_user = bot.get_chat(user_id)
+        if howgay_user.username:
+            user = "@" + escape_markdown(howgay_user.username)
+        else:
+            user = "[{}](tg://user?id={})".format(howgay_user.first_name,
+                                                   howgay_user.id)
+
+    # if no target found, bot targets the sender
+    else:
+        user = curr_user
+
+    num = randint(1, 100)
+    temp = "{user} jest w {num}% gejem!"
+    repl = temp.format(user=user, num=num)
+
+    reply_text(repl, parse_mode=ParseMode.MARKDOWN)
+
 # /ip is for private use
 __help__ = """
  - /id: Wypisuje obecny groupid. Jeżeli użyte w odpowiedzi do wiadomości, wypisuje userid.
@@ -561,6 +593,7 @@ __help__ = """
  - /tyc: To samo co /boop.
  - /warm: Ociepla futrzaka lub ociepla wysyłającego jeżeli nie zostało użyte w odpowiedzi.
  - /pat: Poklepywuje futrzaka lub poklepywuje wysyłającego jeżeli nie zostało użyte w odpowiedzi.
+ - /howgay: Zgaduje poziom gejowatości futrzaka lub wysyłającego jeżeli nie zostało użyte w odpowiedzi.
  - /time <miejsce>: Podaje lokalny czas w podanym miejscu.
  - /info: Uzyskaj informacje o futrzaku.
  - /gdpr: Usuwa twoje informacje z mojej bazy danych. Użycie tylko na PW.
@@ -584,6 +617,7 @@ BOOP_HANDLER = DisableAbleCommandHandler("boop", boop, pass_args=True)
 TYC_HANDLER = DisableAbleCommandHandler("tyc", boop, pass_args=True)
 WARM_HANDLER = DisableAbleCommandHandler("warm", warm, pass_args=True)
 PAT_HANDLER = DisableAbleCommandHandler("pat", pat, pass_args=True)
+GAY_HANDLER = DisableAbleCommandHandler("howgay", pat, pass_args=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True)
 
 ECHO_HANDLER = CommandHandler("echo", echo, filters=Filters.user(OWNER_ID))
@@ -606,6 +640,7 @@ dispatcher.add_handler(BOOP_HANDLER)
 dispatcher.add_handler(TYC_HANDLER)
 dispatcher.add_handler(WARM_HANDLER)
 dispatcher.add_handler(PAT_HANDLER)
+dispatcher.add_handler(GAY_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(MD_HELP_HANDLER)
