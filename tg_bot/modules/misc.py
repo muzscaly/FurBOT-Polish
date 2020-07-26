@@ -617,7 +617,7 @@ BOOP_HANDLER = DisableAbleCommandHandler("boop", boop, pass_args=True)
 TYC_HANDLER = DisableAbleCommandHandler("tyc", boop, pass_args=True)
 WARM_HANDLER = DisableAbleCommandHandler("warm", warm, pass_args=True)
 PAT_HANDLER = DisableAbleCommandHandler("pat", pat, pass_args=True)
-GAY_HANDLER = DisableAbleCommandHandler("howgay", pat, pass_args=True)
+GAY_HANDLER = DisableAbleCommandHandler("howgay", howgay, pass_args=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True)
 
 ECHO_HANDLER = CommandHandler("echo", echo, filters=Filters.user(OWNER_ID))
