@@ -578,8 +578,9 @@ def howgay(bot: Bot, update: Update, args: List[str]):
     else:
         user = curr_user
 
+    num = abs(howgay_user.id) % (10**2)	
     temp = "{user} jest w {num}% gejem!"
-    repl = temp.format(user=user, num=randint(1, 100))
+    repl = temp.format(user=user, num=num)
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
