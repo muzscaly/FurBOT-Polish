@@ -568,6 +568,7 @@ def howgay(bot: Bot, update: Update, args: List[str]):
     user_id = extract_user(update.effective_message, args)
     if user_id:
         howgay_user = bot.get_chat(user_id)
+	gaynum = abs(howgay_user.id) % (10**2)
         if howgay_user.username:
             user = "@" + escape_markdown(howgay_user.username)
         else:
@@ -577,10 +578,10 @@ def howgay(bot: Bot, update: Update, args: List[str]):
     # if no target found, bot targets the sender
     else:
         user = curr_user
+	gaynum = abs(msg.from_user.id) % (10**2)
 
-    num = abs(howgay_user.id) % (10**2)	
     temp = "{user} jest w {num}% gejem!"
-    repl = temp.format(user=user, num=num)
+    repl = temp.format(user=user, num=gaynum)
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
