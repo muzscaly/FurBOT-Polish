@@ -1,6 +1,7 @@
 import html
 import json
 import random
+import randint
 from datetime import datetime
 from typing import Optional, List
 
@@ -577,9 +578,8 @@ def howgay(bot: Bot, update: Update, args: List[str]):
     else:
         user = curr_user
 
-    num = randint(1, 100)
     temp = "{user} jest w {num}% gejem!"
-    repl = temp.format(user=user, num=num)
+    repl = temp.format(user=user, num=randint(1, 100))
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
