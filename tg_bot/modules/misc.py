@@ -38,10 +38,11 @@ QUOTE_STRINGS = (
     "Chuj z butami, uwaga Olive będzie skakać!\n~ Cytrynek",
     "Nie zesraj sie\n~ Stripe",
     "Reee znów się zjebałem z łóżka psia kurwa zajebana mać\n~ Pusz",
-    "Jeżeli się mówi \"smacznego\" jak sie zaczyna jeść, to kiedy sie znaczyna pić to mówi sie \"pijnego\"?\n~ Olive",
+#   "Jeżeli się mówi \"smacznego\" jak sie zaczyna jeść, to kiedy sie znaczyna pić to mówi sie \"pijnego\"?\n~ Olive",
     "Na górze róże\nna dole pachnie makiem\nrozpoczęło się narodowe rzucanie futrzakiem\n~ nepriz",
     "Krokodyl Polowy\n~ Davis",
     "SPAGHETTI Z NUTELLĄ\n~ Zeir",
+    "Your neck isn’t a shirt so don’t hang it,\nYour skin isn’t paper so don’t cut it,\nYour heart isn’t a door so don’t lock it,\nYour life isn’t a Film so don’t end it.\n~ Davis",
 )
 
 
