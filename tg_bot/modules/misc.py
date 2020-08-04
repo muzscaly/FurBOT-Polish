@@ -42,7 +42,7 @@ QUOTE_STRINGS = (
     "Na górze róże\nna dole pachnie makiem\nrozpoczęło się narodowe rzucanie futrzakiem\n~ nepriz",
     "Krokodyl Polowy\n~ Davis",
     "SPAGHETTI Z NUTELLĄ\n~ Zeir",
-    "Your neck isn’t a shirt so don’t hang it,\nYour skin isn’t paper so don’t cut it,\nYour heart isn’t a door so don’t lock it,\nYour life isn’t a Film so don’t end it.\n~ Davis",
+#   "Your neck isn’t a shirt so don’t hang it,\nYour skin isn’t paper so don’t cut it,\nYour heart isn’t a door so don’t lock it,\nYour life isn’t a Film so don’t end it.\n~ Davis",
 )
 
 
@@ -72,7 +72,6 @@ ITEMS = (
     "monitor CRT",
     "podręcznik do fizyki",
     "toster",
-    "potret Mona Lisy",
     "art",
     "naklejka",
     "radio",
@@ -125,6 +124,17 @@ ITEMS = (
     "pomidor",
     "ciastko",
     "No U",
+    "autobus",
+    "kombajn",
+    "metalowy pręt",
+    "5 gram koksu",
+    "statek",
+    "parowiec",
+    "balon",
+    "sałata",
+    "PIS",
+    "kosiarka",
+    "fortnite",
 )
 
 THROW = (
