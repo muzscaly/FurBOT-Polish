@@ -69,7 +69,6 @@ def reply_afk(bot: Bot, update: Update):
 
 __help__ = """
  - /afk <powód>: Oznacz siebie jako AFK.
- - brb <powód>: Te same działanie co komenda wyżej - ale nie jest komendą.
 
 Będąc zaznaczony jako AFK, na wszelkie wzmianki zostaną udzielone odpowiedzi z wiadomością, że nie jesteś dostępny!
 """
@@ -77,12 +76,10 @@ Będąc zaznaczony jako AFK, na wszelkie wzmianki zostaną udzielone odpowiedzi 
 __mod_name__ = "AFK"
 
 AFK_HANDLER = DisableAbleCommandHandler("afk", afk)
-AFK_REGEX_HANDLER = DisableAbleRegexHandler("(?i)brb", afk, friendly="afk")
 NO_AFK_HANDLER = MessageHandler(Filters.all & Filters.group, no_longer_afk)
 AFK_REPLY_HANDLER = MessageHandler(Filters.entity(MessageEntity.MENTION) | Filters.entity(MessageEntity.TEXT_MENTION),
                                    reply_afk)
 
 dispatcher.add_handler(AFK_HANDLER, AFK_GROUP)
-dispatcher.add_handler(AFK_REGEX_HANDLER, AFK_GROUP)
 dispatcher.add_handler(NO_AFK_HANDLER, AFK_GROUP)
 dispatcher.add_handler(AFK_REPLY_HANDLER, AFK_REPLY_GROUP)
