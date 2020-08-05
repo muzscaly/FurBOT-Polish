@@ -56,7 +56,7 @@ def gban_user(user_id, name, reason=None):
             user.name = name
             user.reason = reason
 
-        SESSION.merge(user)
+        SESSION.add(user)
         SESSION.commit()
         __load_gbanned_userid_list()
 
