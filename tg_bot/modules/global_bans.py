@@ -50,19 +50,19 @@ def gban(bot: Bot, update: Update, args: List[str]):
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("Wygląda na to, że nie odnosisz się do futrzaka.")
+        message.reply_text("You don't seem to be referring to a user.")
         return
 
     if int(user_id) in SUDO_USERS:
-        message.reply_text("Będę go śledził moim małym oczkiem... Wojna sudo futrzaków! Dlaczego odwracacie się od siebie nawzajem?")
+        message.reply_text("I spy, with my little eye... a sudo user war! Why are you guys turning on each other?")
         return
 
     if int(user_id) in SUPPORT_USERS:
-        message.reply_text("OHO! któś próbuje globalnie zbanować futrzaka od supportu! *bierze popcorn*")
+        message.reply_text("OOOH someone's trying to gban a support user! *grabs popcorn*")
         return
 
     if user_id == bot.id:
-        message.reply_text("-_- Bardzo śmieszne... Globalnie zbanuj mnie, dlaczego by nie? Niezła próba.")
+        message.reply_text("-_- So funny, lets gban myself why don't I? Nice try.")
         return
 
     try:
@@ -72,38 +72,38 @@ def gban(bot: Bot, update: Update, args: List[str]):
         return
 
     if user_chat.type != 'private':
-        message.reply_text("To nie jest futrzak!")
+        message.reply_text("That's not a user!")
         return
 
     if sql.is_user_gbanned(user_id):
         if not reason:
-            message.reply_text("Ten futrzak jest już globalnie zbanowany. Mogę zmienić powód ale nie podałeś mi żadnego...")
+            message.reply_text("This user is already gbanned; I'd change the reason, but you haven't given me one...")
             return
 
         old_reason = sql.update_gban_reason(user_id, user_chat.username or user_chat.first_name, reason)
         if old_reason:
-            message.reply_text("Ten futrzak jest już globalnie zbanowany za:\n"
+            message.reply_text("This user is already gbanned, for the following reason:\n"
                                "<code>{}</code>\n"
-                               "Ale to już zostało poprawione nowym powodem!".format(html.escape(old_reason)),
+                               "I've gone and updated it with your new reason!".format(html.escape(old_reason)),
                                parse_mode=ParseMode.HTML)
         else:
-            message.reply_text("Ten futrzak jest już globalnie zbanowany ale nie ma ustawionego powodu. Ale już to zostało poprawione!")
+            message.reply_text("This user is already gbanned, but had no reason set; I've gone and updated it!")
 
         return
 
-    message.reply_text("⚡️ *NADCHODZI BANHAMMER* ⚡️")
+    message.reply_text("⚡️ *Snaps the Banhammer* ⚡️")
 
     banner = update.effective_user  # type: Optional[User]
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
-                 "<b>Globalny Ban</b>" \
-                 "\n#GLOBALNY_BAN" \
-                 "\n<b>Status:</b> <code>Egzekwowany</code>" \
-                 "\n<b>Sudo administrator:</b> {}" \
-                 "\n<b>Futrzak:</b> {}" \
+                 "<b>Global Ban</b>" \
+                 "\n#GBAN" \
+                 "\n<b>Status:</b> <code>Enforcing</code>" \
+                 "\n<b>Sudo Admin:</b> {}" \
+                 "\n<b>User:</b> {}" \
                  "\n<b>ID:</b> <code>{}</code>" \
-                 "\n<b>Powód:</b> {}".format(mention_html(banner.id, banner.first_name),
+                 "\n<b>Reason:</b> {}".format(mention_html(banner.id, banner.first_name),
                                               mention_html(user_chat.id, user_chat.first_name), 
-                                                           user_chat.id, reason or "Nie podano powodu"), 
+                                                           user_chat.id, reason or "No reason given"), 
                 html=True)
 
     sql.gban_user(user_id, user_chat.username or user_chat.first_name, reason)
@@ -122,17 +122,17 @@ def gban(bot: Bot, update: Update, args: List[str]):
             if excp.message in GBAN_ERRORS:
                 pass
             else:
-                message.reply_text("Nie mogę globalnie zbanować z powodu: {}".format(excp.message))
-                send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "Nie mogę globalnie zbanować z powodu: {}".format(excp.message))
+                message.reply_text("Could not gban due to: {}".format(excp.message))
+                send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "Could not gban due to: {}".format(excp.message))
                 sql.ungban_user(user_id)
                 return
         except TelegramError:
             pass
 
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS, 
-                  "{} został pomyślnie globalnie zbanowany!".format(mention_html(user_chat.id, user_chat.first_name)),
+                  "{} has been successfully gbanned!".format(mention_html(user_chat.id, user_chat.first_name)),
                 html=True)
-    message.reply_text("Futrzak został globalnie zbanowany.")
+    message.reply_text("Person has been gbanned.")
 
 
 @run_async
