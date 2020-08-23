@@ -43,6 +43,9 @@ QUOTE_STRINGS = (
     "Krokodyl Polowy\n~ Davis",
     "SPAGHETTI Z NUTELLĄ\n~ Zeir",
 #   "Your neck isn’t a shirt so don’t hang it,\nYour skin isn’t paper so don’t cut it,\nYour heart isn’t a door so don’t lock it,\nYour life isn’t a Film so don’t end it.\n~ Davis",
+    "Czołgi w województwie rzymskim\n~ Mizchi",
+    "Life to bitch. Czasami jebie nas ostro w ass, ale są takie chwile dla których warto life.\n~ Davis",
+    "Andrzej Duda jest przedstawicielem tego samego gatunku co Adolf Hitler.\n~ Kozel.",
 )
 
 
